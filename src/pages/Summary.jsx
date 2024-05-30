@@ -147,7 +147,6 @@ const Summary = () => {
   };
 
   return (
-
     <div className=" h-full">
       <div className="flex justify-center items-center gap-6 text-neutral-50 text-xl text-center md:mt-14">
         {!form && (

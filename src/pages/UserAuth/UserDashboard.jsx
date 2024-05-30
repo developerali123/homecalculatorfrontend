@@ -3,8 +3,8 @@ import React, { useEffect, useState } from "react";
 import { CiStar } from "react-icons/ci";
 import { FaRegUserCircle } from "react-icons/fa";
 import { FaBell } from "react-icons/fa6";
-import { useSelector } from "react-redux";
-import { useParams } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { useNavigate, useParams } from "react-router-dom";
 import { toast } from 'react-toastify';
 import { useAuth } from "../../AuthProvider";
 import ErrorHandler from "../../components/ErrorHandler";
@@ -16,6 +16,7 @@ import Final from "../../components/Final";
 import Details from "../../components/Details";
 import TableComponent from "../../components/TableComponent";
 import Data from "../../components/Data";
+import { setCompanyId } from "../../slices/companyslice";
 
 const formatDate = (dateString) => {
     const options = { day: 'numeric', month: 'numeric', year: 'numeric' };
@@ -23,6 +24,8 @@ const formatDate = (dateString) => {
 };
 
 const UserDashboard = () => {
+    const dispatch = useDispatch();
+    const navigate=useNavigate();
     const tenderId = useSelector(state => state.tender.tenderId);
     const auth = useAuth();
     const [userId, setuserId] = useState(auth?.user);
@@ -180,6 +183,7 @@ const UserDashboard = () => {
                 tenderId: id,
                 companyId: params?.row?.id
             });
+            dispatch(setCompanyId(params?.row?.id));
             toast.success('Offer Confirm successfully');
             fetchActiveData(); // Refresh the data
         } catch (error) {
@@ -205,6 +209,7 @@ const UserDashboard = () => {
             const response = await axios.post(`https://homecalculatorbackend-ni04.onrender.com/api/tenders/finishTender/${tenderId}`);
             toast.success('Tender finished successfully');
             fetchActiveData(); // Refresh the data
+            navigate('/userreview')
         } catch (error) {
             console.error('Failed to finish tender', error);
             toast.error('Failed to finish tender');
@@ -217,6 +222,7 @@ const UserDashboard = () => {
             const response = await axios.post(`https://homecalculatorbackend-ni04.onrender.com/api/tenders/cancelTender/${tenderId}`);
             toast.success('Tender canceled successfully');
             fetchActiveData(); // Refresh the data
+            navigate('/usercancelreview')
         } catch (error) {
             console.error('Failed to cancel tender', error);
             toast.error('Failed to cancel tender');

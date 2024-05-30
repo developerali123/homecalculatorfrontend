@@ -20,6 +20,7 @@ import UserVerify from './pages/UserAuth/UserVerify';
 import UserDashboard from './pages/UserAuth/UserDashboard';
 import UserReview from './pages/UserAuth/UserReview';
 import Dashboard from './pages/Dashboard/Dashboard';
+import UserCancelReview from './pages/UserAuth/UserCancelReview';
 
 
 
@@ -43,6 +44,7 @@ function App() {
               <Route exact path="/tender" element={<TenderForm />} />
               <Route path="/userdashboard" element={<UserDashboard />} />
               <Route path="/userreview" element={<UserReview />} />
+              <Route path="/usercancelreview" element={<UserCancelReview />} />
               <Route element={<PrivateRoute />}>
                 <Route path="/dashboard" element={<Dashboard />} />
               </Route>

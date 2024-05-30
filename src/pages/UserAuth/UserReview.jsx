@@ -8,11 +8,12 @@ import TruckBtn from '../../components/TruckBtn';
 import { useAuth } from '../../AuthProvider';
 import Confetti from "react-confetti";
 import { greenarrow } from "../../assets";
+import { useSelector } from 'react-redux';
 
 const UserReview = () => {
     const auth = useAuth();
     const [userId, setuserId] = useState(auth?.user);
-    const companyId = 1
+    const companyId = useSelector(state => state.company.companyId)
     const [formSubmitted, setFormSubmitted] = useState(false);
     const [form, setForm] = useState({
         userId: userId,
