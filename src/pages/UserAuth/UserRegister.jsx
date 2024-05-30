@@ -127,7 +127,7 @@ const UserRegister = () => {
                                 value={form.confirmpassword}
                                 onChange={handleFormChange}
                                 type='password'
-                                className='w-[400px] h-[44px] bg-white border border-[#cccccc] border-opacity-100 px-4 py-2 rounded-md focus:border-none mb-3'
+                                className='md:w-[400px] w-[250px] h-[44px] bg-white border border-[#cccccc] border-opacity-100 px-4 py-2 rounded-md focus:border-none mb-3'
                                 placeholder="Enter at least 8 characters"
                             />
                             <button className='bg-[#2676E5] w-full text-white p-2 mt-5 rounded-md' onClick={handlestepone}>Next</button>

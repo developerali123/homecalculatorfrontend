@@ -13,7 +13,7 @@ const Final = () => {
   return (
     <div className='flex flex-col items-center justify-center gap-3 mt-10'>
       <div className='py-5 text-3xl font-semibold'>Total Cost </div>
-      <div className='text-7xl font-semibold'>{price} NIS</div>
+      <div className='md:text-7xl text-3xl font-semibold'>{price} NIS</div>
 
       {/* Dotted grey box */}
       <div className="mt-6 p-4 max-w-2xl w-1/2 flex flex-col items-center text-center">
@@ -24,7 +24,7 @@ const Final = () => {
         <h2>The price shown is just a start!</h2>
       </div>
 
-      <h4 className='underline'> Save up to 30% by creating a tender between leading transport companies.</h4>
+      <h4 className='underline  text-center md:w-full w-[300px]'> Save up to 30% by creating a tender between leading transport companies.</h4>
       <div className="w-full flex flex-col gap-4 md:flex-row md:flex-wrap items-center justify-content mb-5">
         <div className='bg-white rounded-md p-4 w-[150px] flex flex-col items-center gap-4'>
           <img src={sum1} alt="sum1" />

@@ -76,7 +76,7 @@ const Storage = () => {
 
 
     return (
-        <div className='bg-white w-full p-4 rounded-md relative flex flex-col mb-5'>
+        <div className='bg-white md:w-full w-[300px] p-4 rounded-md relative flex flex-col mb-5'>
             <div className='flex w-full justify-between'>
                 <button onClick={() => setToggle((prev) => !prev)}>
                     {toggle === true ? <FaAngleUp /> : <FaAngleDown />}

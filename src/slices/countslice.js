@@ -12,8 +12,11 @@ const countSlice = createSlice({
     resetCount(state) {
       state.count = 1; // Reset to default start step
     },
+    decrementCount(state) {
+      state.count = Math.max(1, state.count - 1); // Decrement count but not below 1
+    },
   },
 });
 
-export const {setCount, resetCount } = countSlice.actions;
+export const {setCount, resetCount,decrementCount } = countSlice.actions;
 export default countSlice.reducer;

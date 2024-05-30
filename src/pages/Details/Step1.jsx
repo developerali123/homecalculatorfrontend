@@ -8,7 +8,7 @@ import { rocket } from '../../assets';
 const Step1 = ({ form, handleFormChange, step }) => {
     return (
         <div className="flex justify-center items-center flex-col h-full">
-            <h1 className="text-5xl font-semibold mt-10 mb-5">Taking off</h1>
+            <h1 className="md:text-5xl text-3xl font-semibold mt-10 mb-5">Taking off</h1>
             <h2 className="text-sm">Enter the details of your origin address</h2>
 
             {/* address */}

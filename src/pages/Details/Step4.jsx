@@ -5,7 +5,7 @@ import { boxes_img, cute_boxes } from '../../assets';
 const Step4 = ({ progress, handleProgressChange, step }) => {
     return (
         <div className="flex justify-center items-center flex-col h-full">
-            <h1 className='text-5xl font-semibold mt-10 mb-5'>Add boxs to your truck</h1>
+            <h1 className='md:text-5xl text-3xl font-semibold mt-10 mb-5'>Add boxs to your truck</h1>
             <p className='mt-6'>Bags also count as boxs</p>
 
             {/* Progress bar */}

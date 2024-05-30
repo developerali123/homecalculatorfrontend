@@ -6,7 +6,7 @@ import TruckBtn from '../../components/TruckBtn';
 const Step3 = ({ handleInputChange, filteredItems, selectedItems, handleQuantityChange, handleSelectChange, step, searchQuery }) => {
     return (
         <div className="flex justify-center items-center flex-col h-full">
-            <h1 className="text-5xl font-semibold mt-10 mb-5">Add items to your truck</h1>
+            <h1 className="md:text-5xl text-3xl font-semibold mt-10 mb-5">Add items to your truck</h1>
 
             <div className='flex flex-col'>
                 <h2 className='mb-1 mt-10'>Search Items</h2>

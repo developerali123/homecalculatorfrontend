@@ -20,7 +20,7 @@ import Step1 from './Details/Step1';
 import Step2 from './Details/Step2';
 import Step3 from './Details/Step3';
 import Step4 from './Details/Step4';
-import { resetCount, setCount } from '../slices/countslice';
+import { decrementCount, resetCount, setCount } from '../slices/countslice';
 
 const Baseline = () => {
   const navigate = useNavigate();
@@ -158,7 +158,7 @@ const Baseline = () => {
   }
 
   const handleprevious = () => {
-    dispatch(setCount((prevCount) => prevCount - 1));
+    dispatch(decrementCount());
   };
 
   const handleFormChange = (e) => {
@@ -180,7 +180,7 @@ const Baseline = () => {
   }
 
   return (
-    <div className="w-full h-screen flex flex-col items-center">
+    <div className="w-full h-full flex flex-col items-center">
       <img src={progressbar(count)} className='h-2 mt-4 w-full px-6' />
       <div className="absolute md:top-[124px] top-[60px] left-[58px] max-md:left-[14px] md:w-[250px] w-[150px] md:h-[140px] h-[120px] -z-[20]">
         <Cloud />
@@ -230,7 +230,7 @@ const Baseline = () => {
         )
       }
       {count > 1 && (
-        <FaCircleChevronLeft className='hidden md:block absolute top-1/2 left-10 w-10 h-10 mr-10 text-[#008EF5] hover:text-[#006EF5]' onClick={handleprevious} />
+        <FaCircleChevronLeft className='block absolute top-10 left-2 md:top-1/2 md:left-10 w-10 h-10 mr-10 text-[#008EF5] hover:text-[#006EF5]' onClick={handleprevious} />
       )}
 
       {/* base */}
