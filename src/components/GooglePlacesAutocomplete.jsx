@@ -23,7 +23,7 @@ const GooglePlacesAutocomplete = ({ value, onChange, name, placeholder, onPlaceS
         value={value}
         onChange={(e) => onChange(e)}
         name={name}
-        className='w-[400px] h-[44px] bg-white border border-[#cccccc] border-opacity-100 px-4 py-2 rounded-md focus:border-none'
+        className='md:w-[400px] w-[250px] h-[44px] bg-white border border-[#cccccc] border-opacity-100 px-4 py-2 rounded-md focus:border-none'
         placeholder={placeholder}
       />
     </Autocomplete>

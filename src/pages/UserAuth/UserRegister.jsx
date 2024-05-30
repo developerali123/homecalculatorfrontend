@@ -109,7 +109,7 @@ const UserRegister = () => {
                                 name='fullName'
                                 value={form.fullName}
                                 onChange={handleFormChange}
-                                className='w-[400px] h-[44px] bg-white border border-[#cccccc] border-opacity-100 px-4 py-2 rounded-md focus:border-none mb-3'
+                                className='md:w-[400px] w-[250px] h-[44px] bg-white border border-[#cccccc] border-opacity-100 px-4 py-2 rounded-md focus:border-none mb-3'
                                 placeholder="Enter your full name"
                             />
                             <h3 className='mb-1'>Password</h3>
@@ -118,7 +118,7 @@ const UserRegister = () => {
                                 value={form.password}
                                 onChange={handleFormChange}
                                 type='password'
-                                className='w-[400px] h-[44px] bg-white border border-[#cccccc] border-opacity-100 px-4 py-2 rounded-md focus:border-none mb-3'
+                                className='md:w-[400px] w-[250px] h-[44px] bg-white border border-[#cccccc] border-opacity-100 px-4 py-2 rounded-md focus:border-none mb-3'
                                 placeholder="Enter at least 8 characters"
                             />
                             <h3 className='mb-1'>Confirm Password</h3>
@@ -142,7 +142,7 @@ const UserRegister = () => {
                                 value={form.email}
                                 type='email'
                                 onChange={handleFormChange}
-                                className='w-[400px] h-[44px] bg-white border border-[#cccccc] border-opacity-100 px-4 py-2 rounded-md focus:border-none mb-3'
+                                className='md:w-[400px] w-[250px] h-[44px] bg-white border border-[#cccccc] border-opacity-100 px-4 py-2 rounded-md focus:border-none mb-3'
                                 placeholder="Enter your email address"
                             />
 

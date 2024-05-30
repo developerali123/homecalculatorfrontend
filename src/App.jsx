@@ -21,6 +21,7 @@ import UserDashboard from './pages/UserAuth/UserDashboard';
 import UserReview from './pages/UserAuth/UserReview';
 import Dashboard from './pages/Dashboard/Dashboard';
 import UserCancelReview from './pages/UserAuth/UserCancelReview';
+import CompanyProfile from './pages/Dashboard/CompanyProfile';
 
 
 
@@ -48,6 +49,7 @@ function App() {
               <Route element={<PrivateRoute />}>
                 <Route path="/dashboard" element={<Dashboard />} />
               </Route>
+              <Route path="/profile" element={<CompanyProfile />} />
               <Route exact path='/register' element={<Register />} />
               <Route exact path='/verify' element={<Verify />} />
               <Route exact path='/forgetpassword' element={<ForgetPassword />} />

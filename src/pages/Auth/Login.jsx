@@ -59,7 +59,7 @@ const Login = () => {
                             name='email'
                             value={form.email}
                             onChange={handleFormChange}
-                            className='w-[400px] h-[44px] bg-white border border-[#cccccc] border-opacity-100 px-4 py-2 rounded-md focus:border-none mb-3'
+                            className='md:w-[400px] w-[250px] h-[44px] bg-white border border-[#cccccc] border-opacity-100 px-4 py-2 rounded-md focus:border-none mb-3'
                             placeholder="Enter Email"
                         />
                         <h3 className='mb-1'>Password</h3>
@@ -68,7 +68,7 @@ const Login = () => {
                             value={form.password}
                             type='password'
                             onChange={handleFormChange}
-                            className='w-[400px] h-[44px] bg-white border border-[#cccccc] border-opacity-100 px-4 py-2 rounded-md focus:border-none'
+                            className='md:w-[400px] w-[250px] h-[44px] bg-white border border-[#cccccc] border-opacity-100 px-4 py-2 rounded-md focus:border-none'
                             placeholder="Enter password"
                         />
                         <div className='flex justify-between mt-2'>

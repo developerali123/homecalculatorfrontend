@@ -133,7 +133,7 @@ const ForgetPassword = () => {
                                 name='email'
                                 value={form.email}
                                 onChange={handleFormChange}
-                                className='w-[400px] h-[44px] bg-white border border-[#cccccc] border-opacity-100 px-4 py-2 rounded-md focus:border-none mb-3'
+                                className='md:w-[400px] w-[250px] h-[44px] bg-white border border-[#cccccc] border-opacity-100 px-4 py-2 rounded-md focus:border-none mb-3'
                                 placeholder="Enter Email"
                             />
                             <button className='bg-[#2676E5] w-full text-white p-2 mt-5 rounded-md' onClick={handleVerifyEmail}>Verify Email</button>
@@ -171,7 +171,7 @@ const ForgetPassword = () => {
                                 value={form.password}
                                 type='password'
                                 onChange={handleFormChange}
-                                className='w-[400px] h-[44px] bg-white border border-[#cccccc] border-opacity-100 px-4 py-2 rounded-md focus:border-none'
+                                className='md:w-[400px] w-[250px] h-[44px] bg-white border border-[#cccccc] border-opacity-100 px-4 py-2 rounded-md focus:border-none'
                                 placeholder="Enter at least 8 character"
                             />
                             <h3 className='mb-1'>Confirm Password</h3>
@@ -180,7 +180,7 @@ const ForgetPassword = () => {
                                 value={form.confirmpassword}
                                 type='password'
                                 onChange={handleFormChange}
-                                className='w-[400px] h-[44px] bg-white border border-[#cccccc] border-opacity-100 px-4 py-2 rounded-md focus:border-none'
+                                className='md:w-[400px] w-[250px] h-[44px] bg-white border border-[#cccccc] border-opacity-100 px-4 py-2 rounded-md focus:border-none'
                                 placeholder="Enter at least 8 character"
                             />
                             <button className='bg-[#2676E5] w-full text-white p-2 mt-5 rounded-md' onClick={handlePasswordReset}>Create</button>

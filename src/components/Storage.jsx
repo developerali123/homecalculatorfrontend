@@ -84,7 +84,7 @@ const Storage = () => {
                 <h4>Storage</h4>
             </div>
             <div className={`${toggle ? 'block' : 'hidden'} ${listToggle && 'hidden'} flex flex-col w-full justify-center items-center gap-2 mt-4`}>
-                <p className='text-sm text-center w-[400px]'>Storage services allow you to store the contents of the apartment for a certain period of time. Set a start date, and an estimated end date of the required storage period.</p>
+                <p className='text-sm text-center md:w-[400px] w-[250px]'>Storage services allow you to store the contents of the apartment for a certain period of time. Set a start date, and an estimated end date of the required storage period.</p>
                 {storageItems.map((item, index) => (
                     <div key={index} className='flex justify-between w-full p-2'>
                         <div className='flex gap-5'>

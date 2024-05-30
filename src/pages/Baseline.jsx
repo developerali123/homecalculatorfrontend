@@ -71,7 +71,6 @@ const Baseline = () => {
         }
         return item;
       });
-
       return newItems.filter(item => item !== null && item.quantity > 0); // Filtering out null items
     });
     dispatch(changeItemQuantity({ name, change }));
@@ -159,7 +158,7 @@ const Baseline = () => {
   }
 
   const handleprevious = () => {
-    setcount((prevCount) => prevCount - 1);
+    dispatch(setCount((prevCount) => prevCount - 1));
   };
 
   const handleFormChange = (e) => {
