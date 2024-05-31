@@ -43,13 +43,13 @@ function App() {
               <Route exact path="/userregister" element={<UserRegister />} />
               <Route exact path='/userverify' element={<UserVerify />} />
               <Route exact path="/tender" element={<TenderForm />} />
-              <Route path="/userdashboard" element={<UserDashboard />} />
-              <Route path="/userreview" element={<UserReview />} />
-              <Route path="/usercancelreview" element={<UserCancelReview />} />
               <Route element={<PrivateRoute />}>
+                <Route path="/userdashboard" element={<UserDashboard />} />
+                <Route path="/userreview" element={<UserReview />} />
+                <Route path="/usercancelreview" element={<UserCancelReview />} />
                 <Route path="/dashboard" element={<Dashboard />} />
+                <Route path="/profile" element={<CompanyProfile />} />
               </Route>
-              <Route path="/profile" element={<CompanyProfile />} />
               <Route exact path='/register' element={<Register />} />
               <Route exact path='/verify' element={<Verify />} />
               <Route exact path='/forgetpassword' element={<ForgetPassword />} />
