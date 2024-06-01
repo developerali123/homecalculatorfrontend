@@ -277,7 +277,7 @@ const Dashboard = () => {
             renderCell: (params) => {
                 const send = () => sendoffer(params);
                 const update = () => updateoffer(params);
-                return <span style={{ whiteSpace: "pre-wrap" }} className="table_first_column">{params.row.priceOffer ? <button className="bg-orange-400 rounded-lg px-2 text-white" onClick={update}>Edit Offer</button> : <button className="bg-orange-400 rounded-lg px-2 text-white" onClick={send}>submit offer</button>}</span>
+                return <span style={{ whiteSpace: "pre-wrap" }} className="table_first_column">{params.row.priceOffer && params?.row?.tenderStatus==="Active" ? <button className="bg-orange-400 rounded-lg px-2 text-white" onClick={update}>Edit Offer</button> : <button className="bg-orange-400 rounded-lg px-2 text-white">Price Accepted</button>}</span>
             },
         },
     ];
