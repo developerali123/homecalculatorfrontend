@@ -40,10 +40,28 @@ const UserDashboard = () => {
     const [formdialogOpen, setformDialogOpen] = useState(false);
     const [selectedHistory, setSelectedHistory] = useState(null);
     const [isFinishButtonDisabled, setIsFinishButtonDisabled] = useState(false);
+    const [isPendingButtonDisabled, setIsPendingButtonDisabled] = useState(false);
     const [confirmDialogOpen, setConfirmDialogOpen] = useState(false);
     const [currentTender, setCurrentTender] = useState(null);
     const [finishDialogOpen, setFinishDialogOpen] = useState(false);
     const [cancelDialogOpen, setCancelDialogOpen] = useState(false);
+
+    const [name, setname] = useState("");
+
+    const fetchuserdata = async () => {
+        try {
+            const response = await axios.get(`https://homecalculatorbackend-ni04.onrender.com/api/users/${userId}`);
+            setname(response?.data?.user?.name);
+            console.log(response?.data?.user?.name);
+
+        } catch (err) {
+            console.log(err);
+        }
+    };
+
+    useEffect(() => {
+        fetchuserdata();
+    }, [userId]);
 
 
     const fetchActiveData = async () => {
@@ -51,8 +69,12 @@ const UserDashboard = () => {
             const response = await axios.get(`https://homecalculatorbackend-ni04.onrender.com/api/priceoffer/getoffers/${tenderId}`);
             setData(response.data);
             // Check if any tender's status is not 'Pending'
-            const isAnyTenderNotPending = response.data.some(tender => tender.tenderStatus !== 'Pending');
+            const isAnyTenderNotPending = response.data.some(tender => tender.tenderStatus !== 'Confirmed');
+            const isAnyTenderPending = response.data.some(tender => tender.tenderStatus === 'Confirmed');
+            console.log(isAnyTenderNotPending);
+            console.log(isAnyTenderPending);
             setIsFinishButtonDisabled(isAnyTenderNotPending);
+            setIsPendingButtonDisabled(isAnyTenderPending);
             
         } catch (err) {
             setError(true);
@@ -153,7 +175,7 @@ const UserDashboard = () => {
         {
             field: "action", headerName: "Action", minWidth: "150",
             renderCell: (params) => {
-                const isPending = params?.row?.tenderStatus === "Pending";
+                const isPending = params?.row?.tenderStatus === "Confirmed";
                 const isOrderConfirmed = params?.row?.orderconfirm === true;
 
                 return (
@@ -208,7 +230,6 @@ const UserDashboard = () => {
         try {
             const response = await axios.post(`https://homecalculatorbackend-ni04.onrender.com/api/tenders/finishTender/${tenderId}`);
             toast.success('Tender finished successfully');
-            fetchActiveData(); // Refresh the data
             navigate('/userreview')
         } catch (error) {
             console.error('Failed to finish tender', error);
@@ -221,7 +242,6 @@ const UserDashboard = () => {
         try {
             const response = await axios.post(`https://homecalculatorbackend-ni04.onrender.com/api/tenders/cancelTender/${tenderId}`);
             toast.success('Tender canceled successfully');
-            fetchActiveData(); // Refresh the data
             navigate('/usercancelreview')
         } catch (error) {
             console.error('Failed to cancel tender', error);
@@ -244,7 +264,7 @@ const UserDashboard = () => {
             <div className="py-2 flex justify-between border-b border-black" style={{ boxShadow: "0 4px 8px rgba(0, 0, 0, 0.1)" }}>
                 {/* <h1>Welcome! {auth.user?.username}</h1> */}
                 <div className="ml-3">
-                    <h2>Good afternoon, Company name!</h2>
+                    <h2>Good afternoon, {name}</h2>
                     <h2>Quickly access Your tenders</h2>
                 </div>
                 <button onClick={() => auth.logOut()} className="btn-submit">
@@ -259,7 +279,7 @@ const UserDashboard = () => {
             </div>
             <div className="flex justify-center items-center mt-5">
                 <button className="bg-[#3E79E9] text-white py-2 px-2 rounded-lg mr-3 font-semibold" onClick={handleFinishClick} disabled={isFinishButtonDisabled}>Finish tender</button>
-                <button className="bg-[#F78C8C] text-white py-2 px-2 rounded-lg mr-3 font-semibold" onClick={handleCancelClick}>Cancel tender</button>
+                <button className="bg-[#F78C8C] text-white py-2 px-2 rounded-lg mr-3 font-semibold" onClick={handleCancelClick} disabled={isPendingButtonDisabled}>Cancel tender</button>
 
             </div>
             <div className="mx-10 my-10">

@@ -1,22 +1,53 @@
-import React, { useEffect, useState } from 'react';
 import axios from 'axios';
-import { toast, ToastContainer } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
-import { FaRegUserCircle, FaBell, FaTimes } from 'react-icons/fa';
-import { CiStar } from "react-icons/ci";
-import TruckBtn from '../../components/TruckBtn';
-import { useAuth } from '../../AuthProvider';
+import React, { useEffect, useState } from 'react';
 import Confetti from "react-confetti";
+import { CiStar } from "react-icons/ci";
+import { FaBell, FaRegUserCircle, FaTimes } from 'react-icons/fa';
+import { toast } from 'react-toastify';
+import { useAuth } from '../../AuthProvider';
 import { greenarrow } from "../../assets";
-import { useSelector } from 'react-redux';
+import TruckBtn from '../../components/TruckBtn';
+import { clearTenderId } from '../../slices/tenderslice';
+import { resetState } from '../../slices/slices';
+import { useDispatch } from 'react-redux';
 
 const UserCancelReview = () => {
     const auth = useAuth();
+    const dispatch = useDispatch();
     const [userId, setuserId] = useState(auth?.user);
     const [selectedCheckboxes1, setselectedCheckboxes1] = useState([]);
     const [selectedCheckboxes2, setselectedCheckboxes2] = useState([]);
     const [selectedCheckboxes3, setselectedCheckboxes3] = useState([]);
+    const [name,setname]=useState("");
     const [formSubmitted, setFormSubmitted] = useState(false);
+    const [screenWidth, setScreenWidth] = useState(window.innerWidth);
+
+    const fetchuserdata = async () => {
+        try {
+            const response = await axios.get(`https://homecalculatorbackend-ni04.onrender.com/api/users/${userId}`);
+            setname(response?.data?.user?.name);
+            console.log(response?.data?.user?.name);
+            
+        } catch (err) {
+            console.log(err);
+        }
+    };
+
+    useEffect(() => {
+        fetchuserdata();
+    }, [userId]);
+
+    useEffect(() => {
+        const handleResize = () => {
+            setScreenWidth(window.innerWidth);
+        };
+
+        window.addEventListener('resize', handleResize);
+
+        return () => {
+            window.removeEventListener('resize', handleResize);
+        };
+    }, []);
     const [form, setForm] = useState({
         userId: userId,
         tender_cancel:[],
@@ -86,7 +117,12 @@ const UserCancelReview = () => {
         try {
             const response = await axios.post('https://homecalculatorbackend-ni04.onrender.com/api/reviews', form);
             // toast.success('Review submitted successfully!');
-            setFormSubmitted(true);
+            setTimeout(() => {
+                setFormSubmitted(true);
+                dispatch(clearTenderId());
+                dispatch(resetState());
+                auth.logOut();
+            }, 3000); 
         } catch (error) {
             toast.error('Failed to submit review!');
         }
@@ -130,7 +166,6 @@ const UserCancelReview = () => {
     } else {
         return (
             <div className="bg-white h-max-screen">
-                <ToastContainer />
                 <div className="bg-[#96E0F8] flex justify-between py-3">
                     <div>
                         <h2 className='w-full text-xl bm-font'>Click <span className='text-orange-500 px-2'>n</span>Move</h2>
@@ -143,7 +178,7 @@ const UserCancelReview = () => {
                 <div className="py-2 flex justify-between border-b border-black mb-3" style={{ boxShadow: "0 4px 8px rgba(0, 0, 0, 0.1)" }}>
                     {/* <h1>Welcome! {auth.user?.username}</h1> */}
                     <div className='ml-3'>
-                        <h2>Good afternoon, Company name!</h2>
+                        <h2>Good afternoon, {name}</h2>
                         <h2>Quickly access Your tenders</h2>
                     </div>
                     <button onClick={() => auth.logOut()} className="btn-submit">
@@ -151,16 +186,16 @@ const UserCancelReview = () => {
                     </button>
                 </div>
                 <div className='flex justify-center items-center flex-col'>
-                    <div className=' bg-[#96E0F8] p-5 rounded-md w-[700px] mb-5'>
-                        <p className='mb-5'>Hello [customer name],</p>
+                    <div className=' bg-[#96E0F8] p-5 rounded-md md:w-[700px] w-[300px] mb-5'>
+                        <p className='mb-5'>Hello {name},</p>
                         <p className='mb-5'>We wanted to thank you for taking the time to participate in the tender to find an apartment management company for you. We are sorry to hear that you have chosen to cancel the auction at this time.</p>
 
                         <p className='mb-5'>We would be very happy to hear from you the reason for canceling the tender. Your feedback is important to us and can help us improve our services in the future.</p>
 
                         <p className='mb-5'>Please take a few minutes to fill out this short survey, in which you can tell us about your experience in the tender process. Your answers will be completely anonymous.</p>
                         <div className='flex justify-center items-center flex-col'>
-                            <div className='my-3'>
-                                <h3 className='my-2 text-xl'>1.What factors influenced your decision to cancel the tender?</h3>
+                            <div className='my-3 md:w-full w-[250px]'>
+                                <h3 className='my-2 md:text-xl text-sm'>1.What factors influenced your decision to cancel the tender?</h3>
                                 <div className='mb-2'>
                                     <label>
                                         <input
@@ -218,10 +253,10 @@ const UserCancelReview = () => {
                                     name='comment1'
                                     value={form.comment1}
                                     onChange={handleFormChange}
-                                    className='w-full h-[44px] bg-white border border-[#cccccc] border-opacity-100 px-4 py-2 rounded-md focus:border-none mb-3'
+                                    className='md:w-full w-[250px] md:h-[44px] h-[30px] bg-white border border-[#cccccc] border-opacity-100 px-4 py-2 rounded-md focus:border-none mb-3'
                                     placeholder="You can type your comment here"
                                 />
-                                <h3 className='my-2 text-xl'>2.What do you think could have improved the auction experience for you?</h3>
+                                <h3 className='my-2 md:text-xl text-sm'>2.What do you think could have improved the auction experience for you?</h3>
                                 <div className='mb-2'>
                                     <label>
                                         <input
@@ -279,15 +314,15 @@ const UserCancelReview = () => {
                                     name='comment2'
                                     value={form.comment2}
                                     onChange={handleFormChange}
-                                    className='w-full h-[44px] bg-white border border-[#cccccc] border-opacity-100 px-4 py-2 rounded-md focus:border-none mb-3'
+                                    className='md:w-full w-[250px] md:h-[44px] h-[30px] bg-white border border-[#cccccc] border-opacity-100 px-4 py-2 rounded-md focus:border-none mb-3'
                                     placeholder="You can type your comment here"
                                 />
-                                <h3 className='my-2 text-xl'>3.Rate your satisfaction with using Click n Move services</h3>
+                                <h3 className='my-2 md:text-xl text-sm'>3.Rate your satisfaction with using Click n Move services</h3>
                                 <div className='flex'>
                                     {[...Array(5)].map((_, index) => (
                                         <CiStar
                                             key={index}
-                                            size={40}
+                                            size={screenWidth < 600 ? 20 : 40}
                                             className='mr-2'
                                             onClick={() => handleRatingChange(index + 1, 1)}
                                             style={{ cursor: 'pointer', color: (index < form.ratings.rating1) ? 'yellow' : 'gray' }}
@@ -295,7 +330,7 @@ const UserCancelReview = () => {
                                     ))}
 
                                 </div>
-                                <h3 className='my-2 text-xl'>4.Would you be willing to use the tender service of finding a moving company in the future?</h3>
+                                <h3 className='my-2 md:text-xl text-sm'>4.Would you be willing to use the tender service of finding a moving company in the future?</h3>
                                 <div className='mb-2'>
                                     <label>
                                         <input

@@ -27,10 +27,29 @@ const Dashboard = () => {
     const [pendingdata, setpendingData] = useState([]);
     const [pendingloading, setpendingLoading] = useState(true);
     const [pendingerror, setpendingError] = useState(false);
+    const [approveddata, setapprovedData] = useState([]);
+    const [approvedloading, setapprovedLoading] = useState(true);
+    const [approvederror, setapprovedError] = useState(false);
     const [dialogOpen, setDialogOpen] = useState(false);
     const [sendofferdialogOpen, setsendofferdialogOpen] = useState(false);
     const [updateofferdialogOpen, setupdateofferdialogOpen] = useState(false);
     const [selectedHistory, setSelectedHistory] = useState(null);
+    const [name, setname] = useState("");
+
+    const fetchuserdata = async () => {
+        try {
+            const response = await axios.get(`https://homecalculatorbackend-ni04.onrender.com/api/users/${userId}`);
+            setname(response?.data?.companies[0]?.companyName);
+            console.log(response?.data);
+
+        } catch (err) {
+            console.log(err);
+        }
+    };
+
+    useEffect(() => {
+        fetchuserdata();
+    }, [userId]);
 
     const fetchActiveData = async () => {
         try {
@@ -52,10 +71,21 @@ const Dashboard = () => {
             setpendingLoading(false);
         }
     };
+    const fetchApprovedData = async () => {
+        try {
+            const response = await axios.get(`https://homecalculatorbackend-ni04.onrender.com/api/tenders/getapprovedtenders/${userId}`);
+            setapprovedData(response.data);
+        } catch (err) {
+            setapprovedError(true);
+        } finally {
+            setapprovedLoading(false);
+        }
+    };
 
     useEffect(() => {
         fetchActiveData();
         fetchPendingData();
+        fetchApprovedData();
     }, [userId]);
 
     const activeRecord = data.reduce((acc, record) => {
@@ -82,6 +112,28 @@ const Dashboard = () => {
     }, []) || [];
     
     const pendingRecord = pendingdata.reduce((acc, record) => {
+        if (record.priceconfirm === true) {
+            acc.push({
+                id: record.tenderId,
+                name: record.name,
+                originaddress: record.originaddress,
+                destinationaddress: record.destinationaddress,
+                transportdate: formatDate(record.transportdate),
+                arrivaldate: formatDate(record.arrivaldate),
+                starttime: record.starthours,
+                endtime: record.endhours,
+                movingPrice: record.movingPrice,
+                phonenumber: record.phonenumber,
+                tenderStatus: record.tenderStatus,
+                details: record.details,
+                priceOffer: record.priceOffer,
+                bestOffer: record.bestOffer,
+                priceconfirm: record.priceConfirm,
+            });
+        }
+        return acc;
+    }, []) || [];
+    const approvedRecord = approveddata.reduce((acc, record) => {
         if (record.priceconfirm === true) {
             acc.push({
                 id: record.tenderId,
@@ -275,9 +327,96 @@ const Dashboard = () => {
         {
             field: "action", headerName: "Action", minWidth: 150, flex: 1,
             renderCell: (params) => {
-                const send = () => sendoffer(params);
                 const update = () => updateoffer(params);
-                return <span style={{ whiteSpace: "pre-wrap" }} className="table_first_column">{params.row.priceOffer && params?.row?.tenderStatus==="Active" ? <button className="bg-orange-400 rounded-lg px-2 text-white" onClick={update}>Edit Offer</button> : <button className="bg-orange-400 rounded-lg px-2 text-white">Price Accepted</button>}</span>
+                return <span style={{ whiteSpace: "pre-wrap" }} className="table_first_column">{params.row.priceOffer && params?.row?.tenderStatus==="Active" ? <button className="bg-orange-400 rounded-lg px-2 text-white" onClick={update}>Edit Offer</button> : <button className="bg-gray-400 rounded-lg px-2 text-white">Tender Cancelled</button>}</span>
+            },
+        },
+    ];
+    const approvedcolumns = [
+        {
+            field: "id", headerName: "Tender ID", minWidth: 100, flex: 1, renderCell: (params) => {
+
+                return <span style={{ whiteSpace: "pre-wrap" }} className="table_first_column">
+                    {params.id}
+                </span>
+            },
+        },
+        {
+            field: "tenderStatus", headerName: "Tender Status", flex: 1, minWidth: 150,
+            renderCell: (params) => {
+
+                return <span style={{ whiteSpace: "pre-wrap" }} className="table_first_column">
+                    <StatusBadge status={params?.row?.tenderStatus} />
+                </span>
+            },
+        },
+        {
+            field: "movingPrice", headerName: "Moving Price", flex: 1, minWidth: 150,
+            renderCell: (params) => {
+
+                return <span style={{ whiteSpace: "pre-wrap" }} className="table_first_column">
+                    {params?.row?.movingPrice} NIS
+                </span>
+            },
+        },
+        {
+            field: "priceOffer", headerName: "Price Offer", flex: 1, minWidth: 150,
+            renderCell: (params) => {
+
+                return <span style={{ whiteSpace: "pre-wrap", color: "#FC7023" }} className="table_first_column">
+                    {params?.row?.priceOffer}{params?.row?.priceOffer ? "NIS":"-"}
+                </span>
+            },
+        },
+        {
+            field: "bestOffer", headerName: "Best Offer", flex: 1, minWidth: 150,
+            renderCell: (params) => {
+
+                return <span style={{ whiteSpace: "pre-wrap", color: "#048611" }} className="table_first_column">
+                    {params?.row?.bestOffer} {params?.row?.bestOffer ? "NIS":"-"}
+                </span>
+            },
+        },
+        {
+            field: "originaddress", headerName: "Origin Address", flex: 1, minWidth: 250,
+            renderCell: (params) => {
+
+                return <span style={{ whiteSpace: "pre-wrap", color: "#C15C7A" }} className="table_first_column" > {params?.row?.originaddress}</span>
+            },
+        },
+        {
+            field: "destinationaddress", headerName: "Destination Address", flex: 1, minWidth: 250,
+            renderCell: (params) => {
+
+                return <span style={{ whiteSpace: "pre-wrap", color: "#046E86" }} className="table_first_column" >{params?.row?.destinationaddress}</span>
+            },
+        },
+        {
+            field: "date", headerName: "Date", minWidth: 200, flex: 1,
+            renderCell: (params) => {
+
+                return <span style={{ whiteSpace: "pre-wrap" }} className="table_first_column" >{params?.row?.transportdate} - {params?.row?.arrivaldate}</span>
+            },
+        },
+        {
+            field: "hours", headerName: "Hours", minWidth: 150, flex: 1,
+            renderCell: (params) => {
+
+                return <span style={{ whiteSpace: "pre-wrap" }} className="table_first_column" >{params?.row?.starttime} - {params?.row?.endtime}</span>
+            },
+        },
+        {
+            field: "tenderdetails", headerName: "Tender Details", minWidth: 150, flex: 1,
+            renderCell: (params) => {
+                const onView = () => handleRowClick(params);
+                return <span style={{ whiteSpace: "pre-wrap", textDecoration: "underline", color: "#1546F3" }} className="table_first_column" onClick={onView}>Open tender details</span>
+            },
+        },
+        {
+            field: "action", headerName: "Action", minWidth: 150, flex: 1,
+            renderCell: (params) => {
+                const update = () => updateoffer(params);
+                return <span style={{ whiteSpace: "pre-wrap" }} className="table_first_column">{params.row.priceOffer && params?.row?.tenderStatus==="Active" ? <button className="bg-orange-400 rounded-lg px-2 text-white" onClick={update}>Edit Offer</button> : <button className="bg-gray-400 rounded-lg px-2 text-white">Price Accepted</button>}</span>
             },
         },
     ];
@@ -323,7 +462,7 @@ const Dashboard = () => {
             <div className="py-1 ml-3 flex justify-between">
                 {/* <h1>Welcome! {auth.user?.username}</h1> */}
                 <div>
-                    <h2>Good afternoon, Company name!</h2>
+                    <h2>Good afternoon, {name}</h2>
                     <h2>Quickly access Your tenders</h2>
                 </div>
                 <button onClick={() => auth.logOut()} className="btn-submit">
@@ -349,6 +488,14 @@ const Dashboard = () => {
                         {pendingerror ? <ErrorHandler online={navigator.onLine} /> :
                             pendingRecord && toggle === 1 ?
                                 <MyTableContainer columns={pendingcolumns} data={pendingRecord} RowFilterWith="id" customPageSize={25} minHeight="calc(100vh - 200px)" onRowClick={handleRowClick} /> : null
+                        }
+                    </>
+                }
+                {approvedloading ? <Loader placement={{ marginTop: '-100px' }} /> :
+                    <>
+                        {approvederror ? <ErrorHandler online={navigator.onLine} /> :
+                            approvedRecord && toggle === 2 ?
+                                <MyTableContainer columns={approvedcolumns} data={approvedRecord} RowFilterWith="id" customPageSize={25} minHeight="calc(100vh - 200px)" onRowClick={handleRowClick} /> : null
                         }
                     </>
                 }

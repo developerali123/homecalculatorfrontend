@@ -430,6 +430,7 @@ export const {
   setStorageStartDay,
   setStorageEndDay,
   calculate,
+  resetState
 } = mainSlice.actions;
 
 export default mainSlice.reducer;
