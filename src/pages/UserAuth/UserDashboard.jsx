@@ -181,9 +181,9 @@ const UserDashboard = () => {
         try {
             const response = await axios.post('https://homecalculatorbackend-ni04.onrender.com/api/priceoffer/updateStatusAndConfirm', {
                 tenderId: id,
-                companyId: params?.row?.id
+                companyId: currentTender?.id
             });
-            dispatch(setCompanyId(params?.row?.id));
+            dispatch(setCompanyId(currentTender?.id));
             toast.success('Offer Confirm successfully');
             fetchActiveData(); // Refresh the data
         } catch (error) {

@@ -9,14 +9,14 @@ const UserLogin = () => {
     const auth = useAuth();
     const navigate=useNavigate();
     const tenderId = useSelector(state => state.tender.tenderId);
+    if(tenderId){
+        navigate('/userdashboard')
+    }
     useEffect(() => {
-        if(tenderId){
-            navigate('/userdashboard')
-        }
         if(auth.token && auth.userType==="user"){
             navigate('/tender');
         }
-    }, [auth.token, navigate,tenderId]);
+    }, [auth.token, navigate]);
     const [form, setForm] = useState({
         email: "",
         password: ""
