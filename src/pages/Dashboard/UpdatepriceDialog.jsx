@@ -11,7 +11,6 @@ const formatDate = (date) => {
 const UpdatePriceDialog = ({ DialogData, onCloseAndRefetch }) => {
     const user = useAuth();
     const userId = user?.user;
-    console.log(DialogData);
     const tenderId = DialogData?.id;
 
     const [field, setField] = useState({
@@ -59,7 +58,6 @@ const UpdatePriceDialog = ({ DialogData, onCloseAndRefetch }) => {
             toast.success('Offer updated successfully');
             onCloseAndRefetch();
         } catch (error) {
-            console.error(error);
             toast.error('Failed to update offer');
         }
     };

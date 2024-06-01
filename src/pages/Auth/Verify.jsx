@@ -28,7 +28,6 @@ const Verify = () => {
             return;
         }
 
-        console.log("Verification Code:", form.verificationCode);
 
         try {
             const response = await axios.post('https://homecalculatorbackend-ni04.onrender.com/api/verify', {

@@ -21,7 +21,6 @@ const AuthProvider = ({ children }) => {
         body: JSON.stringify(data),
       });
       const res = await response.json();
-      console.log(res);
       if (res.userId && res.token) {
         setUser(res.userId);
         setToken(res.token);
@@ -40,7 +39,6 @@ const AuthProvider = ({ children }) => {
       }
       throw new Error(res.message || 'Login failed');
     } catch (err) {
-      console.error(err);
       alert("Error logging in: " + err.message);  // It's a good practice to give user feedback
     }
   };

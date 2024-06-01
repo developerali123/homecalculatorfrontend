@@ -143,7 +143,6 @@ const Storage = () => {
             <div className={`${timeToggle ? 'block' : 'hidden'} flex flex-col w-full justify-center items-center gap-2 mt-4 border-[1px] border-gray-200 rounded-t-md max-h-[100px] overflow-auto`}>
                 <div className='w-full flex justify-center p-1 gap-1'>
                     <DatePicker className="w-full border border-black" selected={startDate} onChange={(date) => {
-                        console.log(date)
                         setStartDate(date)
                         dispatch(setStorageStartDay(date))
                     }} />
@@ -151,7 +150,6 @@ const Storage = () => {
                 </div>
                 <div className='w-full flex justify-center p-1 gap-1'>
                     <DatePicker className="w-full border border-black" selected={endDate} onChange={(date) => {
-                        console.log(date);
                         setEndDate(date)
                         dispatch(setStorageEndDay(date))
 

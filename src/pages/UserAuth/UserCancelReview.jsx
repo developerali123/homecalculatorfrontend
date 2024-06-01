@@ -83,18 +83,12 @@ const UserCancelReview = () => {
     };
 
     const handleSubmit = async () => {
-        console.log(form);
-        console.log(selectedCheckboxes1);
-        console.log(selectedCheckboxes2);
-        console.log(selectedCheckboxes3);
         try {
             const response = await axios.post('https://homecalculatorbackend-ni04.onrender.com/api/reviews', form);
             // toast.success('Review submitted successfully!');
             setFormSubmitted(true);
-            console.log(response.data);
         } catch (error) {
             toast.error('Failed to submit review!');
-            console.error(error);
         }
     };
 

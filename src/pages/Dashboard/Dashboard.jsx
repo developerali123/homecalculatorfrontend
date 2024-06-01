@@ -36,7 +36,6 @@ const Dashboard = () => {
         try {
             const response = await axios.get(`https://homecalculatorbackend-ni04.onrender.com/api/tenders/getactivetenders/${userId}`);
             setData(response.data);
-            console.log(response.data);
         } catch (err) {
             setError(true);
         } finally {
@@ -47,7 +46,6 @@ const Dashboard = () => {
         try {
             const response = await axios.get(`https://homecalculatorbackend-ni04.onrender.com/api/tenders/getpendingtenders/${userId}`);
             setpendingData(response.data);
-            console.log(response.data);
         } catch (err) {
             setpendingError(true);
         } finally {
@@ -105,9 +103,6 @@ const Dashboard = () => {
         }
         return acc;
     }, []) || [];
-    console.log(activeRecord);
-    console.log(pendingRecord);
-
     const columns = [
         {
             field: "id", headerName: "Tender ID", minWidth: 100, flex: 1, renderCell: (params) => {

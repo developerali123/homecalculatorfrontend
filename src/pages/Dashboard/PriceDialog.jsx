@@ -6,7 +6,6 @@ import axios from "axios";
 const PriceDialog = ({ DialogData, onCloseAndRefetch }) => {
     const user = useAuth();
     const userId = user?.user;
-    console.log(DialogData);
     const tenderId = DialogData?.id;
 
     const [field, setField] = useState({
@@ -42,7 +41,6 @@ const PriceDialog = ({ DialogData, onCloseAndRefetch }) => {
             toast.success('Offer sent successfully');
             onCloseAndRefetch();
         } catch (error) {
-            console.error(error);
             toast.error('Failed to send offer');
         }
     };

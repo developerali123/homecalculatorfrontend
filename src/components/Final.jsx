@@ -8,7 +8,6 @@ import { sum1, sum2, sum3, sum4, sum5, arrow1 } from '../assets';
 const Final = () => {
   const price = useSelector(state => state.items.totalPrice);
   const distanceInKm=useSelector(state=>state.items.distanceInKm);
-  console.log(distanceInKm);
 
   return (
     <div className='flex flex-col items-center justify-center gap-3 mt-10'>

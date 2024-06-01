@@ -26,7 +26,6 @@ const Baseline = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const baselineForm = useSelector(state => state.items.baseline);
-  console.log(baselineForm);
   const Boxes = useSelector(state => state.items.boxes);
   const [progress, setProgress] = useState(Boxes);
   const [form, setForm] = useState(baselineForm);
@@ -34,10 +33,8 @@ const Baseline = () => {
     progress: 0,
   })
   const count = useSelector(state => state.count.count);
-  console.log(count);
   //lists
   const reduxItems = useSelector(state => state.items.items);
-  console.log(reduxItems);
   const [selectedItems, setSelectedItems] = useState(reduxItems);
   const [searchQuery, setSearchQuery] = useState('');
   const [filteredItems, setFilteredItems] = useState([]);
@@ -99,7 +96,7 @@ const Baseline = () => {
 
   const handleCalculate = async () => {
     const distance = await getDistance(baselineForm.originaddress, baselineForm.destinationaddress);
-    console.log(distance?.data?.price);
+    
     if (distance?.data?.price !== null) {
       dispatch(calculate({ ...state, distance: distance?.data?.price,distanceInKm:distance?.data?.distanceInKm }));
       dispatch(resetCount())
@@ -173,7 +170,6 @@ const Baseline = () => {
     }
   };
 
-  console.log(form)
 
   if (!isLoaded) {
     return <h1>loading</h1>

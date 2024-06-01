@@ -69,7 +69,7 @@ const UserReview = () => {
             const response = await axios.post('https://homecalculatorbackend-ni04.onrender.com/api/company/reviews', form);
             // toast.success('Review submitted successfully!');
             setFormSubmitted(true);
-            console.log(response.data);
+            
         } catch (error) {
             toast.error('Failed to submit review!');
             console.error(error);

@@ -12,7 +12,7 @@ export const getDistance = async (baselineAddress, destinationAddress) => {
       destinations: destinationAddress,
     },
   });
-  console.log(response?.data?.price);
+  
   return response;
 };
 
@@ -23,7 +23,7 @@ export async function sendEmail(emailBody) {
     // const apiUrl = `http://localhost:3000/email`;
 
     const response = await axios.post(apiUrl, emailBody);
-    // console.log({ response });
+    // 
     return response;
   } catch (error) {
     console.error(error.message);

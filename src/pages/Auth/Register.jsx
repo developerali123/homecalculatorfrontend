@@ -100,17 +100,15 @@ const Register = () => {
             toast.error('please agree to privacy policy');
             return;
         }
-        console.log(form);
 
         try {
-            const response = await axios.post('http://localhost:4000/api/register', {
+            const response = await axios.post('https://homecalculatorbackend-ni04.onrender.com/api/register', {
                 name: form.fullName,
                 email: form.email,
                 password: form.password,
                 userType: userType
             });
-            console.log(response?.data?._id);
-            const response1 = await axios.post('http://localhost:4000/api/company/add', {
+            const response1 = await axios.post('https://homecalculatorbackend-ni04.onrender.com/api/company/add', {
                 companyName: form.companyName,
                 userId: response?.data?.userId,
                 numberOfTrucks: form.numberOfTrucks,

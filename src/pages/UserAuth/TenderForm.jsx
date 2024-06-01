@@ -50,7 +50,6 @@ const TenderForm = () => {
 
   const handleSubmit = async (e) => {
 		e.preventDefault();
-		console.log(form);
 		if (form.name.trim() === "") {
 			toast.error('Please fill in full name');
 			return;
@@ -93,7 +92,6 @@ const TenderForm = () => {
 				starthours: form.starthours,
 				endhours: form.endhours,
 			});
-			console.log(response?.data?.tenderId);
 			await axios.post('https://homecalculatorbackend-ni04.onrender.com/api/tenders/tenderdetails', {
 				tenderId: response?.data?.tenderId,
 				originaddress: baselineForm.originaddress,

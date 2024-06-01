@@ -254,7 +254,7 @@ export const mainSlice = createSlice({
         distanceInKm,
       } = action.payload;
 
-      console.log("distance", distance);
+      
 
       // Calculate total price for all items
       let totalPrice = 0;
@@ -378,12 +378,12 @@ export const mainSlice = createSlice({
       // Calculate total cost based on boxes (each box costs $15)
       boxesPrice = boxes * 5;
 
-      console.log(distancePrice);
+      
 
       // Calculate total price including additional costs
       totalPrice += itemsPrice + servicesPrice + distancePrice + boxesPrice;
 
-      console.log(totalPrice);
+      
 
       // Return the calculated result
       return {

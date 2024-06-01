@@ -54,7 +54,7 @@ const UserDashboard = () => {
             // Check if any tender's status is not 'Pending'
             const isAnyTenderNotPending = response.data.some(tender => tender.tenderStatus !== 'Pending');
             setIsFinishButtonDisabled(isAnyTenderNotPending);
-            console.log(response.data);
+            
         } catch (err) {
             setError(true);
         } finally {
@@ -79,7 +79,7 @@ const UserDashboard = () => {
         orderconfirm: record.orderconfirm,
         priceOffer: record.priceOffer,
     })) || [];
-    console.log(activeRecord);
+    
 
     const columns = [
         {

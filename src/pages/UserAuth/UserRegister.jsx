@@ -76,7 +76,7 @@ const UserRegister = () => {
             toast.error('please agree to privacy policy');
             return;
         }
-        console.log(form);
+        
 
         try {
             const response = await axios.post('https://homecalculatorbackend-ni04.onrender.com/api/register', {
@@ -85,7 +85,7 @@ const UserRegister = () => {
                 password: form.password,
                 userType:userType
             });
-            console.log(response?.data?._id);
+            
             toast.success('Registration successful!');
             dispatch(setEmail(form.email));
             navigate("/userverify")
