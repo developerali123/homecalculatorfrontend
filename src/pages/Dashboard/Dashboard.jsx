@@ -298,6 +298,7 @@ const Dashboard = () => {
         setsendofferdialogOpen(false);
         setupdateofferdialogOpen(false);
         fetchActiveData();
+        fetchPendingData();
     };
     const handleCloseDialog = () => {
         setDialogOpen(false);

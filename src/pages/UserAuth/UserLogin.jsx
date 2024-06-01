@@ -3,15 +3,20 @@ import { Link, useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import { useAuth } from '../../AuthProvider';
 import Sidediv from '../Auth/Sidediv';
+import { useSelector } from 'react-redux';
 
 const UserLogin = () => {
     const auth = useAuth();
     const navigate=useNavigate();
+    const tenderId = useSelector(state => state.tender.tenderId);
     useEffect(() => {
+        if(tenderId){
+            navigate('/userdashboard')
+        }
         if(auth.token && auth.userType==="user"){
             navigate('/tender');
         }
-    }, [auth.token, navigate]);
+    }, [auth.token, navigate,tenderId]);
     const [form, setForm] = useState({
         email: "",
         password: ""
