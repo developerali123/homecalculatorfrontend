@@ -162,7 +162,7 @@ const UserDashboard = () => {
                         <button
                             className={`rounded-lg px-2 text-white ${isPending ? 'bg-gray-400' : 'bg-orange-400'}`}
                             disabled={isPending}
-                            onClick={() => handleConfirmOrderClick(params.row)}
+                            onClick={() => handleConfirmOrderClick(params?.row)}
                         >
                             {isOrderConfirmed ? 'Order Confirmed' : 'Confirm Offer'}
                         </button>
@@ -177,7 +177,7 @@ const UserDashboard = () => {
     };
 
     const handleConfirmOk = async () => {
-        setConfirmDialogOpen(false);
+        console.log(currentTender);
         try {
             const response = await axios.post('https://homecalculatorbackend-ni04.onrender.com/api/priceoffer/updateStatusAndConfirm', {
                 tenderId: id,
@@ -190,6 +190,7 @@ const UserDashboard = () => {
             console.error('Failed to confirm offer', error);
             toast.error('Failed to confirm offer');
         }
+        setConfirmDialogOpen(false);
     };
 
     const handleConfirmCancel = () => {
