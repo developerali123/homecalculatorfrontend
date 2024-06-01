@@ -63,7 +63,7 @@ const UserDashboard = () => {
 
     useEffect(() => {
         fetchActiveData();
-    }, [id]);
+    }, [tenderId]);
 
     const activeRecord = data.map((record) => ({
         id: record.moverId,
