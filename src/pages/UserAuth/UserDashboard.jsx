@@ -29,7 +29,6 @@ const UserDashboard = () => {
     const tenderId = useSelector(state => state.tender.tenderId);
     const auth = useAuth();
     const [userId, setuserId] = useState(auth?.user);
-    const { id } = useParams();
     const [toggle, setToggle] = useState(0);
     const [data, setData] = useState([]);
     const [loading, setLoading] = useState(true);
@@ -180,7 +179,7 @@ const UserDashboard = () => {
         console.log(currentTender);
         try {
             const response = await axios.post('https://homecalculatorbackend-ni04.onrender.com/api/priceoffer/updateStatusAndConfirm', {
-                tenderId: id,
+                tenderId: tenderId,
                 companyId: currentTender?.id
             });
             dispatch(setCompanyId(currentTender?.id));
