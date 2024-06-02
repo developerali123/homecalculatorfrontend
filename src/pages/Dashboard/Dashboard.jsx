@@ -112,7 +112,7 @@ const Dashboard = () => {
     }, []) || [];
     
     const pendingRecord = pendingdata.reduce((acc, record) => {
-        if (record.priceconfirm === true) {
+        if (record.priceOffer!=null) {
             acc.push({
                 id: record.tenderId,
                 name: record.name,

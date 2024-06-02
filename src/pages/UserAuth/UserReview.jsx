@@ -152,7 +152,6 @@ const UserReview = () => {
     } else {
         return (
             <div className="bg-white h-max-screen">
-                <ToastContainer />
                 <div className="bg-[#96E0F8] flex justify-between py-3">
                     <div>
                         <h2 className='w-full text-xl bm-font'>Click <span className='text-orange-500 px-2'>n</span>Move</h2>

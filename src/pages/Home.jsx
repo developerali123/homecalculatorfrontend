@@ -5,8 +5,10 @@ import Balloon from '../components/Balloon';
 import Cloud from '../components/Cloud';
 import MovingTruck from '../components/MovingTruck';
 import SmallCloud from '../components/smallCloud';
+import { useAuth } from '../AuthProvider';
 
 const Home = () => {
+  const user = useAuth();
   return (
     <div className="relative h-full flex flex-col">
       {/* clouds */}
@@ -26,6 +28,11 @@ const Home = () => {
       <h2 className='md:text-3xl md:hidden text-2xl font-bold text-center text-white'>Click <span className='text-orange-500 px-2'>n</span><span className='text-white'>Move</span></h2>
       <div className='flex md:justify-around justify-start md:ml-0 ml-5 items-center mt-5'>
         <button className='bg-[#FC7023] text-white md:text-xl text-md rounded-md md:p-3 p-1 md:w-48 w-36 font-semibold'><Link to="/login">log in for Moving companies </Link></button>
+        {
+          user.userType==="user" && (
+            <button className='bg-[#FC7023] text-white md:text-xl text-md rounded-md md:p-3 ml:2 p-1 md:w-48 w-36 font-semibold'><Link to="/userdashboard">User Dashboard </Link></button>
+          )
+        }
         <h2 className='md:text-3xl text-2xl bm-font md:flex hidden text-white'>Click <span className='text-orange-500 px-2'>n</span><span className='text-white'>Move</span></h2>
       </div>
 
