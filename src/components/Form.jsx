@@ -11,7 +11,7 @@ const Form = ({ toggleSummary }) => {
 	const user = useAuth();
     const userId = user?.user;
 	const [formSubmitted, setFormSubmitted] = useState(false);
-	const price = useSelector(state => state.items.totalPrice);
+	const price = useSelector(state => Math.round(state.items.totalPrice));;
 	const baselineForm = useSelector(state => state.items.baseline);
 	const distance = useSelector(state => state.items.distanceInKm);
 	const distanceprice = useSelector(state => state.items.distancePrice);

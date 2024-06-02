@@ -20,7 +20,7 @@ const TableComponent = () => {
     const originCranePrice = useSelector(state => state.items.originCranePrice);
     const destinationCranePrice = useSelector(state => state.items.destinationCranePrice);
     const packingprice = useSelector(state => state.items.packingprice);
-    const price = useSelector(state => state.items.totalPrice);
+    const price = useSelector(state => Math.round(state.items.totalPrice));;
     return (
         <div className='bg-white p-20'>
             <h2 className='text-center mb-5 font-bold text-xl'>Total Cost: {price}</h2>

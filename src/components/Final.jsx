@@ -6,7 +6,7 @@ import { sum1, sum2, sum3, sum4, sum5, arrow1 } from '../assets';
 
 
 const Final = () => {
-  const price = useSelector(state => state.items.totalPrice);
+  const price = useSelector(state => Math.round(state.items.totalPrice));;
   const distanceInKm=useSelector(state=>state.items.distanceInKm);
 
   return (

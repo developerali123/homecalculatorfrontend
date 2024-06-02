@@ -89,7 +89,7 @@ const Dashboard = () => {
     }, [userId]);
 
     const activeRecord = data.reduce((acc, record) => {
-        if (record.priceconfirm === false) {
+        if (record.priceOffer==null) {
             acc.push({
                 id: record.tenderId,
                 name: record.name,
