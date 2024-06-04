@@ -5,6 +5,9 @@ import { Link, useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import { setEmail } from '../../slices/emailslice';
 import Sidediv from './Sidediv';
+import GoogleCityAutocomplete from '../../components/GeogleCityAutocomplete';
+import { useJsApiLoader } from '@react-google-maps/api';
+import { setPassword } from '../../slices/passwordslice';
 
 const Register = () => {
     const dispatch = useDispatch();
@@ -20,9 +23,14 @@ const Register = () => {
         agreed: false,
         numberOfTrucks: "1-10",
         phoneNumber: "",
-        city: "Tel aviv",
+        city: "",
         companyId: null
     });
+
+    const { isLoaded } = useJsApiLoader({
+        googleMapsApiKey: 'AIzaSyAuIchE5mdfEw_S7oM8I5ZkpCcQyWOMg-Y',
+        libraries: ['places']
+      })
 
     useEffect(() => { }, [count]);
 
@@ -101,6 +109,7 @@ const Register = () => {
             return;
         }
 
+        console.log(form);
         try {
             const response = await axios.post('https://homecalculatorbackend-ni04.onrender.com/api/register', {
                 name: form.fullName,
@@ -118,6 +127,7 @@ const Register = () => {
             });
             toast.success('Registration successful!');
             dispatch(setEmail(form.email));
+            dispatch(setPassword(form.password));
             navigate("/verify")
             // Handle any additional logic, such as redirecting to another page
         } catch (error) {
@@ -147,6 +157,8 @@ const Register = () => {
                                 name='password'
                                 value={form.password}
                                 onChange={handleFormChange}
+                                onFocus={true}
+                                onBlur={false}
                                 type='password'
                                 className='md:w-[400px] w-[250px] h-[44px] bg-white border border-[#cccccc] border-opacity-100 px-4 py-2 rounded-md focus:border-none mb-3'
                                 placeholder="Enter at least 8 characters"
@@ -254,7 +266,8 @@ const Register = () => {
                             </div>
 
                             <h3 className='mb-1'>In which cities do you operate?</h3>
-                            <div className='flex mb-1'>
+                            <GoogleCityAutocomplete value={form.city} onChange={handleFormChange} name="city" placeholder="Select city" />
+                            {/* <div className='flex mb-1'>
                                 <div className={`border rounded-full mr-3 p-2 ${form.city === 'Tel aviv' ? 'border-blue-500' : 'border-black'}`}>
                                     <input
                                         type="radio"
@@ -341,7 +354,7 @@ const Register = () => {
                                     />
                                     <label htmlFor="sevencity">Other</label>
                                 </div>
-                            </div>
+                            </div> */}
                             <div className='flex justify-center items-center'>
                                 <button className='bg-white w-full text-black p-2 mt-5 rounded-md border border-black mr-2' onClick={handleprevious}>Previous</button>
                                 <button className='bg-[#2676E5] w-full text-white p-2 mt-5 rounded-md' onClick={handlestepthree}>Next</button>

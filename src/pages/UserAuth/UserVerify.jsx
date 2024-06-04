@@ -6,14 +6,15 @@ import { toast } from 'react-toastify';
 import VerificationInput from "react-verification-input";
 import { clearEmail } from '../../slices/emailslice';
 import Sidediv from '../Auth/Sidediv';
+import { useAuth } from '../../AuthProvider';
+import { clearPassword } from '../../slices/passwordslice';
 
 const UserVerify = () => {
     const email = useSelector(state => state.email);
+    const password = useSelector(state => state.password);
+    const auth = useAuth();
     const dispatch = useDispatch();
     const navigate = useNavigate();
-    if (email == "") {
-        navigate("/userregister");
-    }
     const [form, setForm] = useState({
         verificationCode: "",
     });
@@ -37,11 +38,17 @@ const UserVerify = () => {
             });
             // Handle successful login, such as storing the token in local storage and redirecting to another page
             toast.success('Verification successful!');
+
+            auth.loginAction({
+                email: email,
+                password: password,
+            });
+            toast.success('Login successful!');
             // Clear the email from Redux state
             dispatch(clearEmail());
+            dispatch(clearPassword());
 
             // Navigate to the login page
-            navigate("/userlogin");
         } catch (error) {
             toast.error('Verification failed');
             // Handle any error messages or logging

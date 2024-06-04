@@ -406,6 +406,20 @@ const Dashboard = () => {
             },
         },
         {
+            field: "name", headerName: "Client Name", minWidth: 150,
+            renderCell: (params) => {
+
+                return <span style={{ whiteSpace: "pre-wrap" }} className="table_first_column" >{params?.row?.name}</span>
+            },
+        },
+        {
+            field: "phonenumber", headerName: "Client Phone Number", minWidth: 150,
+            renderCell: (params) => {
+
+                return <span style={{ whiteSpace: "pre-wrap" }} className="table_first_column" >{params?.row?.phonenumber}</span>
+            },
+        },
+        {
             field: "tenderdetails", headerName: "Tender Details", minWidth: 150, flex: 1,
             renderCell: (params) => {
                 const onView = () => handleRowClick(params);

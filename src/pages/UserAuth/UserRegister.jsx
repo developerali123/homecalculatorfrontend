@@ -5,6 +5,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import { setEmail } from '../../slices/emailslice';
 import Sidediv from '../Auth/Sidediv';
+import { setPassword } from '../../slices/passwordslice';
 
 const UserRegister = () => {
     const dispatch = useDispatch();
@@ -88,6 +89,7 @@ const UserRegister = () => {
             
             toast.success('Registration successful!');
             dispatch(setEmail(form.email));
+            dispatch(setPassword(form.password));
             navigate("/userverify")
             // Handle any additional logic, such as redirecting to another page
         } catch (error) {

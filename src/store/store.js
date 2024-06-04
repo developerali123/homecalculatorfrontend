@@ -4,6 +4,7 @@ import emailReducer from '../slices/emailslice';
 import tenderReducer from '../slices/tenderslice';
 import countReducer from '../slices/countslice';
 import companyReducer from '../slices/companyslice';
+import passwordReducer from '../slices/passwordslice';
 import storage from 'redux-persist/lib/storage';
 import { combineReducers } from 'redux';
 import {
@@ -27,6 +28,7 @@ const reducers = combineReducers({
   email: emailReducer,
   count: countReducer,
   company:companyReducer,
+  password:passwordReducer,
 });
 
 const persistedReducer = persistReducer(persistConfig, reducers);
