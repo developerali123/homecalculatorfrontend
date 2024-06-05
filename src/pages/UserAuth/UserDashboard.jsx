@@ -68,6 +68,7 @@ const UserDashboard = () => {
         try {
             const response = await axios.get(`https://homecalculatorbackend-ni04.onrender.com/api/priceoffer/getoffers/${tenderId}`);
             setData(response.data);
+            console.log(response.data);
             // Check if any tender's status is not 'Pending'
             const isAnyTenderNotPending = response.data.some(tender => tender.tenderStatus !== 'Confirmed');
             const isAnyTenderPending = response.data.some(tender => tender.tenderStatus === 'Confirmed');
@@ -91,6 +92,7 @@ const UserDashboard = () => {
         id: record.moverId,
         rating: record.companyDetails.rating,
         name: record.companyDetails.companyName,
+        companyid:record.companyDetails.companyId,
         phonenumber: record.companyDetails.phoneNumber,
         transportdate: formatDate(record.transportDate),
         arrivaldate: formatDate(record.arrivalDate),
@@ -202,9 +204,9 @@ const UserDashboard = () => {
         try {
             const response = await axios.post('https://homecalculatorbackend-ni04.onrender.com/api/priceoffer/updateStatusAndConfirm', {
                 tenderId: tenderId,
-                companyId: currentTender?.id
+                companyId: currentTender?.companyid
             });
-            dispatch(setCompanyId(currentTender?.id));
+            dispatch(setCompanyId(currentTender?.companyid));
             toast.success('Offer Confirm successfully');
             fetchActiveData(); // Refresh the data
         } catch (error) {
