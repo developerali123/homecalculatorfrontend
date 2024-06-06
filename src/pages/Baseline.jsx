@@ -29,7 +29,7 @@ const Baseline = () => {
   const Boxes = useSelector(state => state.items.boxes);
   const [progress, setProgress] = useState(Boxes);
   const [form, setForm] = useState(baselineForm);
-  const [form1,setform1]=useState({
+  const [form1, setform1] = useState({
     progress: 0,
   })
   const count = useSelector(state => state.count.count);
@@ -96,9 +96,9 @@ const Baseline = () => {
 
   const handleCalculate = async () => {
     const distance = await getDistance(baselineForm.originaddress, baselineForm.destinationaddress);
-    
+
     if (distance?.data?.price !== null) {
-      dispatch(calculate({ ...state, distance: distance?.data?.price,distanceInKm:distance?.data?.distanceInKm }));
+      dispatch(calculate({ ...state, distance: distance?.data?.price, distanceInKm: distance?.data?.distanceInKm }));
       dispatch(resetCount())
     }
     navigate('/summary');
@@ -118,18 +118,19 @@ const Baseline = () => {
 
   const stepone = () => {
     if (form.originaddress === "") {
-      toast.error('Please fill your origin address');
+      toast.error('אנא מלא את כתובת המקור שלך');
       return;
     }
     dispatch(setCount(2));
   }
   const steptwo = () => {
     if (form.destinationaddress === "") {
-      toast.error('Please fill your destination address');
+      toast.error('אנא מלא את כתובת היעד שלך');
       return;
     }
-    dispatch(addBaseline({originaddress: form.originaddress,originfloor:form.originfloor,originelevator:form.originelevator,origintruckAccess:form.origintruckAccess,
-      destinationaddress: form.destinationaddress,destinationfloor:form.destinationfloor,destinationelevator:form.destinationelevator,destinationtruckAccess:form.destinationtruckAccess
+    dispatch(addBaseline({
+      originaddress: form.originaddress, originfloor: form.originfloor, originelevator: form.originelevator, origintruckAccess: form.origintruckAccess,
+      destinationaddress: form.destinationaddress, destinationfloor: form.destinationfloor, destinationelevator: form.destinationelevator, destinationtruckAccess: form.destinationtruckAccess
     }))
     dispatch(setCount(3));
   }
@@ -207,7 +208,7 @@ const Baseline = () => {
       {
         count == 5 && (
           <div className="flex justify-center items-center flex-col h-full">
-            <h1 className='mt-20 font-semibold text-3xl px-3'>Additional service</h1>
+            <h1 className='mt-20 font-semibold text-3xl px-3'>שירות נוסף</h1>
 
             <Assemble />
             <Disassemble />
@@ -231,8 +232,6 @@ const Baseline = () => {
 
       {/* base */}
       <div className="flex flex-col w-full items-center md:h-[150px]">
-        {/* <img src={marker} alt="marker" className='absolute bottom-14 right-10 w-26 h-40 max-md:w-14 max-md:h-24 z-30'/>
-        <img src={grass} alt="grass" className='z-20 w-full object-cover'/> */}
         {count <= 2 && (
           <img src={basebg} alt="grayslab" className='-z-20 w-full object-cover' />
         )}

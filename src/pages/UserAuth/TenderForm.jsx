@@ -11,7 +11,7 @@ const TenderForm = () => {
   const dispatch = useDispatch();
   const user = useAuth();
   const userId = user?.user;
-  const navigate=useNavigate();
+  const navigate = useNavigate();
   const [formSubmitted, setFormSubmitted] = useState(false);
   const price = useSelector(state => Math.round(state.items.totalPrice));;
   const baselineForm = useSelector(state => state.items.baseline);
@@ -49,182 +49,183 @@ const TenderForm = () => {
   };
 
   const handleSubmit = async (e) => {
-		e.preventDefault();
-		if (form.name.trim() === "") {
-			toast.error('Please fill in full name');
-			return;
-		}
-		if (form.phonenumber.trim() === "") {
-			toast.error('Please fill in phone number');
-			return;
-		}
-		if (form.transportdate.trim() === "") {
-			toast.error('Please select the date of transport');
-			return;
-		}
-		if (form.arrivaldate.trim() === "") {
-			toast.error('Please select the date of arrival');
-			return;
-		}
-		if (form.starthours.trim() === "") {
-			toast.error('Please select the start hours');
-			return;
-		}
-		if (form.endhours.trim() === "") {
-			toast.error('Please select the end hours');
-			return;
-		}
-		if (form.additionalDetails.trim() === "") {
-			toast.error('Please provide additional details');
-			return;
-		}
-		try {
-			const response = await axios.post('https://homecalculatorbackend-ni04.onrender.com/api/tenders/sendtender', {
-				userId,
-				name: form.name,
-				phonenumber: form.phonenumber,
-				additionalDetails: form.additionalDetails,
-				movingPrice: form.movingPrice,
-				originaddress: form.originaddress,
-				destinationaddress: form.destinationaddress,
-				transportdate: form.transportdate,
-				arrivaldate: form.arrivaldate,
-				starthours: form.starthours,
-				endhours: form.endhours,
-			});
-			await axios.post('https://homecalculatorbackend-ni04.onrender.com/api/tenders/tenderdetails', {
-				tenderId: response?.data?.tenderId,
-				originaddress: baselineForm.originaddress,
-				distance: distance,
-				distanceprice: distanceprice,
-				destinationaddress: baselineForm.destinationaddress,
-				originfloor: baselineForm.originfloor,
-				itemsprice: itemsprice,
-				originfloorprice: originfloorprice,
-				destinationfloor: baselineForm.destinationfloor,
-				destinationfloorprice: destinationfloorprice,
-				origintruckAccess: baselineForm.origintruckAccess,
-				origintruckaccessprice: origintruckaccessprice,
-				destinationtruckAccess: baselineForm.destinationtruckAccess,
-				destinationtruckaccessprice: destinationtruckaccessprice,
-				items: items,
-				assembledItems: assembledItems,
-				disassembledItems: disassembledItems,
-				boxes: boxes,
-				boxesPrice: boxesPrice,
-				originCranePrice: originCranePrice,
-				destinationCranePrice: destinationCranePrice,
-				packingprice: packingprice,
-			});
+    e.preventDefault();
+    if (form.name.trim() === "") {
+      toast.error('נא למלא שם מלא');
+      return;
+    }
+    if (form.phonenumber.trim() === "") {
+      toast.error('נא למלא מספר טלפון');
+      return;
+    }
+    if (form.transportdate.trim() === "") {
+      toast.error('אנא בחר את תאריך ההובלה');
+      return;
+    }
+    if (form.arrivaldate.trim() === "") {
+      toast.error('אנא בחר את תאריך ההגעה');
+      return;
+    }
+    if (form.starthours.trim() === "") {
+      toast.error('אנא בחר את שעות ההתחלה');
+      return;
+    }
+    if (form.endhours.trim() === "") {
+      toast.error('אנא בחר את שעות הסיום');
+      return;
+    }
+    if (form.additionalDetails.trim() === "") {
+      toast.error('אנא ספק פרטים נוספים');
+      return;
+    }
+    try {
+      const response = await axios.post('https://homecalculatorbackend-ni04.onrender.com/api/tenders/sendtender', {
+        userId,
+        name: form.name,
+        phonenumber: form.phonenumber,
+        additionalDetails: form.additionalDetails,
+        movingPrice: form.movingPrice,
+        originaddress: form.originaddress,
+        destinationaddress: form.destinationaddress,
+        transportdate: form.transportdate,
+        arrivaldate: form.arrivaldate,
+        starthours: form.starthours,
+        endhours: form.endhours,
+      });
+      await axios.post('https://homecalculatorbackend-ni04.onrender.com/api/tenders/tenderdetails', {
+        tenderId: response?.data?.tenderId,
+        originaddress: baselineForm.originaddress,
+        distance: distance,
+        distanceprice: distanceprice,
+        destinationaddress: baselineForm.destinationaddress,
+        originfloor: baselineForm.originfloor,
+        itemsprice: itemsprice,
+        originfloorprice: originfloorprice,
+        destinationfloor: baselineForm.destinationfloor,
+        destinationfloorprice: destinationfloorprice,
+        origintruckAccess: baselineForm.origintruckAccess,
+        origintruckaccessprice: origintruckaccessprice,
+        destinationtruckAccess: baselineForm.destinationtruckAccess,
+        destinationtruckaccessprice: destinationtruckaccessprice,
+        items: items,
+        assembledItems: assembledItems,
+        disassembledItems: disassembledItems,
+        boxes: boxes,
+        boxesPrice: boxesPrice,
+        originCranePrice: originCranePrice,
+        destinationCranePrice: destinationCranePrice,
+        packingprice: packingprice,
+      });
       dispatch(setTenderId(response?.data?.tenderId));
+      toast.success("מכרז נוצר בהצלחה")
       navigate(`/userdashboard`);
-			setFormSubmitted(true);
-			// Handle any additional logic, such as redirecting to another page
-		} catch (error) {
-			toast.error('An error occurred. Please try again later.');
-			// Handle any error messages or logging
-		}
-	};
+      setFormSubmitted(true);
+      // Handle any additional logic, such as redirecting to another page
+    } catch (error) {
+      toast.error('אירעה שגיאה. אנא נסה שוב מאוחר יותר.');
+      // Handle any error messages or logging
+    }
+  };
   return (
     <div className='grid grid-cols-12 h-screen'>
       <Sidediv />
       <div className='md:col-span-8 col-span-12 bg-white'>
         <div className='flex justify-center items-center flex-col h-full'>
           <h1 className="text-2xl mb-2 align-center">
-            Interested in a tender?
+            מעוניינים במכרז?
           </h1>
           <h2 className="text-md p-4 text-slate-500 text-center">
-            Let us do the hard work for you.
+            הרשימו לנו לעשות את העבודה הקשה עבורכם.
             <br />
-            You just leave details, and we will take care of locating you
-            The best offer!
+            תנו פרטים, ואנחנו נדאג לאיתור לכם
+            את ההצעה הטובה ביותר!
           </h2>
 
           <h3 className="text-md my-4 text-slate-400">
-            Please note - flexibility in delivery dates and times is possible
-            Help you get better offers.
+            נא לשים לב - גמישות בתאריכי המשלוח והגעה עשויה
+            לעזור לך לקבל הצעות טובות יותר.
           </h3>
           <div className='flex flex-col'>
             <div className='flex '>
               <div className='mr-3'>
-                <h3 className='mb-1'>Full Name</h3>
+                <h3 className='mb-1'>שם מלא</h3>
                 <input
                   name='name'
                   value={form.name}
                   onChange={handleFormChange}
                   className='w-[200px] h-[44px] bg-white border border-[#cccccc] border-opacity-100 px-4 py-2 rounded-md focus:border-none mb-3'
-                  placeholder="Enter your full name"
+                  placeholder="הזן את שמך המלא"
                 />
               </div>
               <div>
-                <h3 className='mb-1'>Phone Number</h3>
+                <h3 className='mb-1'>מספר טלפון</h3>
                 <input
                   name='phonenumber'
                   value={form.phonenumber}
                   onChange={handleFormChange}
                   className='w-[200px] h-[44px] bg-white border border-[#cccccc] border-opacity-100 px-4 py-2 rounded-md focus:border-none mb-3'
-                  placeholder="Enter your phone number"
+                  placeholder="הזן את מספר הטלפון שלך"
                 />
               </div>
             </div>
             <div className='flex '>
               <div className='mr-3'>
-                <h3 className='mb-1'>Date of Transport</h3>
+                <h3 className='mb-1'>תאריך הובלה</h3>
                 <input
                   type='date'
                   name='transportdate'
                   value={form.transportdate}
                   onChange={handleFormChange}
                   className='w-[200px] h-[44px] bg-white border border-[#cccccc] border-opacity-100 px-4 py-2 rounded-md focus:border-none mb-3'
-                  placeholder="Enter your phone number"
+                  placeholder="הזן את מספר הטלפון שלך"
                 />
               </div>
               <div>
-                <h3 className='mb-1'>Date of Arrival</h3>
+                <h3 className='mb-1'>תאריך הגעה</h3>
                 <input
                   type='date'
                   name='arrivaldate'
                   value={form.arrivaldate}
                   onChange={handleFormChange}
                   className='w-[200px] h-[44px] bg-white border border-[#cccccc] border-opacity-100 px-4 py-2 rounded-md focus:border-none mb-3'
-                  placeholder="Enter your phone number"
+                  placeholder="הזן את מספר הטלפון שלך"
                 />
               </div>
             </div>
             <div className='flex '>
               <div className='mr-3'>
-                <h3 className='mb-1'>Starting Time</h3>
+                <h3 className='mb-1'>שעת התחלה</h3>
                 <input
                   type='time'
                   name='starthours'
                   value={form.starthours}
                   onChange={handleFormChange}
                   className='w-[200px] h-[44px] bg-white border border-[#cccccc] border-opacity-100 px-4 py-2 rounded-md focus:border-none mb-3'
-                  placeholder="Enter your phone number"
+                  placeholder="הזן את מספר הטלפון שלך"
                 />
               </div>
               <div>
-                <h3 className='mb-1'>Ending Time</h3>
+                <h3 className='mb-1'>שעת סיום</h3>
                 <input
                   type='time'
                   name='endhours'
                   value={form.endhours}
                   onChange={handleFormChange}
                   className='w-[200px] h-[44px] bg-white border border-[#cccccc] border-opacity-100 px-4 py-2 rounded-md focus:border-none mb-3'
-                  placeholder="Enter your phone number"
+                  placeholder="הזן את מספר הטלפון שלך"
                 />
               </div>
             </div>
-            <h3 className='mb-1'>More Details</h3>
+            <h3 className='mb-1'>פרטים נוספים</h3>
             <textarea
               name='additionalDetails'
               value={form.additionalDetails}
               onChange={handleFormChange}
               className='w-[410px] bg-white border border-[#cccccc] border-opacity-100 px-4 py-2 rounded-md focus:border-none mb-3'
-              placeholder="Enter your More Details"
+              placeholder="הזן פרטים נוספים"
               rows="3"
             />
-            <button className='bg-[#2676E5] w-full text-white p-2 mt-5 rounded-md' onClick={handleSubmit}>Create a tender</button>
+            <button className='bg-[#2676E5] w-full text-white p-2 mt-5 rounded-md' onClick={handleSubmit}>צור מכרז</button>
           </div>
         </div>
       </div>

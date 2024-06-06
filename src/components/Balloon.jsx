@@ -3,8 +3,8 @@ import { hotairballoon } from '../assets'
 const Balloon = () => {
   return (
     <div className="w-[80px] h-[120px]">
-      {/* <img src={hotairballoon} alt="Cloud" className="h-full absolute top-0 smallcloud delay-500" /> */}
-      <svg width="81" height="124" viewBox="0 0 81 124" fill="none" xmlns="http://www.w3.org/2000/svg" className='h-full absolute top-0 smallcloud delay-500'>
+      <img src={hotairballoon} alt="Cloud" className="h-full absolute top-0 smallcloud delay-500" />
+      {/* <svg width="81" height="124" viewBox="0 0 81 124" fill="none" xmlns="http://www.w3.org/2000/svg" className='h-full absolute top-0 smallcloud delay-500'>
         <path d="M48.748 90.156H31.301V99.0173H48.748V90.156Z" fill="#FCAD00" />
         <path d="M80.05 37.5612C80.05 16.0156 62.128 0.5 40.021 0.5C17.905 0.5 0 16.0156 0 37.5612C0 46.8434 3.63599 55.175 8.91199 62.0778C14.852 69.8469 31.302 91.6541 31.302 91.6541H48.733C48.733 91.6541 65.225 69.8244 71.166 62.0469C76.431 55.1506 80.05 46.8284 80.05 37.5612Z" fill="#FDCB1A" />
         <path d="M70.1981 37.5612C70.1981 16.0156 56.6861 0.5 40.0201 0.5C23.3461 0.5 9.8501 16.0156 9.8501 37.5612C9.8501 46.8434 12.6291 55.2444 16.5651 62.0778C21.0831 69.9172 33.4481 91.6541 33.4481 91.6541H46.5861C46.5861 91.6541 58.9741 69.9031 63.5011 62.0469C67.4371 55.2209 70.1981 46.8284 70.1981 37.5612Z" fill="white" />
@@ -16,7 +16,7 @@ const Balloon = () => {
         <path d="M28.307 66.6687L36.103 107.645" stroke="#754C24" stroke-width="1.1813" stroke-miterlimit="10" />
         <path d="M48.995 122.029C48.995 123.095 48.073 123.958 46.936 123.958H33.247C32.11 123.958 31.188 123.095 31.188 122.029V109.196C31.188 108.131 32.11 107.266 33.247 107.266H46.936C48.073 107.266 48.995 108.131 48.995 109.196V122.029Z" fill="#754C24" />
         <path d="M49.67 109.748C49.67 110.193 49.286 110.554 48.812 110.554H31.241C30.766 110.554 30.38 110.193 30.38 109.748V108.071C30.38 107.627 30.767 107.266 31.241 107.266H48.812C49.287 107.266 49.67 107.627 49.67 108.071V109.748Z" fill="#603813" />
-      </svg>
+      </svg> */}
 
 
       {/* <img src={cloudleft} alt="Cloud Left" className="w-1/2 h-full absolute top-0 cloud-left" /> */}

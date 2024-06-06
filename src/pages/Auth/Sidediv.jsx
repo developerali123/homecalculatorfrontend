@@ -7,7 +7,7 @@ const Sidediv = () => {
             <div className=" w-[200px] h-[90px] ml-5">
                 <img src={newCloud} alt="Cloud" className="cloud" />
             </div>
-            <h2 className='text-4xl mt-5 font-bold text-center text-white'>Click <span className='text-orange-500 px-2'>n</span><span className='text-white'>Move</span></h2>
+            <h2 className='text-4xl mt-5 font-bold text-center text-white'>לחץ על <span className='text-orange-500 px-2'>n</span><span className='text- white'>הזז</span></h2>
             <div className='flex justify-end mt-5'>
                 <div className=" w-[100px] h-[50px] mr-10">
                     <img src={newCloud} alt="Cloud" className="smallcloud" />

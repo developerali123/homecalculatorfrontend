@@ -25,7 +25,7 @@ const formatDate = (dateString) => {
 
 const UserDashboard = () => {
     const dispatch = useDispatch();
-    const navigate=useNavigate();
+    const navigate = useNavigate();
     const tenderId = useSelector(state => state.tender.tenderId);
     const auth = useAuth();
     const [userId, setuserId] = useState(auth?.user);
@@ -76,7 +76,7 @@ const UserDashboard = () => {
             console.log(isAnyTenderPending);
             setIsFinishButtonDisabled(isAnyTenderNotPending);
             setIsPendingButtonDisabled(isAnyTenderPending);
-            
+
         } catch (err) {
             setError(true);
         } finally {
@@ -92,7 +92,7 @@ const UserDashboard = () => {
         id: record.moverId,
         rating: record.companyDetails.rating,
         name: record.companyDetails.companyName,
-        companyid:record.companyDetails.companyId,
+        companyid: record.companyDetails.companyId,
         phonenumber: record.companyDetails.phoneNumber,
         transportdate: formatDate(record.transportDate),
         arrivaldate: formatDate(record.arrivalDate),
@@ -102,11 +102,11 @@ const UserDashboard = () => {
         orderconfirm: record.orderconfirm,
         priceOffer: record.priceOffer,
     })) || [];
-    
+
 
     const columns = [
         {
-            field: "id", headerName: "Mover ID", minWidth: 100, renderCell: (params) => {
+            field: "id", headerName: "מזהה הובלן", minWidth: 100, renderCell: (params) => {
 
                 return <span style={{ whiteSpace: "pre-wrap" }} className="table_first_column">
                     {params.id}
@@ -115,7 +115,7 @@ const UserDashboard = () => {
         },
         {
             field: "rating",
-            headerName: "Rating",
+            headerName: "דירוג",
 
             minWidth: 150,
             renderCell: (params) => {
@@ -123,13 +123,13 @@ const UserDashboard = () => {
                     <div style={{ display: 'flex', alignItems: 'center', gap: '4px' }}>
                         <CiStar size={30} style={{ color: 'gold' }} />
                         {params.row.rating}
-                        <span>(10 reviews)</span>
+                        <span>(10 ביקורות)</span>
                     </div>
                 );
             },
         },
         {
-            field: "tenderStatus", headerName: "Tender Status", minWidth: 150,
+            field: "tenderStatus", headerName: "סטטוס מכרז", minWidth: 150,
             renderCell: (params) => {
 
                 return <span style={{ whiteSpace: "pre-wrap" }} className="table_first_column">
@@ -138,46 +138,46 @@ const UserDashboard = () => {
             },
         },
         {
-            field: "priceOffer", headerName: "Price Offer", minWidth: 150,
+            field: "priceOffer", headerName: "הצעת מחיר", minWidth: 150,
             renderCell: (params) => {
 
                 return <span style={{ whiteSpace: "pre-wrap", color: "#FC7023" }} className="table_first_column">
-                    {params?.row?.priceOffer} NIS
+                    {params?.row?.priceOffer} ש"ח
                 </span>
             },
         },
         {
-            field: "date", headerName: "Date", minWidth: 200,
+            field: "date", headerName: "תאריך", minWidth: 200,
             renderCell: (params) => {
 
                 return <span style={{ whiteSpace: "pre-wrap" }} className="table_first_column" >{params?.row?.transportdate} - {params?.row?.arrivaldate}</span>
             },
         },
         {
-            field: "hours", headerName: "Hours", minWidth: 150,
+            field: "hours", headerName: "שעות", minWidth: 150,
             renderCell: (params) => {
 
                 return <span style={{ whiteSpace: "pre-wrap" }} className="table_first_column" >{params?.row?.starttime} - {params?.row?.endtime}</span>
             },
         },
         {
-            field: "name", headerName: "Company Name", minWidth: 150,
+            field: "name", headerName: "שם החברה", minWidth: 150,
             renderCell: (params) => {
 
-                return <span style={{ whiteSpace: "pre-wrap" }} className="table_first_column" >{params.row.orderconfirm ? params?.row?.name : 'confirm your order'}</span>
+                return <span style={{ whiteSpace: "pre-wrap" }} className="table_first_column" >{params.row.orderconfirm ? params?.row?.name : 'אשר את ההזמנה שלך'}</span>
             },
         },
         {
-            field: "phonenumber", headerName: "Company Phone Number", minWidth: 150,
+            field: "phonenumber", headerName: "מספר טלפון של החברה", minWidth: 150,
             renderCell: (params) => {
 
-                return <span style={{ whiteSpace: "pre-wrap" }} className="table_first_column" >{params.row.orderconfirm ? params?.row?.phonenumber : 'confirm your order'}</span>
+                return <span style={{ whiteSpace: "pre-wrap" }} className="table_first_column" >{params.row.orderconfirm ? params?.row?.phonenumber : 'אשר את ההזמנה שלך'}</span>
             },
         },
         {
-            field: "action", headerName: "Action", minWidth: "150",
+            field: "action", headerName: "פעולה", minWidth: "150",
             renderCell: (params) => {
-                const isPending = params?.row?.tenderStatus === "Confirmed";
+                const isPending = params?.row?.tenderStatus === "אושר";
                 const isOrderConfirmed = params?.row?.orderconfirm === true;
 
                 return (
@@ -187,13 +187,14 @@ const UserDashboard = () => {
                             disabled={isPending}
                             onClick={() => handleConfirmOrderClick(params?.row)}
                         >
-                            {isOrderConfirmed ? 'Order Confirmed' : 'Confirm Offer'}
+                            {isOrderConfirmed ? 'הזמנה מאושרת' : 'אישור הצעה'}
                         </button>
                     </span>
                 );
             },
         }
     ];
+
     const handleConfirmOrderClick = (tender) => {
         setCurrentTender(tender);
         setConfirmDialogOpen(true);
@@ -207,11 +208,10 @@ const UserDashboard = () => {
                 companyId: currentTender?.companyid
             });
             dispatch(setCompanyId(currentTender?.companyid));
-            toast.success('Offer Confirm successfully');
+            toast.success('אשר ההצעה בהצלחה');
             fetchActiveData(); // Refresh the data
         } catch (error) {
-            console.error('Failed to confirm offer', error);
-            toast.error('Failed to confirm offer');
+            toast.error('נכשל באישור ההצעה');
         }
         setConfirmDialogOpen(false);
     };
@@ -231,11 +231,10 @@ const UserDashboard = () => {
     const handleFinishTender = async () => {
         try {
             const response = await axios.post(`https://homecalculatorbackend-ni04.onrender.com/api/tenders/finishTender/${tenderId}`);
-            toast.success('Tender finished successfully');
+            toast.success('המכרז הסתיים בהצלחה');
             navigate('/userreview')
         } catch (error) {
-            console.error('Failed to finish tender', error);
-            toast.error('Failed to finish tender');
+            toast.error('נכשל בסיום המכרז');
         }
         setFinishDialogOpen(false);
     };
@@ -243,11 +242,10 @@ const UserDashboard = () => {
     const handleCancelTender = async () => {
         try {
             const response = await axios.post(`https://homecalculatorbackend-ni04.onrender.com/api/tenders/cancelTender/${tenderId}`);
-            toast.success('Tender canceled successfully');
+            toast.success('המכרז בוטל בהצלחה');
             navigate('/usercancelreview')
         } catch (error) {
-            console.error('Failed to cancel tender', error);
-            toast.error('Failed to cancel tender');
+            toast.error('נכשל בביטול המכרז');
         }
         setCancelDialogOpen(false);
     };
@@ -256,7 +254,7 @@ const UserDashboard = () => {
         <div className="bg-white h-full">
             <div className="bg-[#96E0F8] flex justify-between py-3">
                 <div>
-                    <h2 className='w-full text-xl bm-font'>Click <span className='text-orange-500 px-2'>n</span>Move</h2>
+                    <h2 className='w-full text-xl bm-font'>לחץ <span className='text-orange-500 px-2'>n</span>Move</h2>
                 </div>
                 <div className="flex">
                     <FaBell className="mr-3" size={20} />
@@ -266,22 +264,22 @@ const UserDashboard = () => {
             <div className="py-2 flex justify-between border-b border-black" style={{ boxShadow: "0 4px 8px rgba(0, 0, 0, 0.1)" }}>
                 {/* <h1>Welcome! {auth.user?.username}</h1> */}
                 <div className="ml-3">
-                    <h2>Good afternoon, {name}</h2>
-                    <h2>Quickly access Your tenders</h2>
+                    <h2>צהריים טובים, {name}</h2>
+                    <h2>גש מהר למכרזים שלך</h2>
                 </div>
                 <button onClick={() => auth.logOut()} className="btn-submit">
-                    logout
+                    התנתק
                 </button>
             </div>
             <div className="flex justify-center items-center mt-5">
-                <button onClick={() => setToggle(0)} className={`w-40 h-16 ${toggle === 0 ? 'bg-orange-400' : ' bg-gray-400'} py-4 px-2 rounded-lg text-sm mr-3 font-semibold`}>Price Offers</button>
-                <button onClick={() => setToggle(1)} className={`w-40 h-16 ${toggle === 1 ? 'bg-orange-400' : ' bg-gray-400'} py-4 px-2 rounded-lg text-sm mr-3 font-semibold`}>Recommendations and tips</button>
-                <button onClick={() => setToggle(2)} className={`w-40 h-16 ${toggle === 2 ? 'bg-orange-400' : ' bg-gray-400'} py-4 px-2 rounded-lg text-sm mr-3 font-semibold`}>Cost breakdown</button>
-                <button onClick={() => setToggle(3)} className={`w-40 h-16 ${toggle === 3 ? 'bg-orange-400' : ' bg-gray-400'} py-4 px-2 rounded-lg text-sm mr-3 font-semibold`}>Summary</button>
+                <button onClick={() => setToggle(0)} className={`w-40 h-16 ${toggle === 0 ? 'bg-orange-400' : ' bg-gray-400'} py-4 px-2 rounded-lg text-sm mr-3 font-semibold`}>הצעות מחיר</button>
+                <button onClick={() => setToggle(1)} className={`w-40 h-16 ${toggle === 1 ? 'bg-orange-400' : ' bg-gray-400'} py-4 px-2 rounded-lg text-sm mr-3 font-semibold`}>המלצות וטיפים</button>
+                <button onClick={() => setToggle(2)} className={`w-40 h-16 ${toggle === 2 ? 'bg-orange-400' : ' bg-gray-400'} py-4 px-2 rounded-lg text-sm mr-3 font-semibold`}>פירוט עלויות</button>
+                <button onClick={() => setToggle(3)} className={`w-40 h-16 ${toggle === 3 ? 'bg-orange-400' : ' bg-gray-400'} py-4 px-2 rounded-lg text-sm mr-3 font-semibold`}>סיכום</button>
             </div>
             <div className="flex justify-center items-center mt-5">
-                <button className="bg-[#3E79E9] text-white py-2 px-2 rounded-lg mr-3 font-semibold" onClick={handleFinishClick} disabled={isFinishButtonDisabled}>Finish tender</button>
-                <button className="bg-[#F78C8C] text-white py-2 px-2 rounded-lg mr-3 font-semibold" onClick={handleCancelClick} disabled={isPendingButtonDisabled}>Cancel tender</button>
+                <button className="bg-[#3E79E9] text-white py-2 px-2 rounded-lg mr-3 font-semibold" onClick={handleFinishClick} disabled={isFinishButtonDisabled}>סיום מכרז</button>
+                <button className="bg-[#F78C8C] text-white py-2 px-2 rounded-lg mr-3 font-semibold" onClick={handleCancelClick} disabled={isPendingButtonDisabled}>ביטול מכרז</button>
 
             </div>
             <div className="mx-10 my-10">
@@ -318,30 +316,30 @@ const UserDashboard = () => {
             >
                 <DialogContent>
                     <DialogContentText id="alert-dialog-description">
-                        Are you sure you want to confirm this offer?
+                        ?האם אתה בטוח שברצונך לאשר את ההצעה הזו
                     </DialogContentText>
                 </DialogContent>
                 <DialogActions>
                     <Button onClick={handleConfirmCancel} color="primary">
-                        Cancel
+                        ביטול
                     </Button>
                     <Button onClick={handleConfirmOk} color="primary" autoFocus>
-                        OK
+                        אישור
                     </Button>
                 </DialogActions>
             </Dialog>
             <Dialog open={finishDialogOpen} onClose={() => setFinishDialogOpen(false)}>
                 <DialogContent>
                     <DialogContentText>
-                        Are you sure you want to finish this tender?
+                        ?האם אתה בטוח שברצונך לסיים את המכרז הזה
                     </DialogContentText>
                 </DialogContent>
                 <DialogActions>
                     <Button onClick={() => setFinishDialogOpen(false)} color="primary">
-                        Cancel
+                        ביטול
                     </Button>
                     <Button onClick={handleFinishTender} color="primary" autoFocus>
-                        OK
+                        אישור
                     </Button>
                 </DialogActions>
             </Dialog>
@@ -349,20 +347,18 @@ const UserDashboard = () => {
             <Dialog open={cancelDialogOpen} onClose={() => setCancelDialogOpen(false)}>
                 <DialogContent>
                     <DialogContentText>
-                        Are you sure you want to cancel this tender?
+                        ?האם אתה בטוח שברצונך לבטל את המכרז הזה
                     </DialogContentText>
                 </DialogContent>
                 <DialogActions>
                     <Button onClick={() => setCancelDialogOpen(false)} color="primary">
-                        Cancel
+                        ביטול
                     </Button>
                     <Button onClick={handleCancelTender} color="primary" autoFocus>
-                        OK
+                        אישור
                     </Button>
                 </DialogActions>
             </Dialog>
-
-
         </div>
     );
 };

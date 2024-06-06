@@ -23,7 +23,7 @@ const PriceDialog = ({ DialogData, onCloseAndRefetch }) => {
 
     const handleApply = async () => {
         if (!field.price || !field.transportdate || !field.arrivaldate || !field.starthours || !field.endhours) {
-            toast.error('All fields are required');
+            toast.error('כל השדות נדרשים');
             return;
         }
 
@@ -38,35 +38,35 @@ const PriceDialog = ({ DialogData, onCloseAndRefetch }) => {
                 endhours: field.endhours,
             });
 
-            toast.success('Offer sent successfully');
+            toast.success('ההצעה נשלחה בהצלחה');
             onCloseAndRefetch();
         } catch (error) {
-            toast.error('Failed to send offer');
+            toast.error('שליחת ההצעה נכשלה');
         }
     };
 
     return (
         <div>
             <div className='flex justify-between mb-2'>
-                <p>Tender Id:{DialogData?.id}</p>
-                <p>Current best price offer:{DialogData?.bestOffer}</p>
+                <p>מזהה המכרז:{DialogData?.id}</p>
+                <p>הצעת מחיר הטובה ביותר נוכחית:{DialogData?.bestOffer}</p>
             </div>
             <hr />
             <form>
                 <div className='flex'>
                     <div className='mr-3'>
-                        <label htmlFor="price" className="block mb-1">Price</label>
+                        <label htmlFor="price" className="block mb-1">מחיר</label>
                         <input
                             type="number"
                             name="price"
                             className="w-full border rounded p-1"
                             value={field.price}
                             onChange={handleChange}
-                            placeholder="Price"
+                            placeholder="מחיר"
                         />
                     </div>
                     <div className='mr-3'>
-                        <label htmlFor="starthours" className="block mb-1">Start Time</label>
+                        <label htmlFor="starthours" className="block mb-1">שעת התחלה</label>
                         <input
                             type="time"
                             name="starthours"
@@ -76,7 +76,7 @@ const PriceDialog = ({ DialogData, onCloseAndRefetch }) => {
                         />
                     </div>
                     <div className='mr-3'>
-                        <label htmlFor="endhours" className="block mb-1">End Time</label>
+                        <label htmlFor="endhours" className="block mb-1">שעת סיום</label>
                         <input
                             type="time"
                             name="endhours"
@@ -88,7 +88,7 @@ const PriceDialog = ({ DialogData, onCloseAndRefetch }) => {
                 </div>
                 <div className="flex">
                     <div className='mr-3'>
-                        <label htmlFor="transportdate" className="block mb-1">Date of Transport</label>
+                        <label htmlFor="transportdate" className="block mb-1">תאריך הובלה</label>
                         <input
                             type="date"
                             name="transportdate"
@@ -98,7 +98,7 @@ const PriceDialog = ({ DialogData, onCloseAndRefetch }) => {
                         />
                     </div>
                     <div className='mr-3'>
-                        <label htmlFor="arrivaldate" className="block mb-1">Date of Arrival</label>
+                        <label htmlFor="arrivaldate" className="block mb-1">תאריך הגעה</label>
                         <input
                             type="date"
                             name="arrivaldate"
@@ -110,7 +110,7 @@ const PriceDialog = ({ DialogData, onCloseAndRefetch }) => {
                 </div>
             </form>
             <div className='mt-3'>
-                <button className="bg-orange-400 rounded-lg p-3 text-white" onClick={handleApply}>Apply</button>
+                <button className="bg-orange-400 rounded-lg p-3 text-white" onClick={handleApply}>החל</button>
             </div>
         </div>
     )

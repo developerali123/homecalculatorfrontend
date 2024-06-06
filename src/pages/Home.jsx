@@ -25,31 +25,31 @@ const Home = () => {
         <Balloon />
       </div>
       <img src={sun} alt="sun" className="absolute top-10 h-[70px] right-[20px] -z-[20] md:hidden" />
-      <h2 className='md:text-3xl md:hidden text-2xl font-bold text-center text-white'>Click <span className='text-orange-500 px-2'>n</span><span className='text-white'>Move</span></h2>
+      <h2 className='md:text-3xl md:hidden text-2xl font-bold text-center text-white'>לחץ על <span className='text-orange-500 px-2'>n</span><span className='text-white'>הזז</span></h2>
       <div className='flex md:justify-around justify-start md:ml-0 ml-5 items-center mt-5'>
-        <button className='bg-[#FC7023] text-white md:text-xl text-md rounded-md md:p-3 p-1 md:w-48 w-36 font-semibold'><Link to="/login">log in for Moving companies </Link></button>
+        <button className='bg-[#FC7023] text-white md:text-xl text-md rounded-md md:p-3 p-1 md:w-48 w-36 font-semibold'><Link to="/login">התחבר לחברות הובלה </Link></button>
         {
-          user.userType === "user" && (
-            <button className='bg-[#FC7023] text-white md:text-xl text-md rounded-md md:p-3 ml:2 p-1 md:w-48 w-36 font-semibold'><Link to="/userdashboard">User Dashboard </Link></button>
+          user.userType === "משתמש" && (
+            <button className='bg-[#FC7023] text-white md:text-xl text-md rounded-md md:p-3 ml:2 p-1 md:w-48 w-36 font-semibold'>< Link to="/userdashboard">לוח המחוונים למשתמשים </Link></button>
           )
         }
-        <h2 className='md:text-3xl text-2xl bm-font md:flex hidden text-white'>Click <span className='text-orange-500 px-2'>n</span><span className='text-white'>Move</span></h2>
+        <h2 className='md:text-3xl text-2xl bm-font md:flex hidden text-white'>לחץ על <span className='text-orange-500 px-2'>n</span><span className='text-white'>הזז</span></h2>
       </div>
 
       <div className="flex flex-col h-full justify-center items-center ">
-        <h1 className="text-2xl font-semibold mt-20">Let's find out </h1>
-        <h2 className="md:text-4xl text-3xl font-bold text-white mt-10">what your Moving cost is</h2>
+        <h1 className="text-2xl font-semibold mt-20">בואו נגלה </h1>
+        <h2 className="md:text-4xl text-3xl font-bold text-white mt-10">מהי עלות ההובלה שלך</h2>
         <p className='mt-[30px] text-center w-[535px] max-md:w-full'>
-          Planning to move house? Excellent! But before you start packing, let's check how much the transport will really cost you. With our easy (but accurate!) calculator, you will be able to arrive at an estimate of the shipping cost very quickly.
+          מתכננים לעבור דירה? מְעוּלֶה! אבל לפני שאתם מתחילים לארוז, בואו לבדוק כמה באמת תעלה לכם ההובלה. בעזרת המחשבון הקל (אך המדויק!) שלנו, תוכלו להגיע במהירות רבה להערכת עלות המשלוח.
         </p>
-        <h3 className='mt-[15px] font-bold'>lets start!</h3>
+        <h3 className='mt-[15px] font-bold'>בואו נתחיל!</h3>
       </div>
       <div className="mt-[40px]" >
         <MovingTruck link="/baseline" />
       </div>
       <div className='w-full md:h-[400px] h-[200px] mt-20 -z-[30] flex justify-end'>
-        {/* <img src={home_bg} alt="home_bg" className="w-full" /> */}
-        <svg width="1440" height="399" viewBox="0 0 1440 399" fill="none" xmlns="http://www.w3.org/2000/svg" className='w-full'>
+        <img src={home_bg} alt="home_bg" className="w-full" />
+        {/* <svg width="1440" height="399" viewBox="0 0 1440 399" fill="none" xmlns="http://www.w3.org/2000/svg" className='w-full'>
           <path d="M1501 365.781C1501 404.978 1135.56 483.558 679.664 483.375C214.682 483.188 -34 404.978 -34 365.781C-34 326.584 1501 326.584 1501 365.781Z" fill="#D3DDE6" />
           <path d="M1121.56 403.073C1124.42 425.757 953.01 448.289 738.693 453.4C524.377 458.51 348.313 444.264 345.447 421.581C342.581 398.897 522.592 360.287 736.912 355.176C951.229 350.067 1118.69 380.39 1121.56 403.073Z" fill="#A5ABB9" />
           <path d="M856.137 270.638C853.36 270.638 851.108 269.061 851.108 267.115V98.8052H765.325V244.065C765.325 246.01 763.074 247.587 760.296 247.587C757.519 247.587 755.267 246.01 755.267 244.065V95.2824C755.267 93.3367 757.519 91.7596 760.296 91.7596H856.136C858.914 91.7596 861.165 93.3367 861.165 95.2824V267.115C861.166 269.061 858.915 270.638 856.137 270.638Z" fill="#381905" />
@@ -775,7 +775,7 @@ const Home = () => {
               <stop offset="1" stop-color="#FFB89A" />
             </linearGradient>
           </defs>
-        </svg>
+        </svg> */}
 
       </div>
     </div>

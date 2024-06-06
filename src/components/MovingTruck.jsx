@@ -9,8 +9,8 @@ const MovingTruck = ({ link }) => {
     <div className='text-white text-lg  '>
       <button onClick={() => navigate(link)} className='w-full flex gap-5 items-center justify-center'>
         {/* <p>לדרך</p> */}
-        {/* <img src={truck} alt="truck" className='moving-truck ml-96' /> */}
-        <svg width="129" height="71" viewBox="0 0 129 71" fill="none" xmlns="http://www.w3.org/2000/svg" className='moving-truck ml-96'>
+        <img src={truck} alt="truck" className='moving-truck ml-96' />
+        {/* <svg width="129" height="71" viewBox="0 0 129 71" fill="none" xmlns="http://www.w3.org/2000/svg" className='moving-truck ml-96'>
           <g filter="url(#filter0_d_1725_56507)">
             <path d="M113.196 19.8049L94.0331 19.9827L93.6834 35.9786L112.846 35.8008L113.196 19.8049Z" fill="#CC955D" />
             <path d="M97.3863 23.1747L96.3504 21.3636L95.1961 23.2183L95.6401 23.2095L95.5669 25.4671L96.8688 25.4414L96.942 23.1835L97.3863 23.1747Z" fill="#8A5B31" />
@@ -253,7 +253,7 @@ const MovingTruck = ({ link }) => {
               <feBlend mode="normal" in="SourceGraphic" in2="effect1_dropShadow_1725_56507" result="shape" />
             </filter>
           </defs>
-        </svg>
+        </svg> */}
 
         {/* <p>צא</p> */}
       </button>

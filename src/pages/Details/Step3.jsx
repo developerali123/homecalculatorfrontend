@@ -6,16 +6,16 @@ import TruckBtn from '../../components/TruckBtn';
 const Step3 = ({ handleInputChange, filteredItems, selectedItems, handleQuantityChange, handleSelectChange, step, searchQuery }) => {
     return (
         <div className="flex justify-center items-center flex-col h-full">
-            <h1 className="md:text-5xl text-3xl font-semibold mt-10 mb-5">Add items to your truck</h1>
+            <h1 className="md:text-5xl text-3xl font-semibold mt-10 mb-5">הוספת פריטים למשאית שלך</h1>
 
             <div className='flex flex-col'>
-                <h2 className='mb-1 mt-10'>Search Items</h2>
+                <h2 className='mb-1 mt-10'>חיפוש פריטים</h2>
                 <input
                     type="text"
                     onChange={handleInputChange}
                     className="border border-gray-300 rounded-md px-3 py-2 w-full"
                     style={{ maxHeight: "100px" }}
-                    placeholder="Wardrobe, Refrigerator,Drawers"
+                    placeholder="ארון, מקרר, מגירות"
                     value={searchQuery}
                 />
                 <div className='bg-white w-full text-black rounded-md max-h-[200px] overflow-y-scroll'>

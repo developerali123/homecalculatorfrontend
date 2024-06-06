@@ -65,10 +65,10 @@ const Crane = () => {
                 <button onClick={() => setToggle((prev) => !prev)}>
                     {toggle === true ? <FaAngleUp /> : <FaAngleDown />}
                 </button>
-                <h4>Crane</h4>
+                <h4>עגורן</h4>
             </div>
             <div className={`${toggle ? 'block' : 'hidden'} ${listToggle && 'hidden'} flex flex-col w-full justify-center items-center gap-2 mt-4`}>
-                <p className='text-md text-center md:w-[400px] w-[250px]'>Storage services allow you to store the contents of the apartment for a certain period. Set a start date, and an estimated end date of the required storage period.</p>
+            <p className='text-md text-center md:w-[400px] w-[250px]'>שירותי אחסון מאפשרים לאחסן את תכולת הדירה לתקופה מסוימת. הגדר תאריך התחלה ותאריך סיום משוער של תקופת האחסון הנדרשת.</p>
                 {craneItems.map((item, index) => (
                     <div key={index} className='flex justify-between w-full p-2'>
                         <div className='flex gap-5'>
@@ -82,19 +82,11 @@ const Crane = () => {
                         </div>
                         <div className='flex gap-2 items-center'>
                             <p>{item.name}</p>
-                            {/* <button onClick={()=>handleSelectChange(item)}>
-                    <svg xmlns="http://www.w3.org/2000/svg" width="1.2rem" height="1.2rem" viewBox="0 0 24 24">
-                      <g fill="black" fill-rule="evenodd" clip-rule="evenodd">
-                        <path fill="#7F56D9" d="M5.47 5.47a.75.75 0 0 1 1.06 0l12 12a.75.75 0 1 1-1.06 1.06l-12-12a.75.75 0 0 1 0-1.06" />
-                        <path fill="#7F56D9" d="M18.53 5.47a.75.75 0 0 1 0 1.06l-12 12a.75.75 0 0 1-1.06-1.06l12-12a.75.75 0 0 1 1.06 0" />
-                      </g>
-                    </svg>
-                  </button> */}
                         </div>
                     </div>
                 ))}
                 <button className='flex gap-2 items-center justify-end' onClick={() => setListToggle((prev) => !prev)}>
-                    <span>Add items</span>
+                <span>הוסף פריטים</span>
                     <span>
                         <FaCirclePlus className='text-blue-500' />
                     </span>
@@ -123,7 +115,7 @@ const Crane = () => {
                 </div>
             </div>
             <div className={`${listToggle ? 'block' : 'hidden'} w-full border-[1px] border-gray-200 rounded-b-md p-4 flex justify-center`}>
-                <button className='bg-[#008EF5] hover:bg-blue-600 text-white px-6 py-2 rounded-md' onClick={() => { setListToggle(false) }}>Close</button>
+            <button className='bg-[#008EF5] hover:bg-blue-600 text-white px-6 py-2 rounded-md' onClick={() => { setListToggle(false) }}>סגור</button>
             </div>
         </div>
     )
