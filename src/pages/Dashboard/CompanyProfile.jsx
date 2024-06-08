@@ -1,25 +1,92 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { CiStar } from 'react-icons/ci'
 import { FaBell, FaRegUserCircle } from 'react-icons/fa'
 import { FaCircleUser } from 'react-icons/fa6'
+import { useAuth } from '../../AuthProvider'
+import axios from "axios";
+import GoogleCityAutocomplete from '../../components/GeogleCityAutocomplete'
+import { useJsApiLoader } from '@react-google-maps/api'
+import { toast } from 'react-toastify';
 
 const CompanyProfile = () => {
+    const auth = useAuth();
+    const [userId, setuserId] = useState(auth?.user);
     const [form, setForm] = useState({
         fullName: "",
-        email: "",
-        password: "",
         confirmpassword: "",
         companyName: "",
-        agreed: false,
         numberOfTrucks: "1-10",
         phoneNumber: "",
         city: "Tel aviv",
         companyId: null
     });
+    const [isEditable, setIsEditable] = useState(false);
+    const [name, setname] = useState("");
+    const [rating, setrating] = useState("");
+    const { isLoaded } = useJsApiLoader({
+        googleMapsApiKey: 'AIzaSyAuIchE5mdfEw_S7oM8I5ZkpCcQyWOMg-Y',
+        libraries: ['places']
+    })
+
+    const fetchuserdata = async () => {
+        try {
+            const response = await axios.get(`https://homecalculatorbackend-ni04.onrender.com/api/users/${userId}`);
+            const rating = parseFloat(response?.data?.companies[0]?.rating).toFixed(1);
+            setname(response?.data?.companies[0]?.companyName);
+            setrating(rating);
+            setForm({
+                companyName: response?.data?.companies[0]?.companyName,
+                fullName: response?.data?.user?.name,
+                phoneNumber: response?.data?.companies[0]?.phoneNumber,
+                companyId: response?.data?.companies[0]?.companyId,
+                numberOfTrucks: response?.data?.companies[0]?.numberOfTrucks,
+                city: response?.data?.companies[0]?.city
+            });
+            console.log(response?.data);
+
+        } catch (err) {
+            console.log(err);
+        }
+    };
+
+    useEffect(() => {
+        fetchuserdata();
+    }, [userId]);
     const handleFormChange = (e) => {
         const { name, value } = e.target;
         setForm({ ...form, [name]: value });
     };
+    const toggleEditMode = () => {
+        setIsEditable(!isEditable);
+    };
+    const handlesave = async () => {
+        const url = `https://homecalculatorbackend-ni04.onrender.com/api/company/updateProfile/${userId}`;
+        const payload = {
+            userData: {
+                fullName: form.fullName
+            },
+            companyData: {
+                companyName: form.companyName,
+                numberOfTrucks: form.numberOfTrucks,
+                phoneNumber: form.phoneNumber,
+                city: form.city,
+                companyId: form.companyId
+            }
+        };
+        try {
+            const response = await axios.put(url, payload);
+            if (response.status === 200) {
+                setIsEditable(false); // Disable edit mode if the save is successful
+                toast.success('Profile updated successfully!');
+            } else {
+                toast.error('An error occurred. Please try again later.');
+            }
+        } catch (err) {
+            console.error('Error updating profile:', err);
+            toast.error('An error occurred. Please try again later.');
+        }
+    }
+
     return (
         <div className="bg-white h-full">
             <div className="bg-[#96E0F8] flex justify-between py-3">
@@ -32,9 +99,8 @@ const CompanyProfile = () => {
                 </div>
             </div>
             <div className="py-1 ml-3 flex justify-between">
-                {/* <h1>Welcome! {auth.user?.username}</h1> */}
                 <div>
-                    <h2>Good afternoon, Company name!</h2>
+                    <h2>Good afternoon, {name}!</h2>
                     <h2>Quickly access Your tenders</h2>
                 </div>
                 <button onClick={() => auth.logOut()} className="btn-submit">
@@ -42,32 +108,39 @@ const CompanyProfile = () => {
                 </button>
             </div>
             <div className='grid grid-cols-12'>
-                <div className='col-span-6'>
-                    <FaCircleUser />
-                    <h1>Company name</h1>
-                    <h2>User name</h2>
-                    <div className='flex'>
-                        <div className='border-r border-black p-2 flex flex-col justify-center items-center'>
-                            <CiStar
-                                size={30}
-                                className='mr-2'
-                            />
-                            <p>4.5 ratings</p>
-                        </div>
-                        <div className='border-r border-black p-2 flex flex-col justify-center items-center'>
-                            <h2>21</h2>
-                            <p>Active offers</p>
-                        </div>
-                        <div className='border-r border-black p-2 flex flex-col justify-center items-center'>
-                            <h2>238</h2>
-                            <p>Completed moves</p>
+                <div className='md:col-span-6 col-span-12'>
+                    <div className='flex flex-col justify-center items-center'>
+                        <FaCircleUser size={100} className='mt-10' />
+                        <h1 className='mt-10'>{name}</h1>
+                        <h2>User name</h2>
+                        <div className='flex mt-10'>
+                            <div className='border-r border-black p-2 flex flex-col justify-center items-center'>
+                                <CiStar
+                                    size={30}
+                                    className='mr-2'
+                                    style={{ color: 'gold' }}
+                                />
+                                <p>{rating} ratings</p>
+                            </div>
+                            <div className='border-r border-black p-2 flex flex-col justify-center items-center'>
+                                <h2>21</h2>
+                                <p>Active offers</p>
+                            </div>
+                            <div className='border-r border-black p-2 flex flex-col justify-center items-center'>
+                                <h2>238</h2>
+                                <p>Completed moves</p>
+                            </div>
                         </div>
                     </div>
                 </div>
-                <div className="col-span-6">
+                <div className="md:col-span-6 col-span-12 mb-5">
                     <div className='flex justify-end items-center'>
-                        <button className='bg-white text-black p-2 mt-5 rounded-md border border-black mr-2'>Edit</button>
-                        <button className='bg-[#2676E5] text-white p-2 mt-5 rounded-md mr-2'>Save</button>
+                        <button className='bg-white text-black p-2 mt-5 rounded-md border border-black mr-2' onClick={toggleEditMode}>
+                            {isEditable ? 'Cancel' : 'Edit'}
+                        </button>
+                        <button className='bg-[#2676E5] text-white p-2 mt-5 rounded-md mr-2' disabled={!isEditable} onClick={() => { handlesave() }}>
+                            Save
+                        </button>
                     </div>
                     <h3 className='mb-1'>UserName</h3>
                     <input
@@ -76,6 +149,7 @@ const CompanyProfile = () => {
                         onChange={handleFormChange}
                         className='w-full  bg-white   py-2 rounded-md  mb-1'
                         placeholder="Enter your full name"
+                        disabled={!isEditable}
                     />
                     <hr />
                     <h3 className='mb-1 mt-5'>Company Name</h3>
@@ -85,15 +159,7 @@ const CompanyProfile = () => {
                         onChange={handleFormChange}
                         className='w-full  bg-white   py-2 rounded-md  mb-1'
                         placeholder="Enter your full name"
-                    />
-                    <hr />
-                    <h3 className='mb-1 mt-5'>Email</h3>
-                    <input
-                        name='companyId'
-                        value={form.email}
-                        onChange={handleFormChange}
-                        className='w-full  bg-white   py-2 rounded-md  mb-1'
-                        placeholder="Enter your full name"
+                        disabled={!isEditable}
                     />
                     <hr />
                     <h3 className='mb-1 mt-5'>Phone Number</h3>
@@ -103,6 +169,7 @@ const CompanyProfile = () => {
                         onChange={handleFormChange}
                         className='w-full  bg-white   py-2 rounded-md  mb-1'
                         placeholder="Enter your full name"
+                        disabled={!isEditable}
                     />
                     <hr />
                     <h3 className='mb-1 mt-5'>Company ID</h3>
@@ -112,16 +179,17 @@ const CompanyProfile = () => {
                         onChange={handleFormChange}
                         className='w-full  bg-white   py-2 rounded-md  mb-1'
                         placeholder="Enter your full name"
+                        disabled={!isEditable}
                     />
                     <hr />
-                    <h3 className='mb-1 mt-5'>Address</h3>
+                    {/* <h3 className='mb-1 mt-5'>Address</h3>
                     <textarea
                         name='additionalDetails'
                         value={form.additionalDetails}
                         onChange={handleFormChange}
                         className='w-full bg-white   py-2 rounded-md  mb-1'
                         placeholder="You can type your comment here"
-                    />
+                    /> */}
                     <hr />
                     <h3 className='mb-1 mt-5'>Number of Trucks</h3>
                     <div className='flex mb-1'>
@@ -134,6 +202,7 @@ const CompanyProfile = () => {
                                 className='mr-2'
                                 defaultChecked={form.numberOfTrucks === '1-10'}
                                 onClick={handleFormChange}
+                                disabled={!isEditable}
                             />
                             <label htmlFor="oneTruck">1-10</label>
                         </div>
@@ -146,6 +215,7 @@ const CompanyProfile = () => {
                                 className='mr-2'
                                 defaultChecked={form.numberOfTrucks === '11-50'}
                                 onClick={handleFormChange}
+                                disabled={!isEditable}
                             />
                             <label htmlFor="twoTrucks">11-50</label>
                         </div>
@@ -158,6 +228,7 @@ const CompanyProfile = () => {
                                 className='mr-2'
                                 defaultChecked={form.numberOfTrucks === '51-200'}
                                 onClick={handleFormChange}
+                                disabled={!isEditable}
                             />
                             <label htmlFor="threeTrucks">51-200</label>
                         </div>
@@ -170,100 +241,18 @@ const CompanyProfile = () => {
                                 className='mr-2'
                                 defaultChecked={form.numberOfTrucks === '200+'}
                                 onClick={handleFormChange}
+                                disabled={!isEditable}
                             />
                             <label htmlFor="fourTrucks">200+</label>
                         </div>
                     </div>
                     <hr />
                     <h3 className='mb-1'>In which cities do you operate?</h3>
-                    <div className='flex mb-1'>
-                        <div className={`border rounded-full mr-3 p-2 ${form.city === 'Tel aviv' ? 'border-blue-500' : 'border-black'}`}>
-                            <input
-                                type="radio"
-                                id="onecity"
-                                name="city"
-                                value="Tel aviv"
-                                className='mr-2'
-                                defaultChecked={form.city === 'Tel aviv'}
-                                onClick={handleFormChange}
-                            />
-                            <label htmlFor="onecity">Tel aviv</label>
-                        </div>
-                        <div className={`border rounded-full mr-3 p-2 ${form.city === 'Haifa' ? 'border-blue-500' : 'border-black'}`}>
-                            <input
-                                type="radio"
-                                id="twocity"
-                                name="city"
-                                value="Haifa"
-                                className='mr-2'
-                                defaultChecked={form.city === 'Haifa'}
-                                onClick={handleFormChange}
-                            />
-                            <label htmlFor="twocity">Haifa</label>
-                        </div>
-                        <div className={`border rounded-full mr-3 p-2 ${form.city === 'Jerusalem' ? 'border-blue-500' : 'border-black'}`}>
-                            <input
-                                type="radio"
-                                id="threecity"
-                                name="city"
-                                value="Jerusalem"
-                                className='mr-2'
-                                defaultChecked={form.city === 'Jerusalem'}
-                                onClick={handleFormChange}
-                            />
-                            <label htmlFor="threecity">Jerusalem</label>
-                        </div>
-                        <div className={`border rounded-full mr-3 p-2 ${form.city === 'Beer Sheva' ? 'border-blue-500' : 'border-black'}`}>
-                            <input
-                                type="radio"
-                                id="fourcity"
-                                name="city"
-                                value="Beer Sheva"
-                                className='mr-2'
-                                defaultChecked={form.city === 'Beer Sheva'}
-                                onClick={handleFormChange}
-                            />
-                            <label htmlFor="fourcity">Beer Sheva</label>
-                        </div>
-                    </div>
-                    <div className='flex'>
-                        <div className={`border rounded-full mr-3 p-2 ${form.city === 'Ashkelon' ? 'border-blue-500' : 'border-black'}`}>
-                            <input
-                                type="radio"
-                                id="fivecity"
-                                name="city"
-                                value="Ashkelon"
-                                className='mr-2'
-                                defaultChecked={form.city === 'Ashkelon'}
-                                onClick={handleFormChange}
-                            />
-                            <label htmlFor="fivecity">Ashkelon</label>
-                        </div>
-                        <div className={`border rounded-full mr-3 p-2 ${form.city === 'Holon' ? 'border-blue-500' : 'border-black'}`}>
-                            <input
-                                type="radio"
-                                id="sixcity"
-                                name="city"
-                                value="Holon"
-                                className='mr-2'
-                                defaultChecked={form.city === 'Holon'}
-                                onClick={handleFormChange}
-                            />
-                            <label htmlFor="sixcity">Holon</label>
-                        </div>
-                        <div className={`border rounded-full mr-3 p-2 ${form.city === 'Other' ? 'border-blue-500' : 'border-black'}`}>
-                            <input
-                                type="radio"
-                                id="sevencity"
-                                name="city"
-                                value="Other"
-                                className='mr-2'
-                                defaultChecked={form.city === 'Other'}
-                                onClick={handleFormChange}
-                            />
-                            <label htmlFor="sevencity">Other</label>
-                        </div>
-                    </div>
+                    {isLoaded ? (
+                        <GoogleCityAutocomplete value={form.city} onChange={handleFormChange} name="city" placeholder="Select city" disabled={!isEditable} />
+                    ) : (
+                        <div>Loading Maps...</div> // Or any other placeholder content
+                    )}
                 </div>
             </div>
         </div>

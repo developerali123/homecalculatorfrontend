@@ -10,35 +10,34 @@ const Details = () => {
   return (
     <div className='w-full flex flex-wrap justify-even gap-2 mb-5'>
       <div className="w-[200px] bg-white rounded-md p-8 flex flex-col items-center gap-2">
-        <h2 className='font-semibold text-lg'>שירותים נוספים</h2>
+        <h2 className='font-semibold text-lg'>Additional services</h2>
         <img src={services} alt="services"/>
-        <p>עלות כוללת</p>
-        <h3 className='text-2xl font-semibold'>{servicesPrice} <span className='text-3xl'>ש"ח</span></h3>
+        <p>Total costs</p>
+        <h3 className='text-2xl font-semibold'>{servicesPrice} <span className='text-3xl'>NIS</span></h3>
       </div>
 
       <div className="w-[200px] bg-white rounded-md p-8 flex flex-col items-center gap-2">
-        <h2 className='font-semibold text-lg'>קרטונים</h2>
+        <h2 className='font-semibold text-lg'>Crates</h2>
         <img src={box} alt="box"/>
-        <p>עלות כוללת</p>
-        <h3 className='text-2xl font-semibold'>{boxesPrice} <span className='text-3xl'>ש"ח</span></h3>
+        <p>Total costs</p>
+        <h3 className='text-2xl font-semibold'>{boxesPrice} <span className='text-3xl'>NIS</span></h3>
       </div>
 
       <div className="w-[200px] bg-white rounded-md p-8 flex flex-col items-center gap-2">
-        <h2 className='font-semibold text-lg'>פריטים</h2>
+        <h2 className='font-semibold text-lg'>items</h2>
         <img src={couch} alt="couch"/>
-        <p>עלות כוללת</p>
-        <h3 className='text-2xl font-semibold'>{itemsPrice} <span className='text-3xl'>ש"ח</span></h3>
+        <p>Total costs</p>
+        <h3 className='text-2xl font-semibold'>{itemsPrice} <span className='text-3xl'>NIS</span></h3>
       </div>
 
       <div className="w-[200px] bg-white rounded-md p-8 flex flex-col items-center gap-2">
-        <h2 className='font-semibold text-lg'>מרחק</h2>
+        <h2 className='font-semibold text-lg'>Distance</h2>
         <img src={pin} alt="pin"/>
-        <p>עלות כוללת</p>
-        <h3 className='text-2xl font-semibold'>{distancePrice} <span className='text-3xl'>ש"ח</span></h3>
+        <p>Total costs</p>
+        <h3 className='text-2xl font-semibold'>{distancePrice} <span className='text-3xl'>₪</span></h3>
       </div>
     
     </div>
-
   )
 }
 

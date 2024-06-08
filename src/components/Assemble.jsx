@@ -65,10 +65,10 @@ const Assemble = () => {
             <button onClick={()=>setToggle((prev)=>!prev)}>
                 {toggle===true ? <FaAngleUp /> : <FaAngleDown />}
             </button>
-            <h4>פירוק</h4>
+            <h4>disassembly</h4>
         </div>
         <div className={`${toggle ? 'block' : 'hidden'} ${listToggle && 'hidden'} flex flex-col w-full justify-center items-center gap-2 mt-4`}>
-            <p className='text-md text-center md:w-[400px] w-[250px]'>שירותי אחסון מאפשרים לך לאחסן את תוכן הדירה לתקופה מסוימת. הגדר תאריך התחלה ותאריך סיום משוער של תקופת האחסון הנדרשת.</p>
+            <p className='text-md text-center md:w-[400px] w-[250px]'>Storage services allow you to store the contents of the apartment for a certain period. Set a start date, and an estimated end date of the required storage period.</p>
             {assembleItems.map((item, index) => (
                 <div key={index} className='flex justify-between w-full p-2'>
                 <div className='flex gap-5'>
@@ -86,7 +86,7 @@ const Assemble = () => {
               </div>
             ))}
             <button className='flex gap-2 items-center justify-end' onClick={()=>setListToggle((prev)=>!prev)}>
-                <span>הוסף פריטים</span>
+                <span>Add items</span>
                 <span>
                     <FaCirclePlus className='text-blue-500' />
                 </span>
@@ -94,7 +94,7 @@ const Assemble = () => {
         </div>
         <div className={`${listToggle ? 'block' : 'hidden'} flex flex-col w-full justify-center items-center gap-2 mt-4 border-[1px] border-gray-200 rounded-t-md max-h-[200px]`}>
             <div className="flex flex-col justify-end w-full">
-                <div className="mt-2 flex gap-2 items-center justify-end w-full hover:bg-gray-100 cursor-pointer pr-2" onClick={()=>handleSelectAll()}>בחר הכל</div>
+                <div className="mt-2 flex gap-2 items-center justify-end w-full hover:bg-gray-100 cursor-pointer pr-2" onClick={()=>handleSelectAll()}>Select all</div>
                 <div className="max-h-[150px] overflow-y-auto">
                     {items.map((item, index) => {
                         const isSelected = assembleItems.some(selectedItem => selectedItem.name === item.name);
@@ -115,7 +115,7 @@ const Assemble = () => {
             </div>
         </div>
         <div className={`${listToggle ? 'block' : 'hidden'} w-full border-[1px] border-gray-200 rounded-b-md p-4 flex justify-center`}>
-            <button className='bg-[#008EF5] hover:bg-blue-600 text-white px-6 py-2 rounded-md' onClick={()=>{setListToggle(false)}}>סגור</button>
+            <button className='bg-[#008EF5] hover:bg-blue-600 text-white px-6 py-2 rounded-md' onClick={()=>{setListToggle(false)}}>Close</button>
         </div>
     </div>
   )

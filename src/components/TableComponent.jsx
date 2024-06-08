@@ -23,185 +23,184 @@ const TableComponent = () => {
     const price = useSelector(state => Math.round(state.items.totalPrice));;
     return (
         <div className='bg-white p-20'>
-            <h2 className='text-center mb-5 font-bold text-xl'>עלות כוללת: {price}</h2>
+            <h2 className='text-center mb-5 font-bold text-xl'>Total Cost: {price}</h2>
             <table className='border border-black'>
                 <thead>
                     <tr className='bg-gray-100 p-2 border border-black'>
-                        <th>קטגוריה</th>
-                        <th>תיאור</th>
-                        <th>עלות</th>
-                        <th>כמות</th>
-                        <th>עלות כוללת</th>
-                        <th>עריכה</th>
+                        <th>Category</th>
+                        <th>Description</th>
+                        <th>Cost</th>
+                        <th>Amount</th>
+                        <th>Total Cost</th>
+                        <th>Edit</th>
                     </tr>
                 </thead>
                 <tbody>
                     <tr className='bg-[#E4E4EF]  p-5 border border-black'>
                         <td colSpan={6}><img src={pin} alt="background" className='h-8 mr-5' />
-                            <h2>מרחק</h2></td>
+                            <h2>Distance</h2></td>
                     </tr>
                     <tr className='bg-gray-100 p-2 border border-black'>
                         <td></td>
-                        <td><h3>כתובת התחלה</h3><p>{baselineForm.originaddress}</p></td>
-                        <td>2 ש"ח</td>
+                        <td><h3>Start address</h3><p>{baselineForm.originaddress}</p></td>
+                        <td>2 NIS</td>
                         <td>{distance}</td>
-                        <td>{distanceprice}ש"ח</td>
+                        <td>{distanceprice}NIS</td>
                         <td><MdEdit className='text-blue-900' /></td>
                     </tr>
                     <tr className='bg-gray-100 p-2 border border-black'>
                         <td></td>
-                        <td><h3>כתובת יעד</h3><p>{baselineForm.destinationaddress}</p></td>
-                        <td>2 ש"ח</td>
+                        <td><h3>Target address</h3><p>{baselineForm.destinationaddress}</p></td>
+                        <td>2 NIS</td>
                         <td>{distance}</td>
-                        <td>{distanceprice}ש"ח</td>
+                        <td>{distanceprice}NIS</td>
                         <td><MdEdit className='text-blue-900' /></td>
                     </tr>
                     <tr className='bg-[#E4E4EF] border border-black'>
                         <td colSpan={6}>
                             <img src={pin} alt="background" className='h-8 mr-5' />
-                            <h2>קומות</h2>
+                            <h2>Floor</h2>
                         </td>
                     </tr>
                     <tr className='bg-gray-100 p-2 border border-black'>
-                        <td><p>חישוב בשיעור של 10% לכל קומה,</p><p>מעלותו של כל פריט</p></td>
-                        <td><p>{baselineForm.originaddress}</p><h3>קומה {baselineForm.originfloor}</h3></td>
+                        <td><p>Calculated at 10% for each floor,</p><p>from the cost of each item</p></td>
+                        <td><p>{baselineForm.originaddress}</p><h3>Floor {baselineForm.originfloor}</h3></td>
                         <td>10%</td>
-                        <td>{itemsprice}ש"ח</td>
-                        <td>{originfloorprice}ש"ח</td>
+                        <td>{itemsprice}NIS</td>
+                        <td>{originfloorprice}NIS</td>
                         <td><MdEdit className='text-blue-900' /></td>
                     </tr>
                     <tr className='bg-gray-100 p-2 border border-black'>
                         <td></td>
-                        <td><p>{baselineForm.destinationaddress}</p><h3>קומה {baselineForm.destinationfloor}</h3></td>
-                        <td>2 ש"ח</td>
-                        <td>{itemsprice}ש"ח</td>
-                        <td>{destinationfloorprice}ש"ח</td>
+                        <td><p>{baselineForm.destinationaddress}</p><h3>Floor {baselineForm.destinationfloor}</h3></td>
+                        <td>2 NIS</td>
+                        <td>{itemsprice}NIS</td>
+                        <td>{destinationfloorprice}NIS</td>
                         <td><MdEdit className='text-blue-900' /></td>
                     </tr>
                     <tr className='bg-[#E4E4EF]  p-5 border border-black'>
                         <td colSpan={6}>
                             <img src={pin} alt="background" className='h-8 mr-5' />
-                            <h2>נגישות</h2>
+                            <h2>Accessibility</h2>
                         </td>
                     </tr>
                     <tr className='bg-gray-100 p-2 border border-black'>
-                        <td><p>חישוב בשיעור של 10% לכל רמה,</p><p>מעלותו של כל פריט</p></td>
+                        <td><p>Calculated at 10% for each level,</p><p>from the cost of each item</p></td>
                         <td><p>{baselineForm.originaddress}</p><h3>{baselineForm.origintruckAccess}</h3></td>
                         <td>10%</td>
-                        <td>{itemsprice}ש"ח</td>
-                        <td>{origintruckaccessprice}ש"ח</td>
+                        <td>{itemsprice}NIS</td>
+                        <td>{origintruckaccessprice}NIS</td>
                         <td><MdEdit className='text-blue-900' /></td>
                     </tr>
                     <tr className='bg-gray-100 p-2 border border-black'>
                         <td></td>
                         <td><p>{baselineForm.destinationaddress}</p><h3>{baselineForm.destinationtruckAccess}</h3></td>
-                        <td>2 ש"ח</td>
-                        <td>{itemsprice}ש"ח</td>
-                        <td>{destinationtruckaccessprice}ש"ח</td>
+                        <td>2 NIS</td>
+                        <td>{itemsprice}NIS</td>
+                        <td>{destinationtruckaccessprice}NIS</td>
                         <td><MdEdit className='text-blue-900' /></td>
                     </tr>
                     <tr className='bg-[#E4E4EF]  p-5 border border-black'>
                         <td colSpan={6}>
                             <img src={couch} alt="background" className='h-8 mr-5' />
-                            <h2>פריטים</h2>
+                            <h2>Items</h2>
                         </td>
                     </tr>
                     {items.map((item, index) => (
                         <tr key={index} className=" bg-gray-100 p-2 border border-black">
                             <td></td>
                             <td>{item.name}</td>
-                            <td>{item.price}ש"ח</td>
+                            <td>{item.price}NIS</td>
                             <td>{item.quantity}</td>
-                            <td>{item.price * item.quantity}ש"ח</td>
+                            <td>{item.price * item.quantity}NIS</td>
                             <td><MdEdit className='text-blue-900' /></td>
                         </tr>
                     ))}
                     <tr className='bg-[#E4E4EF]  p-5 border border-black'>
                         <td colSpan={6}>
                             <img src={couch} alt="background" className='h-8 mr-5' />
-                            <h2>פירוק</h2>
+                            <h2>Disassembly</h2>
                         </td>
                     </tr>
                     {disassembledItems.map((item, index) => (
                         <tr key={index} className="  bg-gray-100  p-2 border border-black">
                             <td></td>
                             <td>{item.name}</td>
-                            <td>{item.price}ש"ח</td>
+                            <td>{item.price}NIS</td>
                             <td>{item.quantity}</td>
-                            <td>{item.price * item.quantity}ש"ח</td>
+                            <td>{item.price * item.quantity}NIS</td>
                             <td><MdEdit className='text-blue-900' /></td>
                         </tr>
                     ))}
                     <tr className='bg-[#E4E4EF]  p-5 border border-black'>
                         <td colSpan={6}>
                             <img src={couch} alt="background" className='h-8 mr-5' />
-                            <h2>הרכבה</h2>
+                            <h2>Assemble</h2>
                         </td>
                     </tr>
                     {assembledItems.map((item, index) => (
                         <tr key={index} className="  bg-gray-100  p-2 border border-black">
                             <td></td>
                             <td>{item.name}</td>
-                            <td>{item.price}ש"ח</td>
+                            <td>{item.price}NIS</td>
                             <td>{item.quantity}</td>
-                            <td>{item.price * item.quantity}ש"ח</td>
+                            <td>{item.price * item.quantity}NIS</td>
                             <td><MdEdit className='text-blue-900' /></td>
                         </tr>
                     ))}
                     <tr className='bg-[#E4E4EF]  p-5 border border-black'>
                         <td colSpan={6}>
                             <img src={couch} alt="background" className='h-8 mr-5' />
-                            <h2>קרטונים</h2>
+                            <h2>Boxes</h2>
                         </td>
                     </tr>
                     <tr className="  bg-gray-100  p-2 border border-black">
                         <td></td>
-                        <td>ספק קרטונים</td>
-                        <td>5 ש"ח</td>
+                        <td>Supply of boxes</td>
+                        <td>5 NIS</td>
                         <td>{boxes}</td>
-                        <td>{boxesPrice}ש"ח</td>
+                        <td>{boxesPrice}NIS</td>
                         <td><MdEdit className='text-blue-900' /></td>
                     </tr>
                     <tr className='bg-[#E4E4EF]  p-5 border border-black'>
                         <td colSpan={6}>
                             <img src={couch} alt="background" className='h-8 mr-5' />
-                            <h2>מנוף</h2>
+                            <h2>Crane</h2>
                         </td>
                     </tr>
                     <tr className="  bg-gray-100  p-2 border border-black">
                         <td></td>
-                        <td><p>{baselineForm.originaddress}</p><h3>קומה {baselineForm.originfloor}</h3></td>
-                        <td>100ש"ח</td>
-                        <td>{originCranePrice}ש"ח</td>
-                        <td>{originCranePrice * 100}ש"ח</td>
+                        <td><p>{baselineForm.originaddress}</p><h3>Floor {baselineForm.originfloor}</h3></td>
+                        <td>100NIS</td>
+                        <td>{originCranePrice}NIS</td>
+                        <td>{originCranePrice * 100}NIS</td>
                         <td><MdEdit className='text-blue-900' /></td>
                     </tr>
                     <tr className="  bg-gray-100  p-2 border border-black">
                         <td></td>
-                        <td><p>{baselineForm.destinationaddress}</p><h3>קומה {baselineForm.destinationfloor}</h3></td>
-                        <td>10 ש"ח</td>
-                        <td>{destinationCranePrice}ש"ח</td>
-                        <td>{destinationCranePrice * 100}ש"ח</td>
+                        <td><p>{baselineForm.destinationaddress}</p><h3>Floor {baselineForm.destinationfloor}</h3></td>
+                        <td>10 NIS</td>
+                        <td>{destinationCranePrice}NIS</td>
+                        <td>{destinationCranePrice * 100}NIS</td>
                         <td><MdEdit className='text-blue-900' /></td>
                     </tr>
                     <tr className='bg-[#E4E4EF]  p-5 border border-black'>
                         <td colSpan={6}>
                             <img src={couch} alt="background" className='h-8 mr-5' />
-                            <h2>אריזה</h2>
+                            <h2>Packing</h2>
                         </td>
                     </tr>
                     <tr className="  bg-gray-100  p-2 border border-black">
                         <td></td>
-                        <td><p>{baselineForm.destinationaddress}</p><h3>קומה {baselineForm.destinationfloor}</h3></td>
+                        <td><p>{baselineForm.destinationaddress}</p><h3>Floor {baselineForm.destinationfloor}</h3></td>
                         <td>10%</td>
                         <td>{items.length}</td>
-                        <td>{packingprice}ש"ח</td>
+                        <td>{packingprice}NIS</td>
                         <td><MdEdit className='text-blue-900' /></td>
                     </tr>
                 </tbody>
             </table>
         </div>
-
     )
 }
 

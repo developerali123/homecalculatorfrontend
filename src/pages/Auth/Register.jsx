@@ -30,7 +30,7 @@ const Register = () => {
     const { isLoaded } = useJsApiLoader({
         googleMapsApiKey: 'AIzaSyAuIchE5mdfEw_S7oM8I5ZkpCcQyWOMg-Y',
         libraries: ['places']
-    })
+      })
 
     useEffect(() => { }, [count]);
 
@@ -46,42 +46,42 @@ const Register = () => {
 
     const handlestepone = async () => {
         if (form.fullName === "") {
-            toast.error('נא למלא שם מלא');
+            toast.error('Please fill in full name');
             return;
         }
         if (form.password === "") {
-            toast.error('נא למלא סיסמה');
+            toast.error('Please fill in password');
             return;
         }
         if (form.password.length < 8) {
-            toast.error('אורך הסיסמה צריך להיות גדול מ-8');
+            toast.error('password length should be greater than 8');
             return;
         }
         if (form.confirmpassword === "") {
-            toast.error('נא למלא סיסמה לאשר');
+            toast.error('Please fill in confirm password');
             return;
         }
         if (form.confirmpassword.length < 8) {
-            toast.error('אשר את אורך הסיסמה צריך להיות גדול מ-8');
+            toast.error('confirm password length should be greater than 8');
             return;
         }
         if (form.confirmpassword != form.password) {
-            toast.error('סיסמה ואישור סיסמה חייבות להיות זהות');
+            toast.error('password and confirm password must be the same');
             return;
         }
         setcount(2);
     };
     const handlesteptwo = async () => {
         if (form.companyName === "") {
-            toast.error('נא למלא שם חברה');
+            toast.error('please fill company name');
             return;
         }
         if (form.companyId === "") {
-            toast.error('נא למלא את מזהה החברה');
+            toast.error('please fill company Id');
             return;
         }
         if (form.phoneNumber === "") {
-            toast.error('נא למלא את מספר הטלפון של החברה');
+            toast.error('please fill company phone number');
             return;
         }
         setcount(3);
@@ -92,24 +92,20 @@ const Register = () => {
     };
 
     const handlestepthree = async () => {
-        if (form.city === "") {
-            toast.error('נא למלא עיר');
-            return;
-        }
         setcount(4);
     };
 
-    const handlestepfour = async () => {
+    const handlestepfour = async() => {
         if (form.email === "") {
-            toast.error('נא למלא דוא"ל');
+            toast.error('Please fill in email');
             return;
         }
         if (!/\S+@\S+\.\S+/.test(form.email)) {
-            toast.error('אנא הזן כתובת דוא"ל חוקית');
+            toast.error('Please enter a valid email address');
             return;
         }
         if (!form.agreed) {
-            toast.error('נא להסכים למדיניות הפרטיות');
+            toast.error('please agree to privacy policy');
             return;
         }
 
@@ -127,15 +123,15 @@ const Register = () => {
                 numberOfTrucks: form.numberOfTrucks,
                 city: form.city,
                 companyId: form.companyId,
-                phoneNumber: form.phoneNumber
+                phoneNumber:form.phoneNumber
             });
-            toast.success('ההרשמה הצליחה!');
+            toast.success('Registration successful!');
             dispatch(setEmail(form.email));
             dispatch(setPassword(form.password));
             navigate("/verify")
             // Handle any additional logic, such as redirecting to another page
         } catch (error) {
-            toast.error('אירעה שגיאה. אנא נסה שוב מאוחר יותר.');
+            toast.error('An error occurred. Please try again later.');
             // Handle any error messages or logging
         }
     }
@@ -145,18 +141,18 @@ const Register = () => {
             <Sidediv />
             <div className='md:col-span-8 col-span-12 bg-white'>
                 <div className='flex justify-center items-center flex-col h-full'>
-                    <h1 className='text-3xl font-semibold'>צור את החשבון שלך</h1>
+                    <h1 className='text-3xl font-semibold'>Create your Account</h1>
                     {count == 1 && (
                         <div className='flex flex-col'>
-                            <h3 className='mb-1 mt-5'>שם מלא</h3>
+                            <h3 className='mb-1 mt-5'>Full Name</h3>
                             <input
                                 name='fullName'
                                 value={form.fullName}
                                 onChange={handleFormChange}
                                 className='md:w-[400px] w-[250px] h-[44px] bg-white border border-[#cccccc] border-opacity-100 px-4 py-2 rounded-md focus:border-none mb-3'
-                                placeholder="הזן את שמך המלא"
+                                placeholder="Enter your full name"
                             />
-                            <h3 className='mb-1'>סיסמה</h3>
+                            <h3 className='mb-1'>Password</h3>
                             <input
                                 name='password'
                                 value={form.password}
@@ -165,59 +161,59 @@ const Register = () => {
                                 onBlur={false}
                                 type='password'
                                 className='md:w-[400px] w-[250px] h-[44px] bg-white border border-[#cccccc] border-opacity-100 px-4 py-2 rounded-md focus:border-none mb-3'
-                                placeholder="הזן לפחות 8 תווים"
+                                placeholder="Enter at least 8 characters"
                             />
-                            <h3 className='mb-1'>אימות סיסמה</h3>
+                            <h3 className='mb-1'>Confirm Password</h3>
                             <input
                                 name='confirmpassword'
                                 value={form.confirmpassword}
                                 onChange={handleFormChange}
                                 type='password'
                                 className='md:w-[400px] w-[250px] h-[44px] bg-white border border-[#cccccc] border-opacity-100 px-4 py-2 rounded-md focus:border-none mb-3'
-                                placeholder="הזן לפחות 8 תווים"
+                                placeholder="Enter at least 8 characters"
                             />
-                            <button className='bg-[#2676E5] w-full text-white p-2 mt-5 rounded-md' onClick={handlestepone}>הבא</button>
-                            <p className='text-center mt-5'>כבר יש לך חשבון? <span className='text-[#2676E5]'><Link to="/login">התחבר</Link></span></p>
+                            <button className='bg-[#2676E5] w-full text-white p-2 mt-5 rounded-md' onClick={handlestepone}>Next</button>
+                            <p className='text-center mt-5'>Already have an Account? <span className='text-[#2676E5]'><Link to="/login">Sign In</Link></span></p>
                         </div>
                     )}
                     {count == 2 && userType == "company" && (
                         <div className='flex flex-col'>
-                            <h3 className='mb-1 mt-5'>שם החברה/החשבון</h3>
+                            <h3 className='mb-1 mt-5'>Company/Account name</h3>
                             <input
                                 name='companyName'
                                 value={form.companyName}
                                 onChange={handleFormChange}
                                 className='md:w-[400px] w-[250px] h-[44px] bg-white border border-[#cccccc] border-opacity-100 px-4 py-2 rounded-md focus:border-none mb-3'
-                                placeholder="לדוגמה, שם החברה או המחלקה"
+                                placeholder="For example, company’s or department’s name"
                             />
-                            <h3 className='mb-1'>מספר עסק/מזהה החברה</h3>
+                            <h3 className='mb-1'>Company Business Number/ID</h3>
                             <input
                                 type='number'
                                 name='companyId'
                                 value={form.companyId}
                                 onChange={handleFormChange}
                                 className='md:w-[400px] w-[250px] h-[44px] bg-white border border-[#cccccc] border-opacity-100 px-4 py-2 rounded-md focus:border-none mb-3'
-                                placeholder="לדוגמה, מזהה העסק של החברה"
+                                placeholder="For example, company’s business Id"
                             />
-                            <h3 className='mb-1'>מספר טלפון של החברה</h3>
+                            <h3 className='mb-1'>Company Phone Number</h3>
                             <input
                                 name='phoneNumber'
                                 value={form.phoneNumber}
                                 onChange={handleFormChange}
                                 className='md:w-[400px] w-[250px] h-[44px] bg-white border border-[#cccccc] border-opacity-100 px-4 py-2 rounded-md focus:border-none mb-3'
-                                placeholder="לדוגמה, מספר הטלפון של החברה"
+                                placeholder="For example, company’s Phone Number"
                             />
 
                             <div className='flex justify-center items-center'>
-                                <button className='bg-white w-full text-black p-2 mt-5 rounded-md border border-black mr-2' onClick={handleprevious}>קודם</button>
-                                <button className='bg-[#2676E5] w-full text-white p-2 mt-5 rounded-md' onClick={handlesteptwo}>הבא</button>
+                                <button className='bg-white w-full text-black p-2 mt-5 rounded-md border border-black mr-2' onClick={handleprevious}>Previous</button>
+                                <button className='bg-[#2676E5] w-full text-white p-2 mt-5 rounded-md' onClick={handlesteptwo}>Next</button>
                             </div>
-                            <p className='text-center mt-5'>כבר יש לך חשבון? <span className='text-[#2676E5]'><Link to="/login">התחבר</Link></span></p>
+                            <p className='text-center mt-5'>Already have an Account? <span className='text-[#2676E5]'><Link to="/login">Sign In</Link></span></p>
                         </div>
                     )}
                     {count == 3 && (
                         <div className='flex flex-col'>
-                            <h3 className='mb-1 mt-5'>מספר המשאיות</h3>
+                            <h3 className='mb-1 mt-5'>Number of Trucks</h3>
                             <div className='flex mb-1'>
                                 <div className={`border rounded-full mr-3 p-2 ${form.numberOfTrucks === '1-10' ? 'border-blue-500' : 'border-black'}`}>
                                     <input
@@ -269,30 +265,30 @@ const Register = () => {
                                 </div>
                             </div>
 
-                            <h3 className='mb-1'>באילו ערים אתה פועל?</h3>
-                            <GoogleCityAutocomplete value={form.city} onChange={handleFormChange} name="city" placeholder="בחר עיר" />
+                            <h3 className='mb-1'>In which cities do you operate?</h3>
+                            <GoogleCityAutocomplete value={form.city} onChange={handleFormChange} name="city" placeholder="Select city" />
                             <div className='flex justify-center items-center'>
-                                <button className='bg-white w-full text-black p-2 mt-5 rounded-md border border-black mr-2' onClick={handleprevious}>קודם</button>
-                                <button className='bg-[#2676E5] w-full text-white p-2 mt-5 rounded-md' onClick={handlestepthree}>הבא</button>
+                                <button className='bg-white w-full text-black p-2 mt-5 rounded-md border border-black mr-2' onClick={handleprevious}>Previous</button>
+                                <button className='bg-[#2676E5] w-full text-white p-2 mt-5 rounded-md' onClick={handlestepthree}>Next</button>
                             </div>
-                            <p className='text-center mt-5'>כבר יש לך חשבון? <span className='text-[#2676E5]'><Link to="/login">התחבר</Link></span></p>
+                            <p className='text-center mt-5'>Already have an Account? <span className='text-[#2676E5]'><Link to="/login">Sign In</Link></span></p>
                         </div>
                     )}
                     {count == 4 && (
                         <div className='flex flex-col'>
-                            <h3 className='mb-1 mt-5'>דוא"ל</h3>
+                            <h3 className='mb-1 mt-5'>Email</h3>
                             <input
                                 name='email'
                                 value={form.email}
                                 type='email'
                                 onChange={handleFormChange}
                                 className='md:w-[400px] w-[250px] h-[44px] bg-white border border-[#cccccc] border-opacity-100 px-4 py-2 rounded-md focus:border-none mb-3'
-                                placeholder="הזן את כתובת הדואר האלקטרוני שלך"
+                                placeholder="Enter your email address"
                             />
 
                             <div className='flex justify-center items-center'>
-                                <button className='bg-white w-full text-black p-2 mt-5 rounded-md border border-black mr-2' onClick={handleprevious}>קודם</button>
-                                <button className='bg-[#2676E5] w-full text-white p-2 mt-5 rounded-md' onClick={handlestepfour}>הרשם</button>
+                                <button className='bg-white w-full text-black p-2 mt-5 rounded-md border border-black mr-2' onClick={handleprevious}>Previous</button>
+                                <button className='bg-[#2676E5] w-full text-white p-2 mt-5 rounded-md' onClick={handlestepfour}>Register</button>
                             </div>
                             <div className='flex mt-5 justify-center items-center'>
                                 <input
@@ -302,16 +298,15 @@ const Register = () => {
                                     onChange={handleCheckboxChange}
                                     className='mr-2'
                                 />
-                                <p>ממשיך, אתה מסכים ל</p>
+                                <p>By proceeding, you agree to the</p>
                             </div>
-                            <p className='text-center'><span className='text-[#2676E5]'>תנאי השימוש</span> ו-<span className='text-[#2676E5]'>מדיניות הפרטיות</span></p>
-                            <p className='text-center mt-5'>כבר יש לך חשבון? <span className='text-[#2676E5]'><Link to="/login">התחבר</Link></span></p>
+                            <p className='text-center'><span className='text-[#2676E5]'>Term of Service</span> and  <span className='text-[#2676E5]'>Privacy Policy</span></p>
+                            <p className='text-center mt-5'>Already have an Account? <span className='text-[#2676E5]'><Link to="/login">Sign In</Link></span></p>
                         </div>
                     )}
                 </div>
             </div>
-
-        </div>
+        </div >
     );
 };
 

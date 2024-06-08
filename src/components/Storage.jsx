@@ -81,10 +81,10 @@ const Storage = () => {
                 <button onClick={() => setToggle((prev) => !prev)}>
                     {toggle === true ? <FaAngleUp /> : <FaAngleDown />}
                 </button>
-                <h4>אחסון</h4>
+                <h4>Storage</h4>
             </div>
             <div className={`${toggle ? 'block' : 'hidden'} ${listToggle && 'hidden'} flex flex-col w-full justify-center items-center gap-2 mt-4`}>
-            <p className='text-md text-center md:w-[400px] w-[250px]'>שירותי אחסון מאפשרים לאחסן את תכולת הדירה לתקופה מסוימת. הגדר תאריך התחלה ותאריך סיום משוער של תקופת האחסון הנדרשת.</p>
+                <p className='text-sm text-center md:w-[400px] w-[250px]'>Storage services allow you to store the contents of the apartment for a certain period of time. Set a start date, and an estimated end date of the required storage period.</p>
                 {storageItems.map((item, index) => (
                     <div key={index} className='flex justify-between w-full p-2'>
                         <div className='flex gap-5'>
@@ -110,7 +110,7 @@ const Storage = () => {
                 )}
 
                 <button className='flex gap-2 items-center justify-end' onClick={() => setListToggle((prev) => !prev)}>
-                <span>הוסף פריטים</span>
+                    <span>Add items</span>
                     <span>
                         <FaCirclePlus className='text-blue-500' />
                     </span>
@@ -146,7 +146,7 @@ const Storage = () => {
                         setStartDate(date)
                         dispatch(setStorageStartDay(date))
                     }} />
-<h3 className="">- תאריך התחלה</h3>
+                    <h3 className="">- Start Date</h3>
                 </div>
                 <div className='w-full flex justify-center p-1 gap-1'>
                     <DatePicker className="w-full border border-black" selected={endDate} onChange={(date) => {
@@ -154,19 +154,19 @@ const Storage = () => {
                         dispatch(setStorageEndDay(date))
 
                     }} />
-<h3 className="">- תאריך סיום</h3>
+                    <h3 className="">- End Date</h3>
                 </div>
             </div>
             <div className={`${toggle ? 'block' : 'hidden'} ${timeToggle && 'hidden'} flex flex-col w-full justify-center items-center gap-2 mt-4`}>
                 <button className='flex gap-2 justify-end items-center' onClick={() => setTimeToggle((prev) => !prev)}>
-                <span>הוסף תקופת אחסון</span>
+                    <span>Add a storage period</span>
                     <span>
                         <FaCirclePlus className='text-blue-500' />
                     </span>
                 </button>
             </div>
             <div className={`${timeToggle ? 'block' : 'hidden'} w-full border-[1px] border-gray-200 rounded-b-md p-4 flex justify-center`}>
-            <button className='bg-[#008EF5] hover:bg-blue-600 text-white px-6 py-2 rounded-md' onClick={() => { setListToggle(false) }}>סגור</button>
+                <button className='bg-[#008EF5] hover:bg-blue-600 text-white px-6 py-2 rounded-md' onClick={() => { setTimeToggle(false) }}>Close</button>
             </div>
         </div>
     )

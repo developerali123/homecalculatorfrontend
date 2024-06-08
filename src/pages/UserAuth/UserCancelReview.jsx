@@ -18,7 +18,7 @@ const UserCancelReview = () => {
     const [selectedCheckboxes1, setselectedCheckboxes1] = useState([]);
     const [selectedCheckboxes2, setselectedCheckboxes2] = useState([]);
     const [selectedCheckboxes3, setselectedCheckboxes3] = useState([]);
-    const [name, setname] = useState("");
+    const [name,setname]=useState("");
     const [formSubmitted, setFormSubmitted] = useState(false);
     const [screenWidth, setScreenWidth] = useState(window.innerWidth);
 
@@ -27,7 +27,7 @@ const UserCancelReview = () => {
             const response = await axios.get(`https://homecalculatorbackend-ni04.onrender.com/api/users/${userId}`);
             setname(response?.data?.user?.name);
             console.log(response?.data?.user?.name);
-
+            
         } catch (err) {
             console.log(err);
         }
@@ -50,9 +50,9 @@ const UserCancelReview = () => {
     }, []);
     const [form, setForm] = useState({
         userId: userId,
-        tender_cancel: [],
-        auction_experience: [],
-        tender_service: [],
+        tender_cancel:[],
+        auction_experience:[],
+        tender_service:[],
         ratings: {
             rating1: 0,
         },
@@ -62,11 +62,11 @@ const UserCancelReview = () => {
         },
     });
 
-    useEffect(() => {
-        setForm(prevForm => ({
-            ...prevForm, tender_cancel: selectedCheckboxes1, auction_experience: selectedCheckboxes2, tender_service: selectedCheckboxes3
+    useEffect(()=>{
+        setForm(prevForm=>({
+            ...prevForm,tender_cancel:selectedCheckboxes1,auction_experience:selectedCheckboxes2,tender_service:selectedCheckboxes3
         }))
-    }, [selectedCheckboxes1, selectedCheckboxes2, selectedCheckboxes3])
+    },[selectedCheckboxes1,selectedCheckboxes2,selectedCheckboxes3])
 
     const handleRatingChange = (rating, questionNumber) => {
         setForm(prevForm => ({
@@ -116,26 +116,26 @@ const UserCancelReview = () => {
     const handleSubmit = async () => {
         try {
             const response = await axios.post('https://homecalculatorbackend-ni04.onrender.com/api/reviews', form);
-            toast.success('סקירה נשלחה בהצלחה!');
+            // toast.success('Review submitted successfully!');
             setTimeout(() => {
                 setFormSubmitted(true);
                 dispatch(clearTenderId());
                 dispatch(resetState());
                 auth.logOut();
-            }, 3000);
+            }, 3000); 
         } catch (error) {
-            toast.error('נכשל בהגשת ביקורת!');
+            toast.error('Failed to submit review!');
         }
     };
 
     if (formSubmitted) {
         return (
-            <div className="fixed top-0 left-0 w-full h-full z-50 flex justify-center items-center bg-grey-500">
+            <div className="fixed top-0 left-0 w-full h-full z-50 flex justify-center items-center bg-gray-500">
                 <div
                     id="confetti-container"
                     className="absolute top-0 left-0 w-full h-full z-10 flex justify-center items-center"
                 >
-                    <קונפטי
+                    <Confetti
                         width={window.innerWidth}
                         height={window.innerHeight}
                     />
@@ -143,18 +143,17 @@ const UserCancelReview = () => {
                 <div className="absolute top-0 flex flex-col items-center z-20">
                     <img
                         src={greenarrow}
-                        alt="חץ ירוק"
+                        alt="Green Arrow"
                         className="w-20 h-20 mb-4 mt-20"
                     />
                     <p className="text-white text-4xl font-bold my-4 ">
-                        תודה!
+                        Thank you!
                     </p>
                     <p className="text-white text-xl text-center mb-4">
-                        מקווה לראות אותך שוב
+                        Hope to see you again
                         <br />
-                        אנו עובדים קשה כדי למצוא לך את ההצעות הטובות ביותר. את ההצעות תקבלו ישירות לוואטסאפ, ותוכלו לבחור את ההצעה הטובה ביותר עבורכם.
+                        We work hard to find you the best offers. You will receive the offers directly to WhatsApp, and you can choose the best offer for you.
                     </p>
-                    כפתור
                     <button
                         onClick={() => setFormSubmitted(false)}
                         className="absolute top-20 right-1"
@@ -169,7 +168,7 @@ const UserCancelReview = () => {
             <div className="bg-white h-max-screen">
                 <div className="bg-[#96E0F8] flex justify-between py-3">
                     <div>
-                        <h2 className='w-full text-xl bm-font'>לחץ <span className='text-orange-500 px-2'>n</span>Move</h2>
+                        <h2 className='w-full text-xl bm-font'>Click <span className='text-orange-500 px-2'>n</span>Move</h2>
                     </div>
                     <div className="flex">
                         <FaBell className="mr-3" size={20} />
@@ -179,35 +178,35 @@ const UserCancelReview = () => {
                 <div className="py-2 flex justify-between border-b border-black mb-3" style={{ boxShadow: "0 4px 8px rgba(0, 0, 0, 0.1)" }}>
                     {/* <h1>Welcome! {auth.user?.username}</h1> */}
                     <div className='ml-3'>
-                        <h2>צהריים טובים, {name}</h2>
-                        <h2>גישה מהירה למכרזים שלך</h2>
+                        <h2>Good afternoon, {name}</h2>
+                        <h2>Quickly access Your tenders</h2>
                     </div>
                     <button onClick={() => auth.logOut()} className="btn-submit">
-                        התנתק
+                        logout
                     </button>
                 </div>
                 <div className='flex justify-center items-center flex-col'>
                     <div className=' bg-[#96E0F8] p-5 rounded-md md:w-[700px] w-[300px] mb-5'>
-                        <p className='mb-5'>שלום {name},</p>
-                        <p className='mb-5'>רצינו להודות לך על הזמן שהקדשת להשתתף במכרז למציאת חברת ניהול דירות עבורך. אנו מצטערים לשמוע שבחרת לבטל את המכרז בזמן זה.</p>
+                        <p className='mb-5'>Hello {name},</p>
+                        <p className='mb-5'>We wanted to thank you for taking the time to participate in the tender to find an apartment management company for you. We are sorry to hear that you have chosen to cancel the auction at this time.</p>
 
-                        <p className='mb-5'>נשמח מאוד לשמוע ממך את הסיבה לביטול המכרז. משובך חשוב לנו ויכול לעזור לנו לשפר את השירותים שלנו בעתיד.</p>
+                        <p className='mb-5'>We would be very happy to hear from you the reason for canceling the tender. Your feedback is important to us and can help us improve our services in the future.</p>
 
-                        <p className='mb-5'>אנא הקדש כמה דקות למילוי סקר קצר זה, בו תוכל לספר לנו על חווייתך בתהליך המכרז. התשובות שלך יהיו לגמרי אנונימיות.</p>
+                        <p className='mb-5'>Please take a few minutes to fill out this short survey, in which you can tell us about your experience in the tender process. Your answers will be completely anonymous.</p>
                         <div className='flex justify-center items-center flex-col'>
                             <div className='my-3 md:w-full w-[250px]'>
-                                <h3 className='my-2 md:text-xl text-sm'>1.אילו גורמים השפיעו על החלטתך לבטל את המכרז?</h3>
+                                <h3 className='my-2 md:text-xl text-sm'>1.What factors influenced your decision to cancel the tender?</h3>
                                 <div className='mb-2'>
                                     <label>
                                         <input
                                             type="checkbox"
                                             name="checkbox1"
-                                            value="לא מרוצה מהתוצאה שקיבלתי מהמחשבון"
+                                            value="Not satisfied with the result I got from the calculator"
                                             onChange={handleCheckboxChange}
-                                            checked={selectedCheckboxes1.includes("לא מרוצה מהתוצאה שקיבלתי מהמחשבון")}
+                                            checked={selectedCheckboxes1.includes("Not satisfied with the result I got from the calculator")}
                                             className='mr-2'
                                         />
-                                        לא מרוצה מהתוצאה שקיבלתי מהמחשבון
+                                        Not satisfied with the result I got from the calculator
                                     </label>
                                 </div>
                                 <div className='mb-2'>
@@ -215,12 +214,12 @@ const UserCancelReview = () => {
                                         <input
                                             type="checkbox"
                                             name="checkbox1"
-                                            value="חברות הובלה נתנו מחירים גבוהים יותר מהנראה במחשבון"
+                                            value="The moving companies gave higher prices than what appeared on the calculator"
                                             onChange={handleCheckboxChange}
-                                            checked={selectedCheckboxes1.includes("חברות הובלה נתנו מחירים גבוהים יותר מהנראה במחשבון")}
+                                            checked={selectedCheckboxes1.includes("The moving companies gave higher prices than what appeared on the calculator")}
                                             className='mr-2'
                                         />
-                                        חברות הובלה נתנו מחירים גבוהים יותר מהנראה במחשבון
+                                        The moving companies gave higher prices than what appeared on the calculator
                                     </label>
                                 </div>
                                 <div className='mb-2'>
@@ -228,12 +227,12 @@ const UserCancelReview = () => {
                                         <input
                                             type="checkbox"
                                             name="checkbox1"
-                                            value="מצאתי חברת הובלה אחרת במחיר זול יותר"
+                                            value="I found another moving company at a cheaper price"
                                             onChange={handleCheckboxChange}
-                                            checked={selectedCheckboxes1.includes("מצאתי חברת הובלה אחרת במחיר זול יותר")}
+                                            checked={selectedCheckboxes1.includes("I found another moving company at a cheaper price")}
                                             className='mr-2'
                                         />
-                                        מצאתי חברת הובלה אחרת במחיר זול יותר
+                                        I found another moving company at a cheaper price
                                     </label>
                                 </div>
                                 <div className='mb-2'>
@@ -241,34 +240,34 @@ const UserCancelReview = () => {
                                         <input
                                             type="checkbox"
                                             name="checkbox1"
-                                            value="התהליך ארוך וכבד מדי"
+                                            value="The process is too long and cumbersome"
                                             onChange={handleCheckboxChange}
-                                            checked={selectedCheckboxes1.includes("התהליך ארוך וכבד מדי")}
+                                            checked={selectedCheckboxes1.includes("The process is too long and cumbersome")}
                                             className='mr-2'
                                         />
-                                        התהליך ארוך וכבד מדי
+                                        The process is too long and cumbersome
                                     </label>
                                 </div>
-                                <h3 className='mb-1'>סיבה אחרת (אנא פרטו).</h3>
+                                <h3 className='mb-1'>Other reason (please specify).</h3>
                                 <input
                                     name='comment1'
                                     value={form.comment1}
                                     onChange={handleFormChange}
                                     className='md:w-full w-[250px] md:h-[44px] h-[30px] bg-white border border-[#cccccc] border-opacity-100 px-4 py-2 rounded-md focus:border-none mb-3'
-                                    placeholder="ניתן להקליד את ההערה כאן"
+                                    placeholder="You can type your comment here"
                                 />
-                                <h3 className='my-2 md:text-xl text-sm'>2.מה דעתך יכולה לשפר את חוויית המכרז עבורך?</h3>
+                                <h3 className='my-2 md:text-xl text-sm'>2.What do you think could have improved the auction experience for you?</h3>
                                 <div className='mb-2'>
                                     <label>
                                         <input
                                             type="checkbox"
                                             name="checkbox2"
-                                            value="קבלת מידע מפורט יותר על החברות שהשתתפו במכרז"
+                                            value="Receiving more detailed information about the companies that participated in the tender."
                                             onChange={handleCheckboxChange}
-                                            checked={selectedCheckboxes2.includes("קבלת מידע מפורט יותר על החברות שהשתתפו במכרז")}
+                                            checked={selectedCheckboxes2.includes("Receiving more detailed information about the companies that participated in the tender.")}
                                             className='mr-2'
                                         />
-                                        קבלת מידע מפורט יותר על החברות שהשתתפו במכרז
+                                        Receiving more detailed information about the companies that participated in the tender
                                     </label>
                                 </div>
                                 <div className='mb-2'>
@@ -276,12 +275,12 @@ const UserCancelReview = () => {
                                         <input
                                             type="checkbox"
                                             name="checkbox2"
-                                            value="תהליך פשוט ומהיר יותר"
+                                            value="A simpler and faster process."
                                             onChange={handleCheckboxChange}
-                                            checked={selectedCheckboxes2.includes("תהליך פשוט ומהיר יותר")}
+                                            checked={selectedCheckboxes2.includes("A simpler and faster process.")}
                                             className='mr-2'
                                         />
-                                        תהליך פשוט ומהיר יותר
+                                        A simpler and faster process.
                                     </label>
                                 </div>
                                 <div className='mb-2'>
@@ -289,12 +288,12 @@ const UserCancelReview = () => {
                                         <input
                                             type="checkbox"
                                             name="checkbox2"
-                                            value="אפשרות לקבל המלצות מחברות אחרות"
+                                            value="Possibility to receive recommendations from other companies."
                                             onChange={handleCheckboxChange}
-                                            checked={selectedCheckboxes2.includes("אפשרות לקבל המלצות מחברות אחרות")}
+                                            checked={selectedCheckboxes2.includes("Possibility to receive recommendations from other companies.")}
                                             className='mr-2'
                                         />
-                                        אפשרות לקבל המלצות מחברות אחרות
+                                        Possibility to receive recommendations from other companies.
                                     </label>
                                 </div>
                                 <div className='mb-2'>
@@ -302,23 +301,23 @@ const UserCancelReview = () => {
                                         <input
                                             type="checkbox"
                                             name="checkbox2"
-                                            value="תמיכה מקצועית לאורך התהליך"
+                                            value="Professional support throughout the process."
                                             onChange={handleCheckboxChange}
-                                            checked={selectedCheckboxes2.includes("תמיכה מקצועית לאורך התהליך")}
+                                            checked={selectedCheckboxes2.includes("Professional support throughout the process.")}
                                             className='mr-2'
                                         />
-                                        תמיכה מקצועית לאורך התהליך
+                                        Professional support throughout the process.
                                     </label>
                                 </div>
-                                <h3 className='mb-1 mt-5'>סיבה אחרת (אנא פרטו).</h3>
+                                <h3 className='mb-1 mt-5'>Other reason (please specify).</h3>
                                 <input
                                     name='comment2'
                                     value={form.comment2}
                                     onChange={handleFormChange}
                                     className='md:w-full w-[250px] md:h-[44px] h-[30px] bg-white border border-[#cccccc] border-opacity-100 px-4 py-2 rounded-md focus:border-none mb-3'
-                                    placeholder="ניתן להקליד את ההערה כאן"
+                                    placeholder="You can type your comment here"
                                 />
-                                <h3 className='my-2 md:text-xl text-sm'>3.שעור השביעות שלך משימוש בשירותי Click n Move</h3>
+                                <h3 className='my-2 md:text-xl text-sm'>3.Rate your satisfaction with using Click n Move services</h3>
                                 <div className='flex'>
                                     {[...Array(5)].map((_, index) => (
                                         <CiStar
@@ -331,18 +330,18 @@ const UserCancelReview = () => {
                                     ))}
 
                                 </div>
-                                <h3 className='my-2 md:text-xl text-sm'>4.האם היית מוכן להשתמש בשירות המכרז למציאת חברת הובלה בעתיד?</h3>
+                                <h3 className='my-2 md:text-xl text-sm'>4.Would you be willing to use the tender service of finding a moving company in the future?</h3>
                                 <div className='mb-2'>
                                     <label>
                                         <input
                                             type="checkbox"
                                             name="checkbox3"
-                                            value="כן, בהחלט."
+                                            value="Yes, absolutely."
                                             onChange={handleCheckboxChange}
-                                            checked={selectedCheckboxes3.includes("כן, בהחלט.")}
+                                            checked={selectedCheckboxes3.includes("Yes, absolutely.")}
                                             className='mr-2'
                                         />
-                                        כן, בהחלט.
+                                        Yes, absolutely.
                                     </label>
                                 </div>
                                 <div className='mb-2'>
@@ -350,12 +349,12 @@ const UserCancelReview = () => {
                                         <input
                                             type="checkbox"
                                             name="checkbox3"
-                                            value="אולי, בהתאם לתהליך והחברות שיצורפו למכרז."
+                                            value="Maybe, depending on the process and the companies that will appear in the tender."
                                             onChange={handleCheckboxChange}
-                                            checked={selectedCheckboxes3.includes("אולי, בהתאם לתהליך והחברות שיצורפו למכרז.")}
+                                            checked={selectedCheckboxes3.includes("Maybe, depending on the process and the companies that will appear in the tender.")}
                                             className='mr-2'
                                         />
-                                        אולי, בהתאם לתהליך והחברות שיצורפו למכרז.
+                                        Maybe, depending on the process and the companies that will appear in the tender.
                                     </label>
                                 </div>
                                 <div className='mb-2'>
@@ -363,12 +362,12 @@ const UserCancelReview = () => {
                                         <input
                                             type="checkbox"
                                             name="checkbox3"
-                                            value="לא, אני מעדיף למצוא חברת הובלה בדרך אחרת."
+                                            value="No, I prefer to find a moving company in another way."
                                             onChange={handleCheckboxChange}
-                                            checked={selectedCheckboxes3.includes("לא, אני מעדיף למצוא חברת הובלה בדרך אחרת.")}
+                                            checked={selectedCheckboxes3.includes("No, I prefer to find a moving company in another way.")}
                                             className='mr-2'
                                         />
-                                        לא, אני מעדיף למצוא חברת הובלה בדרך אחרת.
+                                        No, I prefer to find a moving company in another way.
                                     </label>
                                 </div>
                                 <TruckBtn onClick={handleSubmit} />

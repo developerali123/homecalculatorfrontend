@@ -11,6 +11,7 @@ import TenderDetailsDialog from "./TenderDetailsDialog";
 import PriceDialog from "./PriceDialog";
 import UpdatePriceDialog from "./UpdatepriceDialog";
 import StatusBadge from "../../utils/statusstyle";
+import { useNavigate } from "react-router-dom";
 
 const formatDate = (dateString) => {
     const options = { day: 'numeric', month: 'numeric', year: 'numeric' };
@@ -20,6 +21,7 @@ const formatDate = (dateString) => {
 const Dashboard = () => {
     const auth = useAuth();
     const [userId, setuserId] = useState(auth?.user);
+    const navigate=useNavigate();
     const [toggle, setToggle] = useState(0);
     const [data, setData] = useState([]);
     const [loading, setLoading] = useState(true);
@@ -89,7 +91,7 @@ const Dashboard = () => {
     }, [userId]);
 
     const activeRecord = data.reduce((acc, record) => {
-        if (record.priceOffer == null) {
+        if (record.priceOffer==null) {
             acc.push({
                 id: record.tenderId,
                 name: record.name,
@@ -110,9 +112,9 @@ const Dashboard = () => {
         }
         return acc;
     }, []) || [];
-
+    
     const pendingRecord = pendingdata.reduce((acc, record) => {
-        if (record.priceOffer != null) {
+        if (record.priceOffer!=null) {
             acc.push({
                 id: record.tenderId,
                 name: record.name,
@@ -157,7 +159,7 @@ const Dashboard = () => {
     }, []) || [];
     const columns = [
         {
-            field: "id", headerName: "מזהה מכרז", minWidth: 100, flex: 1, renderCell: (params) => {
+            field: "id", headerName: "Tender ID", minWidth: 100, flex: 1, renderCell: (params) => {
 
                 return <span style={{ whiteSpace: "pre-wrap" }} className="table_first_column">
                     {params.id}
@@ -165,7 +167,7 @@ const Dashboard = () => {
             },
         },
         {
-            field: "tenderStatus", headerName: "סטטוס המכרז", flex: 1, minWidth: 150,
+            field: "tenderStatus", headerName: "Tender Status", flex: 1, minWidth: 150,
             renderCell: (params) => {
 
                 return <span style={{ whiteSpace: "pre-wrap" }} className="table_first_column">
@@ -174,79 +176,79 @@ const Dashboard = () => {
             },
         },
         {
-            field: "movingPrice", headerName: "מחיר ההובלה", flex: 1, minWidth: 150,
+            field: "movingPrice", headerName: "Moving Price", flex: 1, minWidth: 150,
             renderCell: (params) => {
 
                 return <span style={{ whiteSpace: "pre-wrap" }} className="table_first_column">
-                    {params?.row?.movingPrice} ש"ח
+                    {params?.row?.movingPrice} NIS
                 </span>
             },
         },
         {
-            field: "priceOffer", headerName: "הצעת מחיר", flex: 1, minWidth: 150,
+            field: "priceOffer", headerName: "Price Offer", flex: 1, minWidth: 150,
             renderCell: (params) => {
 
                 return <span style={{ whiteSpace: "pre-wrap", color: "#FC7023" }} className="table_first_column">
-                    {params?.row?.priceOffer}{params?.row?.priceOffer ? " ש\"ח" : "-"}
+                    {params?.row?.priceOffer}{params?.row?.priceOffer ? "NIS":"-"}
                 </span>
             },
         },
         {
-            field: "bestOffer", headerName: "הצעה הטובה ביותר", flex: 1, minWidth: 150,
+            field: "bestOffer", headerName: "Best Offer", flex: 1, minWidth: 150,
             renderCell: (params) => {
 
                 return <span style={{ whiteSpace: "pre-wrap", color: "#048611" }} className="table_first_column">
-                    {params?.row?.bestOffer} {params?.row?.bestOffer ? " ש\"ח" : "-"}
+                    {params?.row?.bestOffer} {params?.row?.bestOffer ? "NIS":"-"}
                 </span>
             },
         },
         {
-            field: "originaddress", headerName: "כתובת מוצא", flex: 1, minWidth: 250,
+            field: "originaddress", headerName: "Origin Address", flex: 1, minWidth: 250,
             renderCell: (params) => {
 
                 return <span style={{ whiteSpace: "pre-wrap", color: "#C15C7A" }} className="table_first_column" > {params?.row?.originaddress}</span>
             },
         },
         {
-            field: "destinationaddress", headerName: "כתובת יעד", flex: 1, minWidth: 250,
+            field: "destinationaddress", headerName: "Destination Address", flex: 1, minWidth: 250,
             renderCell: (params) => {
 
                 return <span style={{ whiteSpace: "pre-wrap", color: "#046E86" }} className="table_first_column" >{params?.row?.destinationaddress}</span>
             },
         },
         {
-            field: "date", headerName: "תאריך", minWidth: 200, flex: 1,
+            field: "date", headerName: "Date", minWidth: 200, flex: 1,
             renderCell: (params) => {
 
                 return <span style={{ whiteSpace: "pre-wrap" }} className="table_first_column" >{params?.row?.transportdate} - {params?.row?.arrivaldate}</span>
             },
         },
         {
-            field: "hours", headerName: "שעות", minWidth: 150, flex: 1,
+            field: "hours", headerName: "Hours", minWidth: 150, flex: 1,
             renderCell: (params) => {
 
                 return <span style={{ whiteSpace: "pre-wrap" }} className="table_first_column" >{params?.row?.starttime} - {params?.row?.endtime}</span>
             },
         },
         {
-            field: "tenderdetails", headerName: "פרטי המכרז", minWidth: 150, flex: 1,
+            field: "tenderdetails", headerName: "Tender Details", minWidth: 150, flex: 1,
             renderCell: (params) => {
                 const onView = () => handleRowClick(params);
-                return <span style={{ whiteSpace: "pre-wrap", textDecoration: "underline", color: "#1546F3" }} className="table_first_column" onClick={onView}>פתח פרטי המכרז</span>
+                return <span style={{ whiteSpace: "pre-wrap", textDecoration: "underline", color: "#1546F3" }} className="table_first_column" onClick={onView}>Open tender details</span>
             },
         },
         {
-            field: "action", headerName: "פעולה", minWidth: 150, flex: 1,
+            field: "action", headerName: "Action", minWidth: 150, flex: 1,
             renderCell: (params) => {
                 const send = () => sendoffer(params);
                 const update = () => updateoffer(params);
-                return <span style={{ whiteSpace: "pre-wrap" }} className="table_first_column">{params.row.priceOffer ? <button className="bg-orange-400 rounded-lg px-2 text-white" onClick={update}>ערוך הצעה</button> : <button className="bg-orange-400 rounded-lg px-2 text-white" onClick={send}>שלח הצעה</button>}</span>
+                return <span style={{ whiteSpace: "pre-wrap" }} className="table_first_column">{params.row.priceOffer ? <button className="bg-orange-400 rounded-lg px-2 text-white" onClick={update}>Edit Offer</button> : <button className="bg-orange-400 rounded-lg px-2 text-white" onClick={send}>submit offer</button>}</span>
             },
         },
     ];
     const pendingcolumns = [
         {
-            field: "id", headerName: "מספר מכרז", minWidth: 100, flex: 1, renderCell: (params) => {
+            field: "id", headerName: "Tender ID", minWidth: 100, flex: 1, renderCell: (params) => {
 
                 return <span style={{ whiteSpace: "pre-wrap" }} className="table_first_column">
                     {params.id}
@@ -254,7 +256,7 @@ const Dashboard = () => {
             },
         },
         {
-            field: "tenderStatus", headerName: "סטטוס המכרז", flex: 1, minWidth: 150,
+            field: "tenderStatus", headerName: "Tender Status", flex: 1, minWidth: 150,
             renderCell: (params) => {
 
                 return <span style={{ whiteSpace: "pre-wrap" }} className="table_first_column">
@@ -263,78 +265,78 @@ const Dashboard = () => {
             },
         },
         {
-            field: "movingPrice", headerName: "מחיר ההובלה", flex: 1, minWidth: 150,
+            field: "movingPrice", headerName: "Moving Price", flex: 1, minWidth: 150,
             renderCell: (params) => {
 
                 return <span style={{ whiteSpace: "pre-wrap" }} className="table_first_column">
-                    {params?.row?.movingPrice} ש"ח
+                    {params?.row?.movingPrice} NIS
                 </span>
             },
         },
         {
-            field: "priceOffer", headerName: "הצעת מחיר", flex: 1, minWidth: 150,
+            field: "priceOffer", headerName: "Price Offer", flex: 1, minWidth: 150,
             renderCell: (params) => {
 
                 return <span style={{ whiteSpace: "pre-wrap", color: "#FC7023" }} className="table_first_column">
-                    {params?.row?.priceOffer}{params?.row?.priceOffer ? " ש\"ח" : "-"}
+                    {params?.row?.priceOffer}{params?.row?.priceOffer ? "NIS":"-"}
                 </span>
             },
         },
         {
-            field: "bestOffer", headerName: "הצעה הטובה ביותר", flex: 1, minWidth: 150,
+            field: "bestOffer", headerName: "Best Offer", flex: 1, minWidth: 150,
             renderCell: (params) => {
 
                 return <span style={{ whiteSpace: "pre-wrap", color: "#048611" }} className="table_first_column">
-                    {params?.row?.bestOffer} {params?.row?.bestOffer ? " ש\"ח" : "-"}
+                    {params?.row?.bestOffer} {params?.row?.bestOffer ? "NIS":"-"}
                 </span>
             },
         },
         {
-            field: "originaddress", headerName: "כתובת מוצא", flex: 1, minWidth: 250,
+            field: "originaddress", headerName: "Origin Address", flex: 1, minWidth: 250,
             renderCell: (params) => {
 
                 return <span style={{ whiteSpace: "pre-wrap", color: "#C15C7A" }} className="table_first_column" > {params?.row?.originaddress}</span>
             },
         },
         {
-            field: "destinationaddress", headerName: "כתובת יעד", flex: 1, minWidth: 250,
+            field: "destinationaddress", headerName: "Destination Address", flex: 1, minWidth: 250,
             renderCell: (params) => {
 
                 return <span style={{ whiteSpace: "pre-wrap", color: "#046E86" }} className="table_first_column" >{params?.row?.destinationaddress}</span>
             },
         },
         {
-            field: "date", headerName: "תאריך", minWidth: 200, flex: 1,
+            field: "date", headerName: "Date", minWidth: 200, flex: 1,
             renderCell: (params) => {
 
                 return <span style={{ whiteSpace: "pre-wrap" }} className="table_first_column" >{params?.row?.transportdate} - {params?.row?.arrivaldate}</span>
             },
         },
         {
-            field: "hours", headerName: "שעות", minWidth: 150, flex: 1,
+            field: "hours", headerName: "Hours", minWidth: 150, flex: 1,
             renderCell: (params) => {
 
                 return <span style={{ whiteSpace: "pre-wrap" }} className="table_first_column" >{params?.row?.starttime} - {params?.row?.endtime}</span>
             },
         },
         {
-            field: "tenderdetails", headerName: "פרטי המכרז", minWidth: 150, flex: 1,
+            field: "tenderdetails", headerName: "Tender Details", minWidth: 150, flex: 1,
             renderCell: (params) => {
                 const onView = () => handleRowClick(params);
-                return <span style={{ whiteSpace: "pre-wrap", textDecoration: "underline", color: "#1546F3" }} className="table_first_column" onClick={onView}>פתח פרטי המכרז</span>
+                return <span style={{ whiteSpace: "pre-wrap", textDecoration: "underline", color: "#1546F3" }} className="table_first_column" onClick={onView}>Open tender details</span>
             },
         },
         {
-            field: "action", headerName: "פעולה", minWidth: 150, flex: 1,
+            field: "action", headerName: "Action", minWidth: 150, flex: 1,
             renderCell: (params) => {
                 const update = () => updateoffer(params);
-                return <span style={{ whiteSpace: "pre-wrap" }} className="table_first_column">{params.row.priceOffer && params?.row?.tenderStatus === "Active" ? <button className="bg-orange-400 rounded-lg px-2 text-white" onClick={update}>עריכת הצעה</button> : <button className="bg-gray-400 rounded-lg px-2 text-white">המכרז בוטל</button>}</span>
+                return <span style={{ whiteSpace: "pre-wrap" }} className="table_first_column">{params.row.priceOffer && params?.row?.tenderStatus==="Active" ? <button className="bg-orange-400 rounded-lg px-2 text-white" onClick={update}>Edit Offer</button> : <button className="bg-gray-400 rounded-lg px-2 text-white">Tender Cancelled</button>}</span>
             },
         },
     ];
     const approvedcolumns = [
         {
-            field: "id", headerName: "מספר מכרז", minWidth: 100, flex: 1, renderCell: (params) => {
+            field: "id", headerName: "Tender ID", minWidth: 100, flex: 1, renderCell: (params) => {
 
                 return <span style={{ whiteSpace: "pre-wrap" }} className="table_first_column">
                     {params.id}
@@ -342,7 +344,7 @@ const Dashboard = () => {
             },
         },
         {
-            field: "tenderStatus", headerName: "סטטוס המכרז", flex: 1, minWidth: 150,
+            field: "tenderStatus", headerName: "Tender Status", flex: 1, minWidth: 150,
             renderCell: (params) => {
 
                 return <span style={{ whiteSpace: "pre-wrap" }} className="table_first_column">
@@ -351,86 +353,86 @@ const Dashboard = () => {
             },
         },
         {
-            field: "movingPrice", headerName: "מחיר ההובלה", flex: 1, minWidth: 150,
+            field: "movingPrice", headerName: "Moving Price", flex: 1, minWidth: 150,
             renderCell: (params) => {
 
                 return <span style={{ whiteSpace: "pre-wrap" }} className="table_first_column">
-                    {params?.row?.movingPrice} ש"ח
+                    {params?.row?.movingPrice} NIS
                 </span>
             },
         },
         {
-            field: "priceOffer", headerName: "הצעת מחיר", flex: 1, minWidth: 150,
+            field: "priceOffer", headerName: "Price Offer", flex: 1, minWidth: 150,
             renderCell: (params) => {
 
                 return <span style={{ whiteSpace: "pre-wrap", color: "#FC7023" }} className="table_first_column">
-                    {params?.row?.priceOffer}{params?.row?.priceOffer ? " ש\"ח" : "-"}
+                    {params?.row?.priceOffer}{params?.row?.priceOffer ? "NIS":"-"}
                 </span>
             },
         },
         {
-            field: "bestOffer", headerName: "הצעה הטובה ביותר", flex: 1, minWidth: 150,
+            field: "bestOffer", headerName: "Best Offer", flex: 1, minWidth: 150,
             renderCell: (params) => {
 
                 return <span style={{ whiteSpace: "pre-wrap", color: "#048611" }} className="table_first_column">
-                    {params?.row?.bestOffer} {params?.row?.bestOffer ? " ש\"ח" : "-"}
+                    {params?.row?.bestOffer} {params?.row?.bestOffer ? "NIS":"-"}
                 </span>
             },
         },
         {
-            field: "originaddress", headerName: "כתובת מוצא", flex: 1, minWidth: 250,
+            field: "originaddress", headerName: "Origin Address", flex: 1, minWidth: 250,
             renderCell: (params) => {
 
                 return <span style={{ whiteSpace: "pre-wrap", color: "#C15C7A" }} className="table_first_column" > {params?.row?.originaddress}</span>
             },
         },
         {
-            field: "destinationaddress", headerName: "כתובת יעד", flex: 1, minWidth: 250,
+            field: "destinationaddress", headerName: "Destination Address", flex: 1, minWidth: 250,
             renderCell: (params) => {
 
                 return <span style={{ whiteSpace: "pre-wrap", color: "#046E86" }} className="table_first_column" >{params?.row?.destinationaddress}</span>
             },
         },
         {
-            field: "date", headerName: "תאריך", minWidth: 200, flex: 1,
+            field: "date", headerName: "Date", minWidth: 200, flex: 1,
             renderCell: (params) => {
 
                 return <span style={{ whiteSpace: "pre-wrap" }} className="table_first_column" >{params?.row?.transportdate} - {params?.row?.arrivaldate}</span>
             },
         },
         {
-            field: "hours", headerName: "שעות", minWidth: 150, flex: 1,
+            field: "hours", headerName: "Hours", minWidth: 150, flex: 1,
             renderCell: (params) => {
 
                 return <span style={{ whiteSpace: "pre-wrap" }} className="table_first_column" >{params?.row?.starttime} - {params?.row?.endtime}</span>
             },
         },
         {
-            field: "name", headerName: "שם לקוח", minWidth: 150,
+            field: "name", headerName: "Client Name", minWidth: 150,
             renderCell: (params) => {
 
                 return <span style={{ whiteSpace: "pre-wrap" }} className="table_first_column" >{params?.row?.name}</span>
             },
         },
         {
-            field: "phonenumber", headerName: "מספר טלפון לקוח", minWidth: 150,
+            field: "phonenumber", headerName: "Client Phone Number", minWidth: 150,
             renderCell: (params) => {
 
                 return <span style={{ whiteSpace: "pre-wrap" }} className="table_first_column" >{params?.row?.phonenumber}</span>
             },
         },
         {
-            field: "tenderdetails", headerName: "פרטי המכרז", minWidth: 150, flex: 1,
+            field: "tenderdetails", headerName: "Tender Details", minWidth: 150, flex: 1,
             renderCell: (params) => {
                 const onView = () => handleRowClick(params);
-                return <span style={{ whiteSpace: "pre-wrap", textDecoration: "underline", color: "#1546F3" }} className="table_first_column" onClick={onView}>פתח פרטי המכרז</span>
+                return <span style={{ whiteSpace: "pre-wrap", textDecoration: "underline", color: "#1546F3" }} className="table_first_column" onClick={onView}>Open tender details</span>
             },
         },
         {
-            field: "action", headerName: "פעולה", minWidth: 150, flex: 1,
+            field: "action", headerName: "Action", minWidth: 150, flex: 1,
             renderCell: (params) => {
                 const update = () => updateoffer(params);
-                return <span style={{ whiteSpace: "pre-wrap" }} className="table_first_column">{params.row.priceOffer && params?.row?.tenderStatus === "Active" ? <button className="bg-orange-400 rounded-lg px-2 text-white" onClick={update}>עריכת הצעה</button> : <button className="bg-gray-400 rounded-lg px-2 text-white">המחיר אושר</button>}</span>
+                return <span style={{ whiteSpace: "pre-wrap" }} className="table_first_column">{params.row.priceOffer && params?.row?.tenderStatus==="Active" ? <button className="bg-orange-400 rounded-lg px-2 text-white" onClick={update}>Edit Offer</button> : <button className="bg-gray-400 rounded-lg px-2 text-white">Price Accepted</button>}</span>
             },
         },
     ];
@@ -462,30 +464,34 @@ const Dashboard = () => {
     const updateofferCloseDialog = () => {
         setupdateofferdialogOpen(false);
     };
+    const navigateToProfile = () => {
+        navigate('/profile'); // Change '/profile' to your profile path
+    };
     return (
         <div className="bg-white h-full">
             <div className="bg-[#96E0F8] flex justify-between py-3">
                 <div>
-                    <h2 className='w-full text-xl bm-font'>לחץ <span className='text-orange-500 px-2'>ו</span>נע</h2>
+                    <h2 className='w-full text-xl bm-font'>Click <span className='text-orange-500 px-2'>n</span>Move</h2>
                 </div>
                 <div className="flex">
                     <FaBell className="mr-3" size={20} />
-                    <FaRegUserCircle className="mr-3" size={20} />
+                    <FaRegUserCircle className="mr-3" size={20} onClick={navigateToProfile} />
                 </div>
             </div>
             <div className="py-1 ml-3 flex justify-between">
+                {/* <h1>Welcome! {auth.user?.username}</h1> */}
                 <div>
-                    <h2>צהריים טובים, {name}</h2>
-                    <h2>גישה מהירה למכרזים שלך</h2>
+                    <h2>Good afternoon, {name}</h2>
+                    <h2>Quickly access Your tenders</h2>
                 </div>
                 <button onClick={() => auth.logOut()} className="btn-submit">
-                    התנתק
+                    logout
                 </button>
             </div>
             <div className="flex justify-center items-center mt-5">
-                <button onClick={() => setToggle(0)} className={`w-40 h-auto ${toggle === 0 ? 'bg-orange-400' : ' bg-gray-400'} py-4 px-2 rounded-lg mr-3 font-semibold`}>מכרזים חדשים</button>
-                <button onClick={() => setToggle(1)} className={`w-40 h-auto ${toggle === 1 ? 'bg-orange-400' : ' bg-gray-400'} py-4 px-2 rounded-lg mr-3 font-semibold`}>המכרזים שלי</button>
-                <button onClick={() => setToggle(2)} className={`w-40 h-auto ${toggle === 2 ? 'bg-orange-400' : ' bg-gray-400'} py-4 px-2 rounded-lg mr-3 font-semibold`}>מכרזים שאושרו</button>
+                <button onClick={() => setToggle(0)} className={`w-40 h-auto ${toggle === 0 ? 'bg-orange-400' : ' bg-gray-400'} py-4 px-2 rounded-lg mr-3 font-semibold`}>New Tenders</button>
+                <button onClick={() => setToggle(1)} className={`w-40 h-auto ${toggle === 1 ? 'bg-orange-400' : ' bg-gray-400'} py-4 px-2 rounded-lg mr-3 font-semibold`}>My Tenders</button>
+                <button onClick={() => setToggle(2)} className={`w-40 h-auto ${toggle === 2 ? 'bg-orange-400' : ' bg-gray-400'} py-4 px-2 rounded-lg mr-3 font-semibold`}>Approved Tenders</button>
             </div>
             <div className="mx-10 my-10">
                 {loading ? <Loader placement={{ marginTop: '-100px' }} /> :
@@ -516,18 +522,24 @@ const Dashboard = () => {
             <Dialog open={dialogOpen} onClose={handleCloseDialog}>
                 <Box sx={{ minwidth: "700px", p: 2, height: "70vh", overflow: "scroll" }}>
                     <Typography variant="h4" color="initial" sx={{ textAlign: "center", mb: 2 }} >
-                        פרטי המכרז
+                        Tender Details
                     </Typography>
                     <TenderDetailsDialog DialogData={selectedHistory} />
                 </Box>
             </Dialog>
             <Dialog open={sendofferdialogOpen} onClose={sendofferCloseDialog}>
                 <Box sx={{ minwidth: "700px", p: 2, overflow: "scroll" }}>
+                    {/* <Typography variant="h4" color="initial" sx={{ textAlign: "center", mb: 2 }} >
+                        Tender Details
+                    </Typography> */}
                     <PriceDialog DialogData={selectedHistory} onCloseAndRefetch={handleFormCloseAndRefetch} />
                 </Box>
             </Dialog>
             <Dialog open={updateofferdialogOpen} onClose={updateofferCloseDialog}>
                 <Box sx={{ minwidth: "700px", p: 2, overflow: "scroll" }}>
+                    {/* <Typography variant="h4" color="initial" sx={{ textAlign: "center", mb: 2 }} >
+                        Tender Details
+                    </Typography> */}
                     <UpdatePriceDialog DialogData={selectedHistory} onCloseAndRefetch={handleFormCloseAndRefetch} />
                 </Box>
             </Dialog>

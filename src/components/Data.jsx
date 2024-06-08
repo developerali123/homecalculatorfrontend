@@ -10,131 +10,136 @@ const Data = () => {
             <img src={text4} alt="text4" className='hidden lg:block absolute right-[150px] top-[2100px]' />
             <div className='grid grid-cols-12 gap-6'>
                 <div className='border-dashed border md:col-span-6 col-span-12 border-black flex flex-col gap-5 items-center p-10 mb-4' style={{ borderWidth: '2px', borderStyle: 'dashed', borderRadius: '8px' }} >
-                    <h1 className='underline text-3xl font-semibold'>עשה זאת בעצמך (DIY)</h1>
-                    <p className='text-sm text-center'>הנה טיפ פשוט שיכול לעשות הבדל גדול - פירוק והרכבת הרהיטים בעצמך!</p>
-                    <p className='text-sm text-center'>רבות מחברות הובלה גובות תשלום נוסף עבור הובלת רהיטים גדולים ומורכבים, מאחר שזה מחייב זמן עבודה נוסף וצוות מיומן.</p>
-                    <h2 className='underline text-xl font-semibold'>יתרונות</h2>
+                    <h1 className='underline text-3xl font-semibold'>Do it yourself (DIY)</h1>
+                    <p className='text-sm text-center'>Here's a simple tip that can make a big difference - disassemble and assemble the furniture yourself!.</p>
+                    <p className='text-sm text-center'>Many moving companies charge an additional fee for transporting large and complex furniture, as this requires additional work time and skilled staff.</p>
+                    <h2 className='underline text-xl font-semibold'>advantages</h2>
                     <div className='flex gap-2'>
                         <p className='text-2xl'>1</p>
-                        <p className='text-right'>חסכון בעלויות - פירוק והרכבת הרהיטים בעצמך יכול לחסוך לך באופן משמעותי בעלויות ההובלה. רבות מחברות הובלה מוסיפות בין 100%-150% ממחיר הפריט לעלות ההובלה, עבור שירותים אלו. לכן, ביצועם באופן עצמאי יכול להוריד את עלות המעבר כולו בעשרות אחוזים.</p>
+                        <p className='text-right'>Cost savings - disassembling and assembling furniture yourself can save you significantly in transportation costs. Many transport companies add between 100% - 150% more of the price of the item to the transport cost, for these services. Therefore, performing them independently can reduce the cost of the entire transition by dozens of percent.</p>
                     </div>
                     <div className='flex gap-2'>
                         <p className='text-2xl'>2</p>
-                        <p className='text-right'>שליטה נוספת - פירוק והרכבת הרהיטים בעצמך נותנת לך שליטה נוספת על תהליך ההובלה. תוכל לבחור מתי ואיך לפרק ולהרכיב את הרהיטים, ולוודא שזה נעשה בצורה נכונה ובטוחה.</p>
+                        <p className='text-right'>More control - disassembling and assembling furniture yourself gives you more control over the moving process. You can choose when and how to disassemble and assemble the furniture, and make sure that this is done correctly and safely.</p>
                     </div>
                     <div className='flex gap-2'>
                         <p className='text-2xl'>3</p>
-                        <p className='text-right'>שרידי המעבר - לא כל הרהיטים מסוגלים לשרוד את המעבר בצורה בטוחה. פירוק והרכבת הרהיטים בעצמך יכולה להיות הזדמנות מצוינת לבדוק את מצבם של הרהיטים לפני ביצוע פעולות נוספות, ולחסוך לך לב כאב וגם כסף.</p>
+                        <p className='text-right'>Transition survival - not all furniture is able to survive the transition safely. Dismantling and assembling furniture yourself can be an excellent opportunity to examine their condition before performing further actions, and save you heartache and even money.</p>
                     </div>
-                    <h2 className='underline text-xl font-semibold mb-5'>כך זה נעשה!</h2>
+                    <h2 className='underline text-xl font-semibold mb-5'>this is how it is done!</h2>
 
-                    <h3 className='text-xl font-semibold'>מחפש חבר שמיודע</h3>
-                    <p className='mb-5 text-center'>שאל חברים או משפחה לעזרה פירוק והרכבת הרהיטים יכולה להיות קלה יותר עם עזרה נוספת.</p>
+                    <h3 className='text-xl font-semibold'>Looking for a friend who is handy</h3>
+                    <p className='mb-5 text-center'>Ask friends or family for help Disassembling and assembling furniture can be easier with extra help.</p>
 
-                    <h3 className='text-xl font-semibold'>צופים ולומדים</h3>
-                    <p className='mb-5 text-center'>צפו בתעודות וידאו באינטרנט יש המון סרטוני וידאו באינטרנט שמראים כיצד לפרק ולהרכיב סוגים שונים של רהיטים.</p>
+                    <h3 className='text-xl font-semibold'>Watching and learning</h3>
+                    <p className='mb-5 text-center'>Watch Video Tutorials on the Internet There are many videos on the Internet showing how to disassemble and assemble different types of furniture.</p>
 
-                    <h3 className='text-xl font-semibold'>מתחילים בקטן</h3>
-                    <p className='mb-5 text-center'>התחל עם רהיטים קטנים. התחל עם רהיטים קטנים שקל לפרק ולהרכיב לפני שתעבור לרהיטים גדולים ומורכבים יותר.</p>
+                    <h3 className='text-xl font-semibold'>Start small</h3>
+                    <p className='mb-5 text-center'>Start with small pieces of furniture. Start with pieces of furniture that are smaller and easier to disassemble and assemble before moving on to larger and more complex pieces of furniture.</p>
                 </div>
 
                 <div className='border-[2px] md:col-span-6 col-span-12 border-dotted border-black rounded-xl flex flex-col gap-5 items-center p-10' style={{ borderWidth: '2px', borderStyle: 'dashed', borderRadius: '8px' }}>
-                    <h1 className='underline text-3xl font-semibold'>אריזה כמו מקצוען</h1>
-                    <p className='text-sm text-center'>האריזה העצמית של רהיטים וקרטונים עשויה להשמע כמשימה מסובכת, אך זה יכול להיות פעילות כיפית ואף מזדמנת!</p>
-                    <h2 className='underline text-xl font-semibold'>יתרונות</h2>
+                    <h1 className='underline text-3xl font-semibold'>packaged like a pro</h1>
+                    <p className='text-sm text-center'>Self-packing of furniture and boxes may sound like a difficult task, but it can be a fun and even rewarding activity!</p>
+                    <h2 className='underline text-xl font-semibold'>Advantages</h2>
                     <div className='flex gap-2'>
                         <p className='text-2xl'>1</p>
-                        <p className='text-right'><span className='font-semibold'>חסכון משמעותי</span> - האריזה העצמית יכולה <span className='font-bold'>לחסוך לך בין 10%-15%</span> מעלויות המשלוח.</p>
+                        <p className='text-right'><span className='font-semibold'>significant savings</span> - self-packaging can <span className='font-bold'>save you 10%-15%</span > the shipping costs.</p>
                     </div>
                     <div className='flex gap-2'>
                         <p className='text-2xl'>2</p>
-                        <p className='text-right'><span className='font-semibold'>סדר וארגון</span> - תהליך האריזה מאפשר לך לארגן את הדברים שלך בצורה אפקטיבית, כך שתדע בדיוק איפה כל דבר נמצא בדירה החדשה שלך.</p >
+                        <p className='text-right'><span className='font-semibold'>Order and organization</span> - The packing process allows you to organize your things efficiently, so that you know exactly where everything is in the new apartment.</p >
                     </div>
                     <div className='flex gap-2'>
                         <p className='text-2xl'>3</p>
-                        <p className='text-right'><span className='font-semibold'>חוויה משפחתית </span>- הפיכת האריזה לפרויקט משפחתי יכולה להיות פעילות גורמת ומהנה לכל חברי המשפחה.</p>
+                        <p className='text-right'><span className='font-semibold'>A family experience </span>- Turning the packaging into a family project can be a formative and enjoyable activity for all members of the household.</p>
                     </div>
 
-                    <h2 className='underline text-xl font-semibold mb-5'>כך זה נעשה!</h2>
+                    <h2 className='underline text-xl font-semibold mb-5'>This is how you do it!</h2>
 
-                    <h3 className='text-xl font-semibold'>מחפש חבר שמיודע</h3>
-                    <p className='mb-5 text-center'>שאל חברים או קרובי משפחה לעזרה פירוק והרכבת רהיטים יכולה להיות קלה יותר עם עזרה נוספת.</p>
+                    <h3 className='text-xl font-semibold'>Looking for a friend who is handy</h3>
+                    <p className='mb-5 text-center'>Ask friends or family members for help Disassembling and assembling furniture can be easier with extra help.</p>
 
-                    <h3 className='text-xl font-semibold'>צופים ולומדים</h3>
-                    <p className='mb-5 text-center'>צפו בתעודות וידאו באינטרנט יש המון סרטוני וידאו באינטרנט שמראים כיצד לפרק ולהרכיב סוגים שונים של רהיטים.</p>
+                    <h3 className='text-xl font-semibold'>Watchers and Learners</h3>
+                    <p className='mb-5 text-center'>Watch video tutorials on the Internet There are many videos on the Internet showing how to disassemble and assemble different types of furniture.</p>
 
-                    <h3 className='text-xl font-semibold'>מתחילים בקטן</h3>
-                    <p className='mb-5 text-center'>התחל עם רהיטים קטנים התחל עם רהיטים קטנים שקל לפרק ולהרכיב לפני שתעבור לרהיטים גדולים ומורכבים יותר.</p>
+                    <h3 className='text-xl font-semibold'>Start small</h3>
+                    <p className='mb-5 text-center mb-[135px]'>Start with small furniture Start with small furniture that is easier to disassemble and assemble before moving on to larger and more complex furniture.</p>
                 </div>
 
                 <div className='border-[2px] md:col-span-6 col-span-12 border-dotted border-black rounded-xl flex flex-col gap-5 items-center p-10 mb-4' style={{ borderWidth: '2px', borderStyle: 'dashed', borderRadius: '8px' }}>
-                    <h1 className='underline text-3xl font-semibold'>הגמישות היא המפתח!</h1>
+                    <h1 className='underline text-3xl font-semibold'>Flexibility is key!</h1>
                     <p className='text-sm text-center'>
-                        רבות מחברות הובלה מתכננות את סדר העבודה שלהן מראש, אך יתכן ותקבל
+                        Many moving companies plan their schedule in advance, but you may
                         <br />
-                        ביטולים או שינויים בדקה האחרונה. זה הזדמנות נהדרת עבורך לחסוך באופן משמעותי בעלויות המשלוח!
+                        Last minute cancellations or changes. This is a great opportunity for you to save significantly on shipping costs!
                     </p>
-                    <h2 className='underline text-xl font-semibold'>כיצד זה עובד?!</h2>
+                    <h2 className='underline text-xl font-semibold'>How does it work?!</h2>
                     <div className='flex gap-2'>
                         <p className='text-2xl'>1</p>
-                        <p className='text-right'>מילוי חורים בלוח זמנים - חברות הובלה מעדיפות למלא חורים בלוח זמנים <span className='font-bold'>במחיר שנמוך כ-20%</span> מאשר להשאיר עובדים בריקים. המשלוח שלך, גם במחיר מוזל, יעזור להם להשתמש בזמן העבודה של צוות ההובלה בצורה יעילה יותר.</p>
+                        <p className='text-right'>Filling holes in the schedule - Transportation companies prefer to fill holes in their schedule <span className='font-bold'>at a price as low as 20%</span> than to leave workers idle. Your transport, even at a discounted price, will help them use the work time of the transport team more effectively.</p>
                     </div>
                     <div className='flex gap-2'>
                         <p className='text-2xl'>2</p>
-                        <p className='text-right'><span className='font-bold'>חיסכון בעלויות שכר</span> - חברות הובלה משלמות לעובדיהן לפי שעה. ביטול המשלוח עשוי להוביל למצב שבו העובדים יהיו זמינים ללא עבודה. המשלוח שלך במחיר נמוך יאפשר לחברת הובלה להשתמש בזמן העבודה של צוות ההובלה ולהימנע מתשלום שכר לא נחוץ.</p>
+                        <p className='text-right'><span className='font-bold'>Wage cost savings</span> - Transportation companies pay their workers by the hour. Canceling transport can lead to a situation where workers will be available without work. Your transport at a low price will allow the transport company to use the work time of the transport team and avoid paying unnecessary wages.</p>
                     </div>
                     <div className='flex gap-2'>
                         <p className='text-2xl'>3</p>
-                        <p className='text-right'><span className='font-bold'>מניעת ימי "נמוכים"</span> - רבות מחברות הובלה מתמלאות בימי ראשון, סופי שבוע וחודשי הקיץ. הזמנת הובלה בימים "נמוכים" כמו בימי השבוע או בעונות מעבר יכולה להוריד באופן משמעותי את העלויות.</p>
+                        <p className='text-right'><span className='font-bold'>Taking advantage of "low" days</span> - Many moving companies tend to be busy on Sundays, weekends and summer months. Ordering transport on "low" days such as weekdays or during transitional seasons can significantly reduce costs.</p>
                     </div>
 
-                    <h2 className='underline text-xl font-semibold mb-5'>כך זה עובד!</h2>
+                    <h2 className='underline text-xl font-semibold mb-5'>This is how you do it!</h2>
 
-                    <h3 className='text-xl font-semibold'>גמישות, גמישות ועוד גמישות</h3>
-                    <p className='mb-5 text-center'>הכינות להעביר את תאריך המשלוח במספר ימים או בשעות לא פופולריות. זמינותך תגביר את הסיכוי למצוא מחיר מוזל.</p>
+                    <h3 className='text-xl font-semibold'>Flexibility, flexibility, and more flexibility</h3>
+                    <p className='mb-5 text-center'>Be prepared to move the shipping date by a few days or during unpopular hours. Your availability will increase the chance of finding a discounted price.</p>
 
-                    <h3 className='text-xl font-semibold'>הזמנה מראש</h3>
-                    <p className='mb-5 text-center'>ככל שתזמין את המשלוח מראש, כך יש סיכוי גדול יותר למצוא תאריך נוח במחיר מוזל.</p>
+                    <h3 className='text-xl font-semibold'>Pre-order</h3>
+                    <p className='mb-5 text-center'>The earlier you order the transport, the greater the chance of finding a convenient date at a discounted price.</p>
 
-                    <h3 className='text-xl font-semibold'>מגרש עסקים</h3>
-                    <p className='mb-5 text-center'>הצג את גמישותך בתאריכים ובשעות כתף כתפו בשיחות עם חברת הובלה. הבהר לחברה כי אתה מוכן להעביר את המשלוח בתמורה למחיר מוזל.</p>
+                    <h3 className='text-xl font-semibold'>bargaining</h3>
+                    <p className='mb-5 text-center mb-[70px]'>Present your flexibility in dates and times as a bargaining chip in conversations with the moving company. Make it clear to the company that you are willing to move the transport in exchange for a discounted price.</p>
                 </div>
 
                 <div className='border-[2px] md:col-span-6 col-span-12 border-dotted border-black rounded-xl flex flex-col gap-5 items-center p-10 ' style={{ borderWidth: '2px', borderStyle: 'dashed', borderRadius: '8px' }}>
 
-                    <h1 className='underline text-3xl font-semibold'>הצטרף למסע</h1>
-                    <p className='text-sm text-center'>חברות הובלה גובות תשלום נוסף עבור העברות מורכבות, כמו העברה בקומות גבוהות ללא מעלית, העברה דרך רחבות צרות או העברה הדורשת נשיאת פריטים על מרחק ארוך.</p>
-                    <h2 className='underline text-xl font-semibold'>כיצד זה עובד?!</h2>
+                    <h1 className='underline text-3xl font-semibold'>Join the journey</h1>
+                    <p className='text-sm text-center'>Moving companies charge an extra fee for difficult moves, such as moving on high floors without an elevator, moving through narrow yards or moving that requires carrying items over a long distance.</p>
+                    <h2 className='underline text-xl font-semibold'>How does it work?!</h2>
                     <div className='flex gap-2'>
                         <p className='text-2xl'>1</p>
                         <p className='text-right'><span className='font-semibold'></span></p>
                         <p className='text-right'><span className='font-semibold'></span><span className='font-bold'></span></p>
-                        <p className='text-right bg-red-400'><span className='font-semibold'>הנחת שירותי פורטר</span> - חברות הובלה גובות תשלום נוסף עבור <span className='font-bold'>נשיאת פריטים כבדים</span> או רגישים במיוחד, כמו <span className='font-bold'>פסלים, כיסאות מסאז' וארגזי נפט.</span></p>
+                        <p className='text-right bg-red-400'><span className='font-semibold'>Discounting porter services</span> - Transport companies charge an additional fee for <span className='font-bold'> services 15% - increases the price of each item between 10%</span> bags. Each floor or complex access to a truck unloading items independently can save the need for porter services and thus lower the cost of transportation.</p>
+
                     </div>
                     <div className='flex gap-2'>
                         <p className='text-2xl'>2</p>
-                        <p className='text-right'><span className='font-semibold'>שכירות טרקטור או מלגזה</span> - חברות הובלה גובות תשלום נוסף עבור העברה באמצעות טרקטור, מלגזה או כל כלי רכב נוסף. המחיר הזול עשוי להיות הנחת חברת הובלה לקוחות שיש להם גישה לכלי רכב אלו.</p>
+                        <p className='text-right'><span className='font-semibold'>Shortening the transport time: - </span>The less time the transport team spends carrying items, the shorter the transport time and the lower the price.</p>
                     </div>
                     <div className='flex gap-2'>
                         <p className='text-2xl'>3</p>
-                        <p className='text-right'><span className='font-semibold'>העברה במעלית </span>- חברות הובלה גובות תשלום נוסף עבור העברה במעלית. הגעת הפריטים לקומות העליונים של הבניין או העברה דרך מעליות קטנות יכולה להוסיף תוספת עלותית לך.</p>
+                        <p className='text-right'><span className='font-semibold'>Reducing the need for cranes</span> - In some cases, moving companies are required to use cranes to raise or lower heavy items. Unloading items independently can save the need for cranes and thus lower the cost of transportation.</p>
                     </div>
 
-                    <h2 className='underline text-xl font-semibold mb-5'>כך זה עובד!</h2>
+                    <h2 className='underline text-xl font-semibold mb-5'>This is how you do it!</h2>
 
-                    <h3 className='text-xl font-semibold'>קבל תמורה על העלויות הנוספות</h3>
-                    <p className='mb-5 text-center'>קבל הצעה נוספת ממקור נוסף על סמך העלויות הנוספות, כך שתוכל להשוות מחירים ולבחור באפשרות המשתלמת ביותר.</p>
+                    <h3 className='text-xl font-semibold'>Planning ahead</h3>
+                    <p className='mb-5 text-center'>Estimate which items you can unload independently and which items you will need help from the transport team.</p>
 
-                    <h3 className='text-xl font-semibold'>שקל אפשרויות פיצוי</h3>
-                    <p className='mb-5 text-center'>אם אתה מקבל תשלום עבור פיצויים על ההעברה הנוספת, שקול לבחון את האפשרויות השונות ולבחור את האופציה המשתלמת ביותר לך.</p>
+                    <h3 className='text-xl font-semibold'>Using aids</h3>
+                    <p className='mb-5 text-center'>Use transport carts, wheels and manual cranes to make unloading the items easier.</p>
 
-                    <h3 className='text-xl font-semibold'>שקול פטורים</h3>
-                    <p className='mb-5 text-center'>במקרים מסוימים, כגון העברה בתוך אותו קומה או במרחק קצר מאוד, שקול לבקש פטור מתשלום נוסף עבור ההעברה.</p>
-
+                    <h3 className='text-xl font-semibold'>Another tip</h3>
+                    <p className='mb-5 text-center'>In the same way, you can also save money when unpacking the furniture in the new apartment. Uploading items independently can reduce the cost of transportation.</p>
                 </div>
+
+
+            </div>
+
+            <div className='w-1/2 max-md:w-full flex flex-col items-center gap-5'>
+                
             </div>
         </div>
-
     );
 };
 

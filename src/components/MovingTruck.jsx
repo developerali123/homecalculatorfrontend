@@ -8,7 +8,6 @@ const MovingTruck = ({ link }) => {
   return (
     <div className='text-white text-lg  '>
       <button onClick={() => navigate(link)} className='w-full flex gap-5 items-center justify-center'>
-        {/* <p>לדרך</p> */}
         <img src={truck} alt="truck" className='moving-truck ml-96' />
         {/* <svg width="129" height="71" viewBox="0 0 129 71" fill="none" xmlns="http://www.w3.org/2000/svg" className='moving-truck ml-96'>
           <g filter="url(#filter0_d_1725_56507)">
@@ -255,7 +254,6 @@ const MovingTruck = ({ link }) => {
           </defs>
         </svg> */}
 
-        {/* <p>צא</p> */}
       </button>
       <div className='w-full flex items-center justify-center'>
         <img src={arrow} alt="arrow" />

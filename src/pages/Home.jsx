@@ -25,24 +25,24 @@ const Home = () => {
         <Balloon />
       </div>
       <img src={sun} alt="sun" className="absolute top-10 h-[70px] right-[20px] -z-[20] md:hidden" />
-      <h2 className='md:text-3xl md:hidden text-2xl font-bold text-center text-white'>לחץ על <span className='text-orange-500 px-2'>n</span><span className='text-white'>הזז</span></h2>
+      <h2 className='md:text-3xl md:hidden text-2xl font-bold text-center text-white'>Click <span className='text-orange-500 px-2'>n</span><span className='text-white'>Move</span></h2>
       <div className='flex md:justify-around justify-start md:ml-0 ml-5 items-center mt-5'>
-        <button className='bg-[#FC7023] text-white md:text-xl text-md rounded-md md:p-3 p-1 md:w-48 w-36 font-semibold'><Link to="/login">התחבר לחברות הובלה </Link></button>
+        <button className='bg-[#FC7023] text-white md:text-xl text-md rounded-md md:p-3 p-1 md:w-48 w-36 font-semibold'><Link to="/login">log in for Moving companies </Link></button>
         {
-          user.userType === "משתמש" && (
-            <button className='bg-[#FC7023] text-white md:text-xl text-md rounded-md md:p-3 ml:2 p-1 md:w-48 w-36 font-semibold'>< Link to="/userdashboard">לוח המחוונים למשתמשים </Link></button>
+          user.userType === "user" && (
+            <button className='bg-[#FC7023] text-white md:text-xl text-md rounded-md md:p-3 ml:2 p-1 md:w-48 w-36 font-semibold'><Link to="/userdashboard">User Dashboard </Link></button>
           )
         }
-        <h2 className='md:text-3xl text-2xl bm-font md:flex hidden text-white'>לחץ על <span className='text-orange-500 px-2'>n</span><span className='text-white'>הזז</span></h2>
+        <h2 className='md:text-3xl text-2xl bm-font md:flex hidden text-white'>Click <span className='text-orange-500 px-2'>n</span><span className='text-white'>Move</span></h2>
       </div>
 
       <div className="flex flex-col h-full justify-center items-center ">
-        <h1 className="text-2xl font-semibold mt-20">בואו נגלה </h1>
-        <h2 className="md:text-4xl text-3xl font-bold text-white mt-10">מהי עלות ההובלה שלך</h2>
+        <h1 className="text-2xl font-semibold mt-20">Let's find out </h1>
+        <h2 className="md:text-4xl text-3xl font-bold text-white mt-10">what your Moving cost is</h2>
         <p className='mt-[30px] text-center w-[535px] max-md:w-full'>
-          מתכננים לעבור דירה? מְעוּלֶה! אבל לפני שאתם מתחילים לארוז, בואו לבדוק כמה באמת תעלה לכם ההובלה. בעזרת המחשבון הקל (אך המדויק!) שלנו, תוכלו להגיע במהירות רבה להערכת עלות המשלוח.
+          Planning to move house? Excellent! But before you start packing, let's check how much the transport will really cost you. With our easy (but accurate!) calculator, you will be able to arrive at an estimate of the shipping cost very quickly.
         </p>
-        <h3 className='mt-[15px] font-bold'>בואו נתחיל!</h3>
+        <h3 className='mt-[15px] font-bold'>lets start!</h3>
       </div>
       <div className="mt-[40px]" >
         <MovingTruck link="/baseline" />

@@ -1,7 +1,7 @@
 import React, { useRef } from 'react';
 import { Autocomplete } from '@react-google-maps/api';
 
-const GoogleCityAutocomplete = ({ value, onChange, name, placeholder, onPlaceSelect }) => {
+const GoogleCityAutocomplete = ({ value, onChange, name, placeholder, onPlaceSelect,disabled }) => {
   const autocompleteRef = useRef(null);
 
   const handlePlaceSelect = () => {
@@ -24,6 +24,7 @@ const GoogleCityAutocomplete = ({ value, onChange, name, placeholder, onPlaceSel
         name={name}
         className='md:w-[400px] w-[300px] h-[44px] bg-white border border-[#cccccc] border-opacity-100 px-4 py-2 rounded-md focus:border-none'
         placeholder={placeholder}
+        disabled={disabled}
       />
     </Autocomplete>
   );

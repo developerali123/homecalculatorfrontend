@@ -20,7 +20,7 @@ const formatDate = (dateString) => {
 
 const Summary = () => {
   const auth = useAuth();
-  const navigate = useNavigate();
+  const navigate=useNavigate();
   const [toggle, setToggle] = useState(2);
   const [form, setForm] = useState(false);
   const [data, setData] = useState([]);
@@ -47,10 +47,12 @@ const Summary = () => {
       <div className="flex justify-center items-center gap-6 text-neutral-50 text-xl text-center md:mt-14">
         {!form && (
           <div className='flex md:flex-row flex-col'>
-            <button onClick={() => setToggle(0)} className={`w-40 h-12 ${toggle === 0 ? 'bg-orange-400' : ' bg-gray-400'} p-2 rounded-lg text-sm font-semibold mx-2 my-2`}>המלצות וטיפים</button>
-            <button onClick={() => setToggle(1)} className={`w-40 h-12 ${toggle === 1 ? 'bg-orange-400' : ' bg-gray-400'} p-2 rounded-lg text-sm font-semibold mx-2 my-2`}>פירוט עלויות</button>
-            <button onClick={() => setToggle(2)} className={`w-40 h-12 ${toggle === 2 ? 'bg-orange-400' : ' bg-gray-400'} p-2 rounded-lg text-sm font-semibold mx-2 my-2`}>סיכום</button>
-            <div className="flex items-center max-md:w-14 max-md:h-14 w-20 h-20 bg-red-500 rounded- full font-semibold shadow-2xl p-5 max-md:p-3 text-white text-lg max-md:text-sm mx-2 my-2" onClick={toggleForm}>צור מכרז</div>
+            <button onClick={() => setToggle(0)} className={`w-40 h-12 ${toggle === 0 ? 'bg-orange-400' : ' bg-gray-400'} p-2 rounded-lg text-sm font-semibold mx-2 my-2`}>Recommendations & tips</button>
+            <button onClick={() => setToggle(1)} className={`w-40 h-12 ${toggle === 1 ? 'bg-orange-400' : ' bg-gray-400'} p-2 rounded-lg text-sm font-semibold mx-2 my-2`}>Cost breakdown</button>
+            <button onClick={() => setToggle(2)} className={`w-40 h-12 ${toggle === 2 ? 'bg-orange-400' : ' bg-gray-400'} p-2 rounded-lg text-sm font-semibold mx-2 my-2`}>Summary</button>
+            {/* <button onClick={() => setToggle(3)} className={`w-40 h-12 ${toggle === 3 ? 'bg-orange-400' : ' bg-gray-400'} p-2 rounded-lg text-sm font-semibold`}>Tenders</button> */}
+            {/* <button onClick={() => setToggle(4)} className={`w-40 h-auto ${toggle === 4 ? 'bg-orange-400' : ' bg-gray-400'} p-2 rounded-lg text-sm font-semibold`}>Approved tenders</button> */}
+            <div className="flex items-center max-md:w-14 max-md:h-14 w-20 h-20 bg-red-500 rounded- full font-semibold shadow-2xl p-5 max-md:p-3 text-white text-lg max-md:text-sm mx-2 my-2" onClick={toggleForm}>Create Tender</div>
           </div>
         )}
       </div>
@@ -82,6 +84,7 @@ const Summary = () => {
           </>
         )}
       </div>
+      {form && <Form toggleSummary={toggleSummary} />}
     </div>
   );
 };

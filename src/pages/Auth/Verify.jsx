@@ -25,7 +25,7 @@ const Verify = () => {
 
     const handleLoginClick = async () => {
         if (form.verificationCode === "") {
-            toast.error('נא למלא קוד אימות');
+            toast.error('Please fill in verificationCode');
             return;
         }
 
@@ -36,19 +36,19 @@ const Verify = () => {
                 verificationCode: form.verificationCode
             });
             // Handle successful login, such as storing the token in local storage and redirecting to another page
-            toast.success('האימות הצליח!');
+            toast.success('Verification successful!');
             auth.loginAction({
                 email: email,
                 password: password,
             });
-            toast.success('הכניסה הצליחה!');
+            toast.success('Login successful!');
             // Clear the email from Redux state
             dispatch(clearEmail());
             dispatch(clearPassword());
 
             // Navigate to the login page
         } catch (error) {
-            toast.error('אימות נכשל');
+            toast.error('Verification failed');
             // Handle any error messages or logging
         }
     };
@@ -58,17 +58,17 @@ const Verify = () => {
             <Sidediv />
             <div className='md:col-span-8 col-span-12 bg-white'>
                 <div className='flex justify-center items-center flex-col h-full'>
-                    <h1 className='text-3xl'>קוד אימות</h1>
-                    <h2 className='text-sm'>שלחנו קוד אימות אל</h2>
+                    <h1 className='text-3xl'>Verification code</h1>
+                    <h2 className='text-sm'>We sent a verification code to</h2>
                     <h2>{email}</h2>
                     <div className='flex flex-col mt-5'>
                         <div className='flex justify-center'>
                             <VerificationInput onChange={handleVerificationInputChange} />
                         </div>
-                        <button className='bg-[#2676E5] w-full text-white p-2 mt-5 rounded-md' onClick={handleLoginClick}>אמת</button>
-                        <p className='text-center mt-10'>לא קיבלת אימייל?</p>
-                        <p className='text-center'>בדוק את תיבת הדואר הנכנס או בתיקיית הספאם שלך</p>
-                        <p className='text-center'><span className='text-[#2676E5]'><Link to="/register">שלח שוב דוא"ל</Link></span> או <span className='text- [#2676E5]'><Link to="/register">היכנס עם כתובת דוא"ל אחרת.</Link></span></p>
+                        <button className='bg-[#2676E5] w-full text-white p-2 mt-5 rounded-md' onClick={handleLoginClick}>Verify</button>
+                        <p className='text-center mt-10'>Haven’t received an email?</p>
+                        <p className='text-center'>Check your email inbox or spam folder</p>
+                        <p className='text-center'><span className='text-[#2676E5]'><Link to="/register">Resend Email</Link></span> or <span className='text-[#2676E5]'><Link to="/register">Sign in with different email address.</Link></span></p>
                     </div>
                 </div>
             </div>

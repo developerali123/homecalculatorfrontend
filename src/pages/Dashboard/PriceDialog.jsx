@@ -23,7 +23,7 @@ const PriceDialog = ({ DialogData, onCloseAndRefetch }) => {
 
     const handleApply = async () => {
         if (!field.price || !field.transportdate || !field.arrivaldate || !field.starthours || !field.endhours) {
-            toast.error('כל השדות נדרשים');
+            toast.error('All fields are required');
             return;
         }
 
@@ -38,35 +38,35 @@ const PriceDialog = ({ DialogData, onCloseAndRefetch }) => {
                 endhours: field.endhours,
             });
 
-            toast.success('ההצעה נשלחה בהצלחה');
+            toast.success('Offer sent successfully');
             onCloseAndRefetch();
         } catch (error) {
-            toast.error('שליחת ההצעה נכשלה');
+            toast.error('Failed to send offer');
         }
     };
 
     return (
         <div>
             <div className='flex justify-between mb-2'>
-                <p>מזהה המכרז:{DialogData?.id}</p>
-                <p>הצעת מחיר הטובה ביותר נוכחית:{DialogData?.bestOffer}</p>
+                <p>Tender Id:{DialogData?.id}</p>
+                <p>Current best price offer:{DialogData?.bestOffer}</p>
             </div>
             <hr />
             <form>
                 <div className='flex'>
                     <div className='mr-3'>
-                        <label htmlFor="price" className="block mb-1">מחיר</label>
+                        <label htmlFor="price" className="block mb-1">Price</label>
                         <input
                             type="number"
                             name="price"
                             className="w-full border rounded p-1"
                             value={field.price}
                             onChange={handleChange}
-                            placeholder="מחיר"
+                            placeholder="Price"
                         />
                     </div>
                     <div className='mr-3'>
-                        <label htmlFor="starthours" className="block mb-1">שעת התחלה</label>
+                        <label htmlFor="starthours" className="block mb-1">Start Time</label>
                         <input
                             type="time"
                             name="starthours"
@@ -76,7 +76,7 @@ const PriceDialog = ({ DialogData, onCloseAndRefetch }) => {
                         />
                     </div>
                     <div className='mr-3'>
-                        <label htmlFor="endhours" className="block mb-1">שעת סיום</label>
+                        <label htmlFor="endhours" className="block mb-1">End Time</label>
                         <input
                             type="time"
                             name="endhours"
@@ -88,7 +88,7 @@ const PriceDialog = ({ DialogData, onCloseAndRefetch }) => {
                 </div>
                 <div className="flex">
                     <div className='mr-3'>
-                        <label htmlFor="transportdate" className="block mb-1">תאריך הובלה</label>
+                        <label htmlFor="transportdate" className="block mb-1">Date of Transport</label>
                         <input
                             type="date"
                             name="transportdate"
@@ -98,7 +98,7 @@ const PriceDialog = ({ DialogData, onCloseAndRefetch }) => {
                         />
                     </div>
                     <div className='mr-3'>
-                        <label htmlFor="arrivaldate" className="block mb-1">תאריך הגעה</label>
+                        <label htmlFor="arrivaldate" className="block mb-1">Date of Arrival</label>
                         <input
                             type="date"
                             name="arrivaldate"
@@ -110,7 +110,7 @@ const PriceDialog = ({ DialogData, onCloseAndRefetch }) => {
                 </div>
             </form>
             <div className='mt-3'>
-                <button className="bg-orange-400 rounded-lg p-3 text-white" onClick={handleApply}>החל</button>
+                <button className="bg-orange-400 rounded-lg p-3 text-white" onClick={handleApply}>Apply</button>
             </div>
         </div>
     )
